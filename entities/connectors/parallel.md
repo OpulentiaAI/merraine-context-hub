@@ -1,6 +1,6 @@
 ---
 type: gtm.connector
-title: Parallel Monitor
+tldr: Parallel Monitor
 status: active
 owner: Jeremy Sanchez
 updated: 2026-09-14

@@ -1,6 +1,6 @@
 ---
 type: gtm.connector
-title: Gojiberry
+tldr: Gojiberry
 status: draft
 owner: Jeremy Alston
 updated: 2026-09-14

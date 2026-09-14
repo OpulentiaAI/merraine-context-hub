@@ -1,6 +1,6 @@
 ---
 type: gtm.extraction
-title: Email, communications and relationship extraction
+tldr: Email, communications and relationship extraction
 status: blocked
 owner: Opulent
 updated: 2026-09-14

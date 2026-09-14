@@ -1,0 +1,9 @@
+#: One stage of a pipeline.
+extends: [idea::au-base-types, gtm.managed]
+fields:
+  order: Number{integer}
+  entryCriteria: String
+  exitCriteria: String
+  ownerRole: String
+  #: Placeholder until real medians come from the mailbox extraction.
+  slaDays?: Number{integer}

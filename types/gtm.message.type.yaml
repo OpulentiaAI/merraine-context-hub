@@ -1,9 +1,0 @@
-fields:
-  channel: [email, linkedin, call, event]
-  subject: String
-  body: String
-  wordCap: Number{integer}
-  sendReady: [yes, no]      #: MUST be "no" until a human types the confirm word
-  reviewState: [hold, approved, sent, rejected]
-  slopChecked: [yes, no]
-  groundedOn: gtm.observation*

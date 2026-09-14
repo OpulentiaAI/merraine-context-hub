@@ -1,6 +1,6 @@
 ---
 type: gtm.account
-title: Sanchez Opulent account
+tldr: Sanchez Opulent account
 status: active
 owner: Jeremy Alston
 updated: 2026-09-14
@@ -14,7 +14,8 @@ workspaceId: ""
 isolated: "yes"
 evidence:
   - claim: "user k57apryqpfeg6h33ybxfynarx58e1dwa, Heavy, balance 14012 cents"
-    sourceUrl: "convex:prod:confident-sheep-333/actions/authAdmin:checkAccountDetails"
+    tldr: "user k57apryqpfeg6h33ybxfynarx58e1dwa, Heavy, balance 14012 cents"
+    origin: "convex:prod:confident-sheep-333/actions/authAdmin:checkAccountDetails"
     observedAt: 2026-09-14
     method: cli
     verifiedBy: parent

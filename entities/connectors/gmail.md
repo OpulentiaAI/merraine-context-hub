@@ -1,6 +1,6 @@
 ---
 type: gtm.connector
-title: Gmail
+tldr: Gmail
 status: blocked
 owner: Jeremy Sanchez
 updated: 2026-09-14

@@ -1,8 +1,0 @@
-# A citation. Nothing in this hub asserts a fact without one of these.
-fields:
-  claim: String
-  sourceUrl: String        #: resolvable URL, file path, or platform event id
-  observedAt: String{^\d{4}-\d{2}-\d{2}$}
-  method: [read, api, cli, browser, mcp, human]
-  verifiedBy: String       #: "parent" once a coordinator reopened the source
-  confidence: [verified, reported, unverified]

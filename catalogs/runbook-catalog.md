@@ -1,6 +1,6 @@
 ---
 type: gtm.catalog
-title: Runbook and extraction catalog
+tldr: Operating procedures and data-extraction runbooks.
 status: active
 owner: Opulent
 updated: 2026-09-14

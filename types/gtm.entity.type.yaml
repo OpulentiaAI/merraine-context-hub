@@ -1,8 +1,0 @@
-# Root of the hub ontology. Never instantiated directly.
-abstract: true
-fields:
-  title: String
-  status: [draft, active, paused, retired, blocked]
-  owner: String            #: who is accountable, a human name or "opulent"
-  updated: String{^\d{4}-\d{2}-\d{2}$}
-  provenance: String       #: where this knowledge came from; "UNVERIFIED" if none

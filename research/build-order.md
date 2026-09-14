@@ -1,6 +1,6 @@
 ---
 type: gtm.tactic
-title: Build order - data layer before agents
+tldr: Build order - data layer before agents
 status: active
 owner: Opulent
 updated: 2026-09-14

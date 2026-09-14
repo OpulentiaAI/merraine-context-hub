@@ -1,6 +1,6 @@
 ---
 type: gtm.automation
-title: Merraine awards and recognition monitor
+tldr: Merraine awards and recognition monitor
 status: draft
 owner: Opulent
 updated: 2026-09-14

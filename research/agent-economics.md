@@ -1,6 +1,6 @@
 ---
 type: gtm.tactic
-title: Production agent economics
+tldr: Production agent economics
 status: active
 owner: Opulent
 updated: 2026-09-14

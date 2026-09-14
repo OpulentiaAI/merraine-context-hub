@@ -1,12 +1,6 @@
 ---
-type: hub.inject
+type: mcp.inject::au-mcp-sdk
 name: merraine-hub
-priority: 1
-seeds:
-  - entities/sanchez-opulent-account.md
-  - entities/merraine-icp.md
-  - catalogs/automation-dictionary.md
-  - runbooks/first-open-gate.md
 ---
 
 # Merraine context hub

@@ -1,7 +1,0 @@
-fields:
-  order: Number{integer}
-  name: String
-  entryCriteria: String
-  exitCriteria: String
-  ownerRole: String
-  slaDays: Number{integer}

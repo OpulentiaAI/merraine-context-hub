@@ -1,6 +1,6 @@
 ---
 type: gtm.catalog
-title: Signal catalog
+tldr: Ranked buying triggers, strongest intent first.
 status: active
 owner: Opulent
 updated: 2026-09-14

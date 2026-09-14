@@ -1,6 +1,6 @@
 ---
 type: gtm.runbook
-title: First-open gate
+tldr: First-open gate
 status: active
 owner: Opulent
 updated: 2026-09-14

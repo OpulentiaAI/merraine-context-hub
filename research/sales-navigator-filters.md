@@ -1,6 +1,6 @@
 ---
 type: gtm.tactic
-title: The five Sales Navigator filters that matter
+tldr: The five Sales Navigator filters that matter
 status: active
 owner: Opulent
 updated: 2026-09-14

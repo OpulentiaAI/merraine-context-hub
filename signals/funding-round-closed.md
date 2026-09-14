@@ -1,6 +1,6 @@
 ---
 type: gtm.signal
-title: Funding round closed in last 60 days
+tldr: Funding round closed in last 60 days
 status: active
 owner: Opulent
 updated: 2026-09-14

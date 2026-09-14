@@ -1,0 +1,9 @@
+#: How a Merraine search actually progresses.
+extends: [idea::au-base-types, gtm.managed]
+fields:
+  stages: gtm.stage&[]
+  systemOfRecord: String
+  writeBackPolicy: String
+body:
+  - section: Flow
+  - section: Guardrails

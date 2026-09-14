@@ -1,6 +1,6 @@
 ---
 type: gtm.runbook
-title: Piloting the account through Convex prod
+tldr: Piloting the account through Convex prod
 status: active
 owner: Jeremy Alston
 updated: 2026-09-14

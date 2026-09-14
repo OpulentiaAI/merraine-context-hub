@@ -1,6 +1,6 @@
 ---
 type: gtm.extraction
-title: Connected tool extraction (generic)
+tldr: Connected tool extraction (generic)
 status: active
 owner: Opulent
 updated: 2026-09-14

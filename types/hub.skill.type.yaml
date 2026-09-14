@@ -1,8 +1,0 @@
-# Triggered guidance surfaced to Opulent. Mirrors mcp.skill from au-mcp-sdk;
-# swap `extends` to mcp.skill::au-mcp-sdk once that repo is mounted as a dep.
-fields:
-  name: String
-  description: String       #: the context pointer. Front-load the trigger words.
-  triggers: String[]
-  readWhen: String
-  doNotUseFor: String[]

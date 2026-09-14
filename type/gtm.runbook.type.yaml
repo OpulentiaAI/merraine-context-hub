@@ -1,0 +1,12 @@
+#: An operating procedure a human or agent opens at a known moment.
+extends: [idea::au-base-types, gtm.managed]
+fields:
+  #: When to open this.
+  trigger: String
+  audience: [operator, opulent, jeremy-sanchez]
+  #: The only conditions that reach a human.
+  escalateWhen: String[+]
+body:
+  - section: Procedure
+  - section: Verification
+  - section: Failure branches

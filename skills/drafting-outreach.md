@@ -1,10 +1,7 @@
 ---
-type: hub.skill
+type: mcp.skill::au-mcp-sdk
 name: drafting-outreach
 description: "Write an opener, sequence, or any message to a prospect for Merraine. Use whenever copy is being drafted, reviewed, or approved. Triggers: draft an email, write an opener, sequence, outreach copy, congratulations note, follow-up."
-triggers: [draft, opener, outreach, copy, email, sequence, message]
-readWhen: "Before writing any text intended for a human outside Merraine"
-doNotUseFor: ["Sending", "Internal notes", "Anything addressed to Jeremy Sanchez himself"]
 ---
 
 # Drafting outreach

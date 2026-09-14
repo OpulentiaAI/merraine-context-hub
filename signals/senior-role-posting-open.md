@@ -1,6 +1,6 @@
 ---
 type: gtm.signal
-title: Senior role posting open >30 days
+tldr: Senior role posting open >30 days
 status: active
 owner: Opulent
 updated: 2026-09-14

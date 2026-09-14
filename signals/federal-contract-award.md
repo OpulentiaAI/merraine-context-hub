@@ -1,6 +1,6 @@
 ---
 type: gtm.signal
-title: Federal contract award
+tldr: Federal contract award
 status: active
 owner: Opulent
 updated: 2026-09-14

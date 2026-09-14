@@ -1,11 +1,10 @@
 ---
 type: gtm.person
-title: Jeremy Sanchez
+tldr: Jeremy Sanchez
 status: active
 owner: Jeremy Alston
 updated: 2026-09-14
 provenance: "Outlook 2026-09-11 email; Convex prod authAdmin:checkAccountDetails 2026-09-14"
-fullName: Jeremy Sanchez
 role: Head of Growth
 org: [[merraine-group]]
 email: jeremy@merraine.com
@@ -17,7 +16,8 @@ relationshipStrength: client
 doNotContact: "no"
 evidence:
   - claim: "Direct + WhatsApp 312-835-2373"
-    sourceUrl: "memory/episodic/2026-08-17.md"
+    tldr: "Direct + WhatsApp 312-835-2373"
+    origin: "memory/episodic/2026-08-17.md"
     observedAt: 2026-09-14
     method: read
     verifiedBy: parent

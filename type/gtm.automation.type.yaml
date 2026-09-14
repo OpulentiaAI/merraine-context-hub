@@ -1,0 +1,21 @@
+#: One entry in the automation dictionary. The prompt IS the contract.
+extends: [idea::au-base-types, gtm.managed]
+fields:
+  slug: String
+  uses: gtm.connector*[]
+  schedule: gtm.schedule&
+  mode: [read-only, draft-then-wait, autonomous]
+  confirmWord: String
+  #: Must be yes before enabled may be yes. See first-open-gate.
+  firstOpenChecked: [yes, no]
+  enabled: [yes, no]
+  costCeilingUsd: Number{>=0}
+  producesArtifact: String
+  sourceTemplate?: String
+  #: How the automation knows not to retrigger itself.
+  loopGuard: String
+body:
+  - section: Overview
+  - section: Prompt
+    guidance: "Verbatim pasteable Opulent prompt in a fenced block: the Create line, the Trigger line, numbered steps, and a CAUTION line."
+  - section: Forbidden Actions

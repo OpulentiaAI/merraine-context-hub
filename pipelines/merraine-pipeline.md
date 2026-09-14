@@ -1,6 +1,6 @@
 ---
 type: gtm.pipeline
-title: Merraine search pipeline
+tldr: Merraine search pipeline
 status: draft
 owner: Jeremy Sanchez
 updated: 2026-09-14

@@ -1,6 +1,6 @@
 ---
 type: gtm.automation
-title: Routine healthcheck
+tldr: Routine healthcheck
 status: draft
 owner: Opulent
 updated: 2026-09-14

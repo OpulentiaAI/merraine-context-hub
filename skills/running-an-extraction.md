@@ -1,10 +1,7 @@
 ---
-type: hub.skill
+type: mcp.skill::au-mcp-sdk
 name: running-an-extraction
 description: "Pull a connected tool's full dataset, or a mailbox's communications and relationships, into this hub. Use when a new connector is authorised, when asked to extract or mine a tool, or when asked what data we already have. Triggers: extract, pull the data, mine his email, what's in Spear, ingest, import."
-triggers: [extract, extraction, mine, ingest, import, pull data]
-readWhen: "Before running any data pull against a connected system"
-doNotUseFor: ["Re-running an extraction that already delivered", "Anything against a connector that reads not connected"]
 ---
 
 # Running an extraction

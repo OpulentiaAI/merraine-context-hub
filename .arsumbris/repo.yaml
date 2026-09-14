@@ -1,16 +1,14 @@
+# Folder-repo identity. Without this the daemon hard-refuses the entry (entry-not-a-repo).
+type: au.engine.repo::au-engine
 name: merraine-context-hub
-remote: git@github.com:Git-Godssoldier/arsumbris.git
+remote: git@github.com:OpulentiaAI/merraine-context-hub.git
 description: >
-  Typed context hub for Merraine Group GTM, piloted by Opulent.
-  Holds the ontology, entities, signals, pipelines, automation dictionary,
-  extraction runbooks, skills and workflow catalogs, research and operating
-  runbooks for Jeremy Sanchez's Opulent account.
-owner:
-  name: Jeremy Sanchez
-  email: jeremysanchez@opulentia.ai
-  opulentUserId: k57apryqpfeg6h33ybxfynarx58e1dwa
-operator:
-  name: Jeremy Alston
-  email: agent@opulentia.ai
-  role: parent-coordinator
-deps: []
+  Typed GTM context hub for Merraine Group, piloted by Opulent. Extends the base
+  ontology with a go-to-market vocabulary (signals, observations, sequences,
+  automations, extractions) plus the runbooks, research and agent surface for
+  Jeremy Sanchez's Opulent account.
+deps:
+  - name: au-base-types
+  - name: au-mcp-sdk
+  - name: au-skills
+  - name: au-writing-style

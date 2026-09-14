@@ -1,6 +1,6 @@
 ---
 type: gtm.tactic
-title: Slop patterns
+tldr: Slop patterns
 status: active
 owner: Opulent
 updated: 2026-09-14

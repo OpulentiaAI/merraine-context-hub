@@ -1,5 +1,8 @@
 # Start here
 
+> **Running Ars Umbris already?** See [docs/open-in-au-host.md](docs/open-in-au-host.md)
+> to mount this hub as a workspace in the live app.
+
 **Jeremy — paste the block below into a new Opulent session. That is the whole setup.**
 
 Everything after that is auth clicks. The agent drives the rest.

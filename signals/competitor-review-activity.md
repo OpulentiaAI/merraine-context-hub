@@ -1,6 +1,6 @@
 ---
 type: gtm.signal
-title: Reviewed a competing service
+tldr: Reviewed a competing service
 status: active
 owner: Opulent
 updated: 2026-09-14

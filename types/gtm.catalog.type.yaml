@@ -1,6 +1,0 @@
-extends: [gtm.entity]
-fields:
-  indexes: [tools, workflows, skills, tactics, automations, extractions]
-  entryCount: Number{integer}
-body:
-  - section: Index

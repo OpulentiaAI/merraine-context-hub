@@ -1,3 +1,6 @@
+type: au.engine.workspace::au-engine
 edit:
   - merraine-context-hub
-discover: []
+discover:
+  - mcp-bundle
+  - host-bundle

@@ -1,10 +1,7 @@
 ---
-type: hub.skill
+type: mcp.skill::au-mcp-sdk
 name: piloting-this-account
 description: "Pilot, audit, or change Jeremy Sanchez's Opulent account through Convex prod. Use when checking account state, connector status, balance, threads, or when installing and mounting hub context. Triggers: audit the account, check his balance, is X connected, mount the hub, what runs on his account."
-triggers: [audit, balance, connector, mount, install hub, convex, prod, account state]
-readWhen: "Before any claim about what is true on the account"
-doNotUseFor: ["Sending anything", "Changing billing", "Anything requiring a signed-in browser session"]
 ---
 
 # Piloting this account

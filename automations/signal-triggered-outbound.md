@@ -1,6 +1,6 @@
 ---
 type: gtm.automation
-title: Merraine signal-triggered outbound
+tldr: Merraine signal-triggered outbound
 status: draft
 owner: Opulent
 updated: 2026-09-14

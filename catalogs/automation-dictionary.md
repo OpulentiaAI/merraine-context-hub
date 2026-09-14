@@ -1,6 +1,6 @@
 ---
 type: gtm.catalog
-title: Automation dictionary
+tldr: Every automation this hub can stand up, and whether it is gated.
 status: active
 owner: Opulent
 updated: 2026-09-14

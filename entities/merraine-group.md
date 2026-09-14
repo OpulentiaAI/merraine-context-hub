@@ -1,6 +1,6 @@
 ---
 type: gtm.org
-title: Merraine Group
+tldr: Merraine Group
 status: active
 owner: Jeremy Sanchez
 updated: 2026-09-14
@@ -8,7 +8,6 @@ provenance: "Outlook thread 'My ask: 6 tools, one stack' (2026-09-11) + memory/e
 legalName: Merraine Group, Inc.
 domain: merraine.com
 industry: Talent advisory and executive search
-employeeCount: 0
 hq: New York
 relationship: client
 notes: >
@@ -17,13 +16,15 @@ notes: >
   Opulent relationship and design partner, not a cold prospect.
 evidence:
   - claim: "Jeremy Sanchez is Head of Growth at Merraine Group"
-    sourceUrl: "outlook:agent@opulentia.ai/thread/My ask: 6 tools, one stack"
+    tldr: "Jeremy Sanchez is Head of Growth at Merraine Group"
+    origin: "outlook:agent@opulentia.ai/thread/My ask: 6 tools, one stack"
     observedAt: 2026-09-14
     method: read
     verifiedBy: parent
     confidence: verified
   - claim: "employeeCount is unknown and must not be guessed"
-    sourceUrl: "UNVERIFIED"
+    tldr: "employeeCount is unknown and must not be guessed"
+    origin: "UNVERIFIED"
     observedAt: 2026-09-14
     method: human
     verifiedBy: parent

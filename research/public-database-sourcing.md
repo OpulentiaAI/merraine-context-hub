@@ -1,6 +1,6 @@
 ---
 type: gtm.tactic
-title: Public-database sourcing over bought lists
+tldr: Public-database sourcing over bought lists
 status: active
 owner: Opulent
 updated: 2026-09-14

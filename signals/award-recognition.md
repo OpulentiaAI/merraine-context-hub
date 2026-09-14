@@ -1,6 +1,6 @@
 ---
 type: gtm.signal
-title: Award or list recognition in last 30 days
+tldr: Award or list recognition in last 30 days
 status: active
 owner: Opulent
 updated: 2026-09-14

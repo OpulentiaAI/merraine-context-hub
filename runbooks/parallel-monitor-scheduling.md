@@ -1,6 +1,6 @@
 ---
 type: gtm.runbook
-title: Parallel Monitor scheduling and webhook wiring
+tldr: Parallel Monitor scheduling and webhook wiring
 status: active
 owner: Opulent
 updated: 2026-09-14

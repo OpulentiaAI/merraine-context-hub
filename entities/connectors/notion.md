@@ -1,6 +1,6 @@
 ---
 type: gtm.connector
-title: Notion
+tldr: Notion
 status: active
 owner: Jeremy Sanchez
 updated: 2026-09-14

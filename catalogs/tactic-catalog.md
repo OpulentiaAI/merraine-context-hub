@@ -1,6 +1,6 @@
 ---
 type: gtm.catalog
-title: Tactic catalog
+tldr: Outside plays we adopted, each attributed to its author.
 status: active
 owner: Opulent
 updated: 2026-09-14

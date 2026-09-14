@@ -1,6 +1,6 @@
 ---
 type: gtm.automation
-title: Transcript healthcheck
+tldr: Transcript healthcheck
 status: draft
 owner: Opulent
 updated: 2026-09-14

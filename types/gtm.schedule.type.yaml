@@ -1,5 +1,0 @@
-fields:
-  kind: [cron, event, webhook, manual]
-  expression: String        #: cron string, or the event/webhook name
-  timezone: String
-  source: String            #: parallel-monitor | opulent-native | mcp | manual

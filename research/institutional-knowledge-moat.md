@@ -1,6 +1,6 @@
 ---
 type: gtm.tactic
-title: Encoded institutional knowledge is the moat
+tldr: Encoded institutional knowledge is the moat
 status: active
 owner: Opulent
 updated: 2026-09-14

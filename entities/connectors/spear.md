@@ -1,6 +1,6 @@
 ---
 type: gtm.connector
-title: Spear
+tldr: Spear
 status: active
 owner: Jeremy Sanchez
 updated: 2026-09-14

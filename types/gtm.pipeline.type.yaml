@@ -1,8 +1,0 @@
-extends: [gtm.entity]
-fields:
-  stages: gtm.stage[]
-  systemOfRecord: String
-  writeBackPolicy: String
-body:
-  - section: Flow
-  - section: Guardrails

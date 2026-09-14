@@ -1,6 +1,6 @@
 ---
 type: gtm.runbook
-title: Gojiberry autonomous setup and MCP wiring
+tldr: Gojiberry autonomous setup and MCP wiring
 status: active
 owner: Opulent
 updated: 2026-09-14

@@ -1,6 +1,6 @@
 ---
 type: gtm.signal
-title: Executive departure or arrival in last 90 days
+tldr: Executive departure or arrival in last 90 days
 status: active
 owner: Opulent
 updated: 2026-09-14

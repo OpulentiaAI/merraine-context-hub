@@ -1,6 +1,6 @@
 ---
 type: gtm.extraction
-title: Spear tool extraction
+tldr: Spear tool extraction
 status: active
 owner: Opulent
 updated: 2026-09-14
@@ -19,7 +19,8 @@ outputs:
 idempotency: "If personal-context-hub.zip exists and is 'ready', this has run. Do not repeat."
 evidence:
   - claim: "57 drive files + personal-context-hub.zip + FILE-INDEX, from completed luna-fast + deepseek worker runs 22:18-22:34"
-    sourceUrl: "capy:jam_WJH16K8HT2KG346Z09FH84GJM4/pre-resume-verification.md"
+    tldr: "57 drive files + personal-context-hub.zip + FILE-INDEX, from completed..."
+    origin: "capy:jam_WJH16K8HT2KG346Z09FH84GJM4/pre-resume-verification.md"
     observedAt: 2026-09-14
     method: read
     verifiedBy: parent

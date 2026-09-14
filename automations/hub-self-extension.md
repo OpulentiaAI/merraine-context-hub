@@ -1,6 +1,6 @@
 ---
 type: gtm.automation
-title: Hub self-extension
+tldr: Hub self-extension
 status: draft
 owner: Opulent
 updated: 2026-09-14

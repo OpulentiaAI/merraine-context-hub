@@ -1,0 +1,21 @@
+type: composition::au-host-sdk
+slot-defaults:
+  placeholder: "[[placeholder-picker::placeholder-picker]]"
+viewer-defaults:
+  defaults:
+    - opens: md
+      viewer: "[[aup-reader::aup-reader]]"
+    - opens: markdown
+      viewer: "[[aup-reader::aup-reader]]"
+    - opens: yaml
+      viewer: "[[editor-pane::editor]]"
+    - opens: yml
+      viewer: "[[editor-pane::editor]]"
+    - opens: json
+      viewer: "[[editor-pane::editor]]"
+    - opens: jsonl
+      viewer: "[[editor-pane::editor]]"
+    - opens: png
+      viewer: "[[image-viewer::media-viewers]]"
+    - opens: jpg
+      viewer: "[[image-viewer::media-viewers]]"

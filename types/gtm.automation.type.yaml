@@ -1,0 +1,22 @@
+# One entry in the automation dictionary. The prompt IS the contract.
+extends: [gtm.entity]
+fields:
+  slug: String
+  uses: gtm.connector*[]
+  schedule: gtm.schedule
+  mode: [read-only, draft-then-wait, autonomous]
+  confirmWord: String
+  firstOpenChecked: [yes, no]
+  enabled: [yes, no]
+  costCeilingUsd: Number{>=0}
+  producesArtifact: String
+  sourceTemplate: String    #: upstream template this was adapted from
+  loopGuard: String
+body:
+  - section: Overview
+  - section: What's Needed From User
+  - section: Procedure
+  - section: Specifications
+  - section: Prompt
+    guidance: "Verbatim pasteable Opulent automation prompt in a fenced block. Includes the Create line, Trigger line, numbered steps, and a CAUTION line."
+  - section: Forbidden Actions

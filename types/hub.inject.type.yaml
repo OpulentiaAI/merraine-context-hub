@@ -1,0 +1,5 @@
+# Always-on context seeded into every Opulent session on this account.
+fields:
+  name: String
+  priority: Number{integer}
+  seeds: String[]           #: files the graph walk starts from

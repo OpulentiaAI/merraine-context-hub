@@ -1,0 +1,10 @@
+# Output of the self-improvement loop. Proposed, never auto-applied.
+fields:
+  observedFriction: String
+  evidence: gtm.evidence[]
+  proposal: String
+  targetFile: String
+  changeKind: [add, edit, retire, reroute]
+  estimatedSaving: String
+  decision: [proposed, accepted, rejected, applied]
+  decidedBy: String

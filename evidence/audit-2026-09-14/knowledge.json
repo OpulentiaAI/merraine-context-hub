@@ -1,0 +1,162 @@
+{
+  "notes": [
+    {
+      "contentLength": 72771,
+      "contentPreview": "# 2026-09-08\n\n## 15:30 - Signed in to Opulent OS with new work account\n\nJeremy has a new work account on platform.opulentia.ai (\"Opulent OS\") under the email jeremysanchez@opulentia.ai, display name \"…",
+      "createdAt": 1788905640569,
+      "folder": "knowledge_base",
+      "id": "j97m1bstk0pqmp7ffhfn0rngv58e1nq7",
+      "name": "Session Log Sep 8 2026 (episodic)",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905640569
+    },
+    {
+      "contentLength": 2521,
+      "contentPreview": "---\ntitle: Marketing & channel communication skills (from vercel-labs eve template)\naliases: [\"eve marketing skills\", \"channel communication tactics\", \"email adaptation skill\", \"marketing-team-eve-tem…",
+      "createdAt": 1788905635488,
+      "folder": "knowledge_base",
+      "id": "j97regznrbhdwbz6mstd0fa5nn8e101p",
+      "name": "Marketing & Channel Skills Index",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905635488
+    },
+    {
+      "contentLength": 3737,
+      "contentPreview": "---\ntitle: platform.opulentia.ai (Opulent OS)\naliases: [\"Opulent OS\", \"Opulentia\"]\n---\n\n## Current\n- Opulent OS is a work platform at platform.opulentia.ai. Jeremy has a work\n  account under jeremysan…",
+      "createdAt": 1788905630668,
+      "folder": "knowledge_base",
+      "id": "j97srycbqcqrs5g6dbk5yazzrh8e0r1g",
+      "name": "Opulent OS Platform Notes",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905630668
+    },
+    {
+      "contentLength": 5311,
+      "contentPreview": "---\ntitle: app.getspear.ai (Spear)\naliases: [\"Spear\", \"getspear.ai\", \"Jeremy's agent\"]\n---\n\n## Current\n\n### What Spear is to Jeremy\n- Spear (app.getspear.ai) is Jeremy's outbound prospecting engine fo…",
+      "createdAt": 1788905625830,
+      "folder": "knowledge_base",
+      "id": "j97qa5gpha5937hn564c602dth8e1fyh",
+      "name": "Spear Site Notes (app.getspear.ai)",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905625830
+    },
+    {
+      "contentLength": 2944,
+      "contentPreview": "---\ntitle: Jeremy Sanchez (the user)\naliases: [\"Jeremy\", \"jeremy@merraine.com\", \"sanchezjeremy\", \"Head of Growth, Merraine Group\"]\n---\n\n## Current\n- Jeremy Sanchez, Head of Growth / Talent & Growth Pa…",
+      "createdAt": 1788905620997,
+      "folder": "knowledge_base",
+      "id": "j97tbpep18pgtrykxhz6bc7t558e109q",
+      "name": "Jeremy Sanchez Profile (canonical)",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905620997
+    },
+    {
+      "contentLength": 5520,
+      "contentPreview": "# Memory Taxonomy\n\nLast updated: 2026-04-17T04:00:00Z\n\n## Invariants\n- Unified memory lives under `memory/`.\n- Semantic and episodic memory are the source of truth. L1 (`MEMORY.md`, `USER.md`) is deri…",
+      "createdAt": 1788905616018,
+      "folder": "knowledge_base",
+      "id": "j97j80cmxan1zzam03en7tmqts8e0new",
+      "name": "Aside Memory Taxonomy & Write Rules",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905616018
+    },
+    {
+      "contentLength": 439,
+      "contentPreview": "# Memory Briefing\n\n<!-- L1 operating briefing: refreshed by dreaming. -->\n\n## Defaults\n- For any marketing or channel writing task (email, X, LinkedIn, Bluesky, Threads, Mastodon, blog, SEO), use the …",
+      "createdAt": 1788905611184,
+      "folder": "knowledge_base",
+      "id": "j97m34yz7a86zhvd8h0spee1158e0n5s",
+      "name": "Aside Operating Defaults",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905611184
+    },
+    {
+      "contentLength": 729,
+      "contentPreview": "# User Briefing\n\n<!-- L1 user briefing: refreshed by dreaming. -->\n\n- Jeremy Sanchez, Head of Growth at Merraine Group (leadership search / embedded talent partner), Chicago. Work Gmail jeremy@merrain…",
+      "createdAt": 1788905595882,
+      "folder": "knowledge_base",
+      "id": "j97jx6a4jc4g7mbj5jpan5j2qh8e057w",
+      "name": "Aside User Briefing (Jeremy Sanchez)",
+      "source": "dashboard",
+      "status": "active",
+      "trigger": "Available when Opulent searches organization knowledge.",
+      "updatedAt": 1788905595882
+    },
+    {
+      "contentLength": 5775,
+      "contentPreview": "# Boston Trip & Networking Guide: September 14–20, 2026\n\n## Context & Anchor Events\n- **Dates**: September 14–20, 2026.\n- **Primary Anchors**:\n  - **HubSpot UNBOUND 2026**: September 16–17, Seaport Di…",
+      "createdAt": 1788905008343,
+      "folder": "travel-and-events",
+      "id": "j97jy9k7w348t485694ygx5kfh8e07qr",
+      "name": "Boston September 2026 Travel & Events Guide",
+      "source": "agent",
+      "status": "active",
+      "trigger": "when planning Jeremy's Boston trip, HubSpot UNBOUND 2026, Startup Boston Week, or event RSVPs",
+      "updatedAt": 1788905008343
+    },
+    {
+      "contentLength": 3547,
+      "contentPreview": "# Workspace Connected Tools & MCP Connector Audit\n\n## Executive Summary\nA comprehensive audit of Opulent and Aside connected tools revealed a stark discrepancy between visual connection status (\"Conne…",
+      "createdAt": 1788904992209,
+      "folder": "integrations",
+      "id": "j97rcc60vw3j0f4kj6s3fh5ajs8e1phb",
+      "name": "Workspace Connected Tools & MCP Audit",
+      "source": "agent",
+      "status": "active",
+      "trigger": "when inspecting, connecting, or auditing MCP servers, Slack, HubSpot, ZoomInfo, Apollo, or Aside vault credentials",
+      "updatedAt": 1788904992209
+    },
+    {
+      "contentLength": 2694,
+      "contentPreview": "# Spear AI MCP Integration Architecture & Diagnostics\n\n## Overview\nSpear (`app.getspear.ai`) provides outbound prospecting, buyer signal detection, and play execution. Integration into AI assistants o…",
+      "createdAt": 1788904981983,
+      "folder": "integrations",
+      "id": "j97qx2w2mv45xms5tm9bdnfg1s8e1m04",
+      "name": "Spear AI MCP Integration & OAuth Quirks",
+      "source": "agent",
+      "status": "active",
+      "trigger": "when configuring or troubleshooting Spear MCP connector, OAuth errors, or Spear settings",
+      "updatedAt": 1788904981983
+    },
+    {
+      "contentLength": 2162,
+      "contentPreview": "# Crustdata Integration, Secrets Configuration & Screener Verification\n\n## Executive Overview\nCrustdata (`crustdata.com`) is configured as the primary company and executive enrichment engine within Op…",
+      "createdAt": 1788904967373,
+      "folder": "integrations",
+      "id": "j97mqy5a92kdawd8nf6t6dpmxx8e1vk0",
+      "name": "Crustdata API Configuration & Enrichment",
+      "source": "agent",
+      "status": "active",
+      "trigger": "when enriching companies or people with Crustdata or configuring Crustdata API credentials",
+      "updatedAt": 1788904967373
+    },
+    {
+      "contentLength": 4001,
+      "contentPreview": "# Parallel Monitor Integration & Architecture Guide\n\n## Executive Summary\nParallel Monitor (`platform.parallel.ai`) provides real-time web and entity monitoring that feeds automated triggers into Opul…",
+      "createdAt": 1788904958668,
+      "folder": "integrations",
+      "id": "j97kmrp0xah1qmttm0bke0djkh8e0zkr",
+      "name": "Parallel Monitor Integration & Diagnostics",
+      "source": "agent",
+      "status": "active",
+      "trigger": "when configuring or executing Parallel Monitor API, triggers, webhooks, or dry runs",
+      "updatedAt": 1788904958668
+    }
+  ],
+  "total": 13,
+  "truncated": false
+}

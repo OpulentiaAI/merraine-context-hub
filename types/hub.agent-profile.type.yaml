@@ -1,0 +1,10 @@
+# What one Opulent session sees.
+fields:
+  name: String
+  role: [coordinator, worker, researcher, reviewer]
+  skills: hub.skill*[]
+  inject: hub.inject*
+  allowedConnectors: gtm.connector*[]
+  modelRoute: String        #: explicit. continueThread defaults and drops intent.
+  canSend: [yes, no]
+  canWriteHub: [yes, no]

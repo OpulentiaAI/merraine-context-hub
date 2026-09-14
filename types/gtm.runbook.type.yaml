@@ -1,0 +1,11 @@
+extends: [gtm.entity]
+fields:
+  trigger: String           #: when a human or agent should open this
+  audience: [operator, opulent, jeremy-sanchez]
+  escalateWhen: String[]
+  relatedAutomations: gtm.automation*[]
+body:
+  - section: Overview
+  - section: Procedure
+  - section: Verification
+  - section: Failure branches

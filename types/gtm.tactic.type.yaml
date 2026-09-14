@@ -1,0 +1,12 @@
+# A referenced play from outside research. Always attributed.
+extends: [gtm.entity]
+fields:
+  source: String            #: author or repo
+  sourceUrl: String
+  category: [sourcing, enrichment, copy, sequencing, events, ops, architecture]
+  appliesTo: gtm.signal*[]
+  claimedResult: String     #: quote the claim; never restate it as our own number
+  adoptionState: [adopted, adapted, rejected, backlog]
+body:
+  - section: The play
+  - section: How we apply it for Merraine

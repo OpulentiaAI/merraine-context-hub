@@ -1,0 +1,12 @@
+# An MCP or native integration on the piloted account.
+extends: [gtm.entity]
+fields:
+  slug: String
+  kind: [mcp, native, composio, oauth]
+  connected: [yes, no, error]
+  toolCount: Number{integer}
+  scopes: String[]
+  authOwner: String        #: who must complete auth; "user" or "operator"
+  setupRunbook: gtm.runbook*
+  blockerNote: String
+  evidence: gtm.evidence[]

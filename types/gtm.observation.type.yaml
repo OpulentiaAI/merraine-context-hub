@@ -1,0 +1,11 @@
+# One observed signal against one org or person.
+fields:
+  signal: gtm.signal*
+  org: gtm.org*
+  person: gtm.person&
+  observedAt: String{^\d{4}-\d{2}-\d{2}$}
+  quote: String             #: the signal in the source's own words
+  evidence: gtm.evidence
+  score: Number{>=0}
+  disposition: [kept, dropped, pending, contacted]
+  dropReason: String

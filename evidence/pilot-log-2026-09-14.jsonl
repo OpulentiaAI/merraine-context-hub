@@ -1,0 +1,7 @@
+{"ts":"2026-09-14T06:23:46Z","mode":"read","fn":"actions/authAdmin:checkAccountDetails","args":{"email":"jeremysanchez@opulentia.ai"},"exit":0,"deployment":"prod:confident-sheep-333"}
+{"ts":"2026-09-14T06:23:47Z","mode":"read","fn":"creditTracking:getCreditBalance","args":{"userId":"k57apryqpfeg6h33ybxfynarx58e1dwa"},"exit":0,"deployment":"prod:confident-sheep-333"}
+{"ts":"2026-09-14T06:23:49Z","mode":"read","fn":"userIdentityLinks:resolveOwnershipCandidatesInternal","args":{"email":"jeremysanchez@opulentia.ai"},"exit":0,"deployment":"prod:confident-sheep-333"}
+{"ts":"2026-09-14T06:23:50Z","mode":"read","fn":"workspaceEntities:listForAgentInternal","args":{"userId":"k57apryqpfeg6h33ybxfynarx58e1dwa"},"exit":0,"deployment":"prod:confident-sheep-333"}
+{"ts":"2026-09-14T06:23:52Z","mode":"read","fn":"knowledgeRunbooks:listKnowledge","args":{"userId":"k57apryqpfeg6h33ybxfynarx58e1dwa","limit":200},"exit":0,"deployment":"prod:confident-sheep-333"}
+{"ts":"2026-09-14T06:23:53Z","mode":"read","fn":"knowledgeRunbooks:listRunbooks","args":{"userId":"k57apryqpfeg6h33ybxfynarx58e1dwa","limit":200},"exit":0,"deployment":"prod:confident-sheep-333"}
+{"ts":"2026-09-14T06:23:54Z","mode":"read","fn":"creditTracking:getRecentUsageEvents","args":{"userId":"k57apryqpfeg6h33ybxfynarx58e1dwa"},"exit":0,"deployment":"prod:confident-sheep-333"}

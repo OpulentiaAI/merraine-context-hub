@@ -1,0 +1,12 @@
+extends: [gtm.entity]
+fields:
+  fullName: String
+  role: String
+  org: gtm.org*
+  email: String
+  phone: String
+  linkedin: String
+  titleHistory: String[]
+  relationshipStrength: [cold, aware, warm, active, client]
+  doNotContact: [yes, no]
+  evidence: gtm.evidence[]

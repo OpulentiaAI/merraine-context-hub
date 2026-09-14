@@ -8,6 +8,8 @@ engine reads as one typed, queryable graph. Knowledge, types, skills and workflo
 live together, so a field that should hold a citation cannot quietly hold a guess.
 
 > **Running Ars Umbris?** [docs/open-in-au-host.md](docs/open-in-au-host.md) mounts this as a workspace.
+> On Linux, [docs/running-on-linux.md](docs/running-on-linux.md) is the verified bring-up
+> (engine + host build, the flags a headless box needs, and the one composition gap left).
 > **New here? Read [ONBOARDING.md](ONBOARDING.md).** It is one paste block and four
 > auth clicks.
 

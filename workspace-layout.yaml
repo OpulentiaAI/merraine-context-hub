@@ -1,4 +1,15 @@
 type: composition::au-host-sdk
+intent-routing:
+  wires:
+    - intent: "[[open-intent::intent]]"
+      mode: fallback
+      source: "[[^^tree]]"
+      targets:
+        - "[[^^document-tabs]]"
+  defaults:
+    - intent: "[[open-intent::intent]]"
+      roles: ["[[tabs::tabs]]"]
+      mode: priority
 slot-defaults:
   placeholder: "[[placeholder-picker::placeholder-picker]]"
 viewer-defaults:
@@ -19,3 +30,55 @@ viewer-defaults:
       viewer: "[[image-viewer::media-viewers]]"
     - opens: jpg
       viewer: "[[image-viewer::media-viewers]]"
+windows:
+  - "[[^^au-window-primary]]"
+projections:
+  - ^: au-window-primary
+    content: "[[^^workspace]]"
+    primary: true
+    type: window::au-host-sdk
+  - ^: workspace
+    center:
+      child: "[[^^documents]]"
+      type: sandwich-slot::sandwich
+    left:
+      child: "[[^^sidebar]]"
+      hideHeader: true
+      label: Files
+      size: 288
+      type: sandwich-slot::sandwich
+      minSize: 200
+    type: sandwich::sandwich
+  - ^: sidebar
+    body: "[[^^sidebar-stack]]"
+    type: aup-workspace-sidebar::aup-workspace-sidebar
+  - ^: sidebar-stack
+    addButton: always
+    items:
+      - child: "[[^^tree]]"
+        size: 60
+        type: column-slot::column
+      - child: "[[^^graph]]"
+        size: 40
+        type: column-slot::column
+    itemHeaders: always
+    type: column::column
+  - ^: graph
+    nodeScale: 1.2
+    selectionZoom: 0.9
+    type: force-graph::force-graph
+  - ^: tree
+    type: file-tree::file-tree
+  - ^: documents
+    root: "[[^^document-tabs]]"
+    type: bento::bento
+  - ^: document-tabs
+    activeTab: reader
+    defaultOpenMode: permanent
+    newTabPosition: after-source
+    tabs:
+      - "[[^^reader]]"
+    type: tabs::tabs
+  - ^: reader
+    file: start here.md
+    type: aup-reader::aup-reader

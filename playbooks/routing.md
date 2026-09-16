@@ -36,6 +36,11 @@ Chains:
 | Inbox | [[replies]] → interested to [[qualification]], warm to [[follow-up]] |
 | Stalled | [[follow-up]] + [[pipeline]] |
 | What's working | [[pipeline]] → [[icp]] if targeting should change |
+| Long version | [[longform]] → [[review]] → hold |
+| One issue | [[newsletter]] → [[review]] → hold |
+| What changed | [[announcement]] → [[review]] → hold |
+| Social versions | [[social-queue]] after the claim is settled. Default LinkedIn + email. |
+| Need a fact | [[facts]] before anyone writes the number |
 
 Cap a single run at 50 new prospects unless Jeremy set another number.
 

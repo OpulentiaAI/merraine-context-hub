@@ -35,6 +35,14 @@ PAGES = [
     "playbooks/sequencing.md",
     "playbooks/channels.md",
     "entities/email-components.md",
+    "playbooks/social-queue.md",
+    "playbooks/longform.md",
+    "playbooks/newsletter.md",
+    "playbooks/announcement.md",
+    "playbooks/review.md",
+    "playbooks/facts.md",
+    "entities/jeremy-writing-prefs.md",
+    "catalogs/channel-catalog.md",
 ]
 
 

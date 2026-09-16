@@ -22,10 +22,11 @@ The claim stays. The first fold, the word cap, and the link placement
 change. See [[first-fold-on-the-channel]].
 
 # Process
-1. Name the channel: email, LinkedIn, call note, or event.
-2. Read the matching guide: [[channel-email]] or [[channel-linkedin]].
+1. Name the channel: email, LinkedIn, X, Threads, Bluesky, Mastodon,
+   blog, newsletter, announcement, call note, or event.
+2. Read the matching guide from [[channel-catalog]].
 3. Rewrite to the fold. Email first 40 characters of subject plus first
-   body line. LinkedIn first ~140 characters.
+   body line. LinkedIn first ~140. X first 280.
 4. Place links where the channel allows them.
 5. If the channel is not connected, say so and stop. Do not invent a send.
 

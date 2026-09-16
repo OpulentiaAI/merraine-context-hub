@@ -27,4 +27,7 @@ Start with [[workspace-now]] and [[connection-inventory]] before you assume
 what is already connected or already extracted. Then [[icp-context]] and
 [[routing]] before you hunt, write, or stand anything up. A note that has
 to travel as mail goes through [[email]] and [[email-components]]. A note
-that has to travel on more than one channel goes through [[channels]].
+that has to travel on more than one channel goes through [[channels]]
+and [[social-queue]]. Long-form goes through [[longform]] then [[review]].
+A public change goes through [[announcement]]. A number you do not have
+goes through [[facts]]. Standing voice lives on [[jeremy-writing-prefs]].

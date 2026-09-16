@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Award or list recognition in last 30 days
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Jeremy Sanchez's own ask: 'Award winners are warm intros waiting to happen'"
 rank: 4
 sourceSystems: [Forbes, Crain's Chicago, Crain's New York, regional business journals, Inc. 5000, Parallel Monitor]

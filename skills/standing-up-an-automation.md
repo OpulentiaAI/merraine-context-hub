@@ -9,11 +9,13 @@ description: "Create, enable, schedule, or troubleshoot an automation on this ac
 Read [[first-open-gate]] and follow it exactly. Nothing gets a clock before one
 checked output.
 
-Choose the trigger honestly, per [[parallel-monitor-scheduling]]: detection is an
-event, aggregation is a cron. An automation that fires daily and finds nothing
-should be a Parallel monitor instead, and [[routine-healthcheck]] will flag it if
-it is not.
+Choose the trigger honestly, per [[parallel-monitor-scheduling]]: detection is
+an event, aggregation is a cron. An automation that fires daily and finds
+nothing should be a Parallel monitor instead.
 
-Every automation file needs `costCeilingUsd`, a `loopGuard`, and a CAUTION line in
-its prompt. Bounding tool calls improves quality, not just cost — see
+Every automation file needs `costCeilingUsd`, a `loopGuard`, and a CAUTION line
+in its prompt. Bounding tool calls improves quality, not just cost — see
 [[agent-economics]].
+
+The daily hiring scan already has a procedure ([[daily-hiring-scan]]) and is
+not on a clock. Do not invent a schedule for it unless Jeremy asks.

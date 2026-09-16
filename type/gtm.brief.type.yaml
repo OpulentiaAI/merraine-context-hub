@@ -1,0 +1,6 @@
+#: A standing brief Jeremy's sessions can open. Not a signal and not a play.
+extends: [idea::au-base-types, gtm.managed]
+fields:
+  kind: [workspace, travel, inventory, accounts]
+body:
+  - section: Now

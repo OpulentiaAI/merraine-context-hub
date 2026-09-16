@@ -2,8 +2,9 @@
 type: gtm.automation
 tldr: Merraine signal-triggered outbound
 status: draft
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Adapted from OpulentiaAI/gtm-agent-automations agents/gtm/outbound/signal-triggered-outbound.md"
 slug: merraine-signal-outbound
 uses:

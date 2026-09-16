@@ -2,11 +2,12 @@
 type: gtm.runbook
 tldr: Parallel Monitor scheduling and webhook wiring
 status: active
-owner: Opulent
-updated: 2026-09-14
-provenance: "Native install with scope monitor.event.detected confirmed on the account 2026-09-10"
+owner: Jeremy Sanchez
+updated: 2026-09-16
+surface: jeremy
+provenance: "Native Parallel install confirmed live 2026-09-16"
 trigger: "Any automation that must watch the world rather than poll it"
-audience: opulent
+audience: jeremy-sanchez
 escalateWhen:
   - "A monitor needs a paid tier beyond the current plan"
 relatedAutomations: []

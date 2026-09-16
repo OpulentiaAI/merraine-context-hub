@@ -2,8 +2,9 @@
 type: gtm.tactic
 tldr: Encoded institutional knowledge is the moat
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Field Theory bookmark 2080716441041465427, @ParthGujare_ on Ramp Revenue"
 source: "@ParthGujare_ (Ramp)"
 sourceUrl: "https://x.com/ParthGujare_/status/2080716441041465427"

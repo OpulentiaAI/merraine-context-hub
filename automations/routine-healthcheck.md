@@ -2,8 +2,9 @@
 type: gtm.automation
 tldr: Routine healthcheck
 status: draft
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Pattern from x.ai dr-eggbot-v2; cost lens from Clay's 350m-agents-a-month talk"
 slug: merraine-routine-healthcheck
 uses: []

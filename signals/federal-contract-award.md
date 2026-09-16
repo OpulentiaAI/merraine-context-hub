@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Federal contract award
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "@scaling_shields: public databases get 5-12% reply vs Apollo's 0.5%"
 rank: 6
 sourceSystems: [USASpending.gov]

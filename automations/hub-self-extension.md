@@ -2,8 +2,9 @@
 type: gtm.automation
 tldr: Hub self-extension
 status: draft
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Requested: autonomous additions to the hub as new knowledge arrives"
 slug: merraine-hub-self-extension
 uses: []

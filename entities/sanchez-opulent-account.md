@@ -1,40 +1,47 @@
 ---
 type: gtm.account
-tldr: Sanchez Opulent account
+tldr: Jeremy Sanchez Opulent workspace
 status: active
-owner: Jeremy Alston
-updated: 2026-09-14
-provenance: "Live read: npx convex run actions/authAdmin:checkAccountDetails --prod"
+owner: Jeremy Sanchez
+updated: 2026-09-16
+surface: jeremy
+provenance: "Live Convex read 2026-09-16: checkAccountDetails, getCreditBalance, listForAgentInternal, listInstalledCapabilitiesInternal, listAutomationsInternal"
 email: jeremysanchez@opulentia.ai
 opulentUserId: k57apryqpfeg6h33ybxfynarx58e1dwa
 plan: Heavy
 deployment: "prod:confident-sheep-333"
 balanceCents: 14012
-workspaceId: ""
+workspaceId: ws_6b932257a9014a51a2ec5d42bb
 isolated: "yes"
 evidence:
-  - claim: "user k57apryqpfeg6h33ybxfynarx58e1dwa, Heavy, balance 14012 cents"
-    tldr: "user k57apryqpfeg6h33ybxfynarx58e1dwa, Heavy, balance 14012 cents"
-    origin: "convex:prod:confident-sheep-333/actions/authAdmin:checkAccountDetails"
-    observedAt: 2026-09-14
+  - claim: "Heavy plan, $140.12 balance, Default Workspace ready, mounted context 0, zero saved automations"
+    tldr: "Live workspace state 2026-09-16"
+    origin: "convex:prod:confident-sheep-333/workspaceEntities:listForAgentInternal"
+    observedAt: 2026-09-16
     method: cli
     verifiedBy: parent
     confidence: verified
 ---
 
-# Sanchez Opulent account
+# Your Opulent workspace
 
-## Address trap
+This is your work account: **Jeremy Sanchez**, `jeremysanchez@opulentia.ai`,
+Heavy plan. Default Workspace is ready. Mesa is ready.
 
-Jeremy Alston refers to this account as `jeremysanchez@opulent.ai`. **That address
-does not exist** — `checkAccountDetails` returns *User not found*. The real account
-is `@opulentia.ai`.
+As of 16 September 2026:
 
-Out of scope, never pilot: `jeremy@merraine.com`, `sanchez@opulentia.ai`.
-The linked-owner set for this account is exactly one id.
+| | |
+|---|---|
+| Credits | $140.12 |
+| Hub mounted on the workspace | **No.** Context attached to the workspace is still zero. |
+| Saved automations | None |
+| Spear | Connected, 131 tools. Export already in Drive. Do not run it again. |
+| Notion | Connected, 42 tools. Workspace: Shepherd Search Group / Merraine. |
+| Parallel Monitor | Connected |
+| Mesa | Connected |
+| Gmail | Not connected. Two login attempts on the "Search the web" thread timed out. This is the unlock for mailbox extraction. |
+| Apollo | Not usable. Trial expired. |
+| Slack, HubSpot, ZoomInfo, Fireflies, and the rest | Not connected. Live inventory: [[connection-inventory]]. |
 
-## Standing state as of the last audit (2026-09-10)
-
-38 threads, 31 runs, all terminal (11 completed / 16 failed / 4 stopped).
-Zero active, zero awaiting-auth, zero queued, zero blocked approvals.
-Intentional user stops: 0. Surviving autonomous resume candidates: **zero**.
+What is already sitting in Drive and knowledge — and what should stay out of
+the way — is in [[workspace-now]].

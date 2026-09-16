@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Reviewed a competing service
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "@scaling_shields: reviewers have budget, are comparing, and are reachable"
 rank: 7
 sourceSystems: [G2, Capterra]

@@ -1,0 +1,12 @@
+.env
+.env.*
+.env.deploy
+*.pem
+
+# Live dumps that can carry secrets or password metadata.
+evidence/**/account.json
+evidence/**/notes/
+evidence/**/runbooks-full/
+evidence/**/memory*.json
+evidence/**/usage*.json
+evidence/*.jsonl

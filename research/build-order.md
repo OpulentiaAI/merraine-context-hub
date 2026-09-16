@@ -2,8 +2,9 @@
 type: gtm.tactic
 tldr: Build order - data layer before agents
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Field Theory bookmark 2059254933539451104, @lukepierceops"
 source: "@lukepierceops"
 sourceUrl: "https://x.com/lukepierceops/status/2059254933539451104"

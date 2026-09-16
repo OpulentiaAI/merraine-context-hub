@@ -2,8 +2,9 @@
 type: gtm.tactic
 tldr: The five Sales Navigator filters that matter
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Field Theory bookmark 2019410722137198655, @draprints"
 source: "@draprints"
 sourceUrl: "https://x.com/draprints/status/2019410722137198655"

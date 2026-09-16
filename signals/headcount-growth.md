@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Headcount growth 20%+ year over year
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "@draprints 'growing companies = hiring = budget'; @Kazanjy signal reading"
 rank: 5
 sourceSystems: [LinkedIn, Crustdata, Monid, Parallel Monitor]

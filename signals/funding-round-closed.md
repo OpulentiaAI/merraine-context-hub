@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Funding round closed in last 60 days
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "@scaling_shields 'a company that raised $5m last week has $5m to deploy'"
 rank: 2
 sourceSystems: [Crunchbase, PitchBook, Parallel Monitor, SEC EDGAR]

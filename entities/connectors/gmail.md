@@ -3,18 +3,34 @@ type: gtm.connector
 tldr: Gmail
 status: blocked
 owner: Jeremy Sanchez
-updated: 2026-09-14
-provenance: "connection-discovery-current.json 2026-09-10"
+updated: 2026-09-16
+surface: jeremy
+provenance: "Live capabilities 2026-09-16 show no Gmail install; thread 'Search the web' has two runs failed with authentication not completed within 10 minutes"
 slug: gmail
 kind: composio
 connected: no
 toolCount: 0
 scopes: []
-authOwner: user
-blockerNote: "isConnected:false, last updated 2026-09-10 03:53:20, inside the second failed auth window. Two runs died connector_manage -> provider gmail, state timed_out after 600s. No native install, no pending OAuth sessions."
-evidence: []
+authOwner: Jeremy Sanchez
+blockerNote: "Not connected. Two login attempts on 2026-09-10 timed out after 10 minutes."
+evidence:
+  - claim: "Gmail is not in the live capability inventory; Search the web thread has two auth timeouts"
+    tldr: "Gmail still disconnected"
+    origin: "convex:mcpConnectors:listInstalledCapabilitiesInternal + agentRuns:getByThreadInternal"
+    observedAt: 2026-09-16
+    method: cli
+    verifiedBy: parent
+    confidence: verified
 ---
 
 # Gmail
 
-**The single highest-value unblock.** Gmail gates the whole communications/relationship extraction and the 'Search the web' thread. User completes it in Settings -> Connectors. No server-side bypass exists or will be proposed.
+The highest-value unlock. Gmail is what lets us rebuild your relationships,
+your voice from mail you actually sent, and the suppression list.
+
+Connect it in Settings → Connectors. Two earlier login attempts on the
+"Search the web" thread timed out after ten minutes. Nothing here can finish
+that click for you.
+
+Once it is connected, [[email-communications-extraction]] runs read-only.
+Nothing is sent, filed, or labelled.

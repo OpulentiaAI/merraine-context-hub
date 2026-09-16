@@ -10,3 +10,5 @@ fields:
   updated: Date
   #: Where this knowledge came from. "UNVERIFIED" when nothing backs it.
   provenance: String
+  #: jeremy = may be mounted on Jeremy's Opulent workspace. operator = ops/ only.
+  surface?: [jeremy, operator]

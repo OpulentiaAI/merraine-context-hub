@@ -2,8 +2,9 @@
 type: gtm.tactic
 tldr: Slop patterns
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "OpulentiaAI/gojiberryai-sales-os skills/sales-os/references/slop-patterns.md"
 source: "Gojiberry Sales OS"
 sourceUrl: "https://github.com/OpulentiaAI/gojiberryai-sales-os"

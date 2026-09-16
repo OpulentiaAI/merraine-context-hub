@@ -2,8 +2,9 @@
 type: gtm.automation
 tldr: Transcript healthcheck
 status: draft
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Pattern from x.ai dr-eggbot-v2 standing healthchecks, rebuilt on Opulent primitives"
 slug: merraine-transcript-healthcheck
 uses: []

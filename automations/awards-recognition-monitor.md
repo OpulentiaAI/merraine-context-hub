@@ -2,8 +2,9 @@
 type: gtm.automation
 tldr: Merraine awards and recognition monitor
 status: draft
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Jeremy Sanchez ask item 6, 2026-09-11"
 slug: merraine-awards-monitor
 uses:
@@ -28,7 +29,7 @@ loopGuard: "If this week's recognition digest already exists, stop."
 
 ## Overview
 
-His words: *"Award winners are warm intros waiting to happen."* A named
+Your words: *"Award winners are warm intros waiting to happen."* A named
 congratulations is the only cold opener that is genuinely welcome.
 
 ## What's Needed From User

@@ -1,14 +1,15 @@
 ---
 type: gtm.extraction
-tldr: Connected tool extraction (generic)
+tldr: Pull a newly connected tool into this hub
 status: active
-owner: Opulent
-updated: 2026-09-14
-provenance: "Generalised from [[spear-tool-extraction]]"
+owner: Jeremy Sanchez
+updated: 2026-09-16
+surface: jeremy
+provenance: "Same pattern as [[spear-tool-extraction]], which already delivered"
 sourceSystem: "any connected MCP or native integration"
 accessPath: mcp
 requiresAuth: "yes"
-authOwner: user
+authOwner: Jeremy Sanchez
 method: "codemode + mcp access, coordinator + worker"
 coordinatorRoute: "luna-fast"
 workerRoute: "gemini-3.8-flash"
@@ -17,10 +18,10 @@ idempotency: "Check FILE-INDEX for a <tool> entry before starting. If present wi
 evidence: []
 ---
 
-# Connected tool extraction (generic)
+# Connected tool extraction
 
-Run this for **every** tool Jeremy authorises, in connector order. It is the Spear
-pattern with the tool name as a parameter.
+Run this for every tool you authorise, in connector order. Same pattern as
+Spear, with the tool name as the only change.
 
 ## Preconditions
 
@@ -50,8 +51,8 @@ pattern with the tool name as a parameter.
 ## Proof of delivery
 
 A reconciliation showing **0 missing, 0 extra, 0 field differences** against the
-raw source responses, plus a hash you recomputed after download. That exact
-standard was met on the Paul Cushman recovery and is the house bar.
+raw source responses, plus a hash you recomputed after download. The Spear
+export already in Drive met this bar. Every later tool has to meet it too.
 
 ## Do not repeat if
 

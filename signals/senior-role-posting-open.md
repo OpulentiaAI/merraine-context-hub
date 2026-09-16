@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Senior role posting open >30 days
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "@Kazanjy 'job postings = hiring pain'; @scaling_shields public-database sourcing"
 rank: 1
 sourceSystems: [LinkedIn Jobs, Indeed, company careers page, Parallel Monitor]

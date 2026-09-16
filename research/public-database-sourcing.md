@@ -2,8 +2,9 @@
 type: gtm.tactic
 tldr: Public-database sourcing over bought lists
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Field Theory bookmark 2018594563594846557, @scaling_shields"
 source: "@scaling_shields"
 sourceUrl: "https://x.com/scaling_shields/status/2018594563594846557"

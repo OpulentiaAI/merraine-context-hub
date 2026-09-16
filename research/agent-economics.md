@@ -2,8 +2,9 @@
 type: gtm.tactic
 tldr: Production agent economics
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "Field Theory bookmark 2069769261778686044, LangChain on Clay's Head of AI"
 source: "Clay via @LangChain"
 sourceUrl: "https://x.com/LangChain/status/2069769261778686044"

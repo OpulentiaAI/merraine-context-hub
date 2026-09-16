@@ -8,15 +8,13 @@ description: "Write an opener, sequence, or any message to a prospect for Merrai
 
 1. Ground it. Every opener quotes a cited `gtm.observation` in its first sentence.
    No observation, no draft.
-2. Match the man, not a persona. Use the voice profile from
-   [[email-communications-extraction]] once it exists. Until then use the voice
-   fields in [[merraine-icp]].
+2. Match the person, not a persona. Use [[jeremy-voice]]. Once the mailbox
+   extraction exists, prefer samples from mail Jeremy actually sent.
 3. Cap it. 80 words for a signal opener, 60 for a congratulations note.
 4. One question. One CTA.
-5. Close with permission to pass — "no pressure if it's not for you." Reported to
-   move compliance from 10% to 47% across 42 studies.
+5. Close with permission to pass — "no pressure if it's not for you."
 6. Run [[slop-patterns]]. Two trips means rewrite.
-7. `sendReady: no`. Always. It flips only when a human types the confirm word.
+7. `sendReady: no`. Always. It flips only when Jeremy types the confirm word.
 
-Never write to Jeremy Sanchez. Outbound to him is Jeremy Alston's, and his reply
-draft is already sitting unsent in Outlook.
+Never invent a name, title, or email to make the draft land. Leave the field
+blank and say so.

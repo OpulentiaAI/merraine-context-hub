@@ -2,8 +2,9 @@
 type: gtm.signal
 tldr: Executive departure or arrival in last 90 days
 status: active
-owner: Opulent
+owner: Jeremy Sanchez
 updated: 2026-09-14
+surface: jeremy
 provenance: "@draprints 'changed jobs in past 90 days - new VPs have budget and points to prove'; @chrispisarski 'track every champion who changes jobs and route them as a new account'"
 rank: 3
 sourceSystems: [LinkedIn, Parallel Monitor, company press, news APIs]

@@ -1,102 +1,82 @@
 ---
 type: gtm.runbook
-tldr: Gojiberry autonomous setup and MCP wiring
+tldr: Gojiberry setup and MCP wiring
 status: active
-owner: Opulent
-updated: 2026-09-14
-provenance: "github.com/OpulentiaAI/gojiberryai-sales-os README; Opulent MCP connector UI verified 2026-09-08"
-trigger: "Jeremy asks for Gojiberry, or an automation needs a 13-desk outbound department"
-audience: opulent
+owner: Jeremy Sanchez
+updated: 2026-09-16
+surface: jeremy
+provenance: "github.com/OpulentiaAI/gojiberryai-sales-os README; connector UI verified 2026-09-08"
+trigger: "Jeremy says wire up Gojiberry"
+audience: jeremy-sanchez
 escalateWhen:
   - "Signup requires a paid plan or a card"
-  - "LinkedIn connection requires Jeremy Sanchez's own credentials"
+  - "LinkedIn connection needs Jeremy's own login"
   - "A CAPTCHA or identity document is presented"
 relatedAutomations: []
 ---
 
-# Gojiberry autonomous setup and MCP wiring
+# Gojiberry setup and MCP wiring
 
-**Goal: Jeremy says "wire up Gojiberry" and nothing else is required of him until
-the LinkedIn auth step.** Everything before that is yours to do.
+Jeremy says **wire up Gojiberry**. Everything before LinkedIn is the agent's job.
 
 ## Overview
 
-Gojiberry is a 13-agent outbound department (Signal Hunter, ICP Analyst, Account
-Researcher, Lead Enricher, Intent Scorer, LinkedIn Copywriter, Outreach Operator,
-Reply Agent, Follow-up Agent, Meeting Qualifier, Pipeline Analyst, Sales Manager,
-Head of Sales) sitting over a hosted MCP. It is markdown plus an MCP URL — there is
-no code to review. Its default mode is **propose, don't send**, which matches this
-hub's send policy exactly.
+Gojiberry is a 13-desk outbound department sitting over a hosted connector. It
+proposes. It does not send. That matches this hub.
 
 ## Procedure
 
 ### 1. Create the account
 
-Open `https://gojiberry.ai/` and sign up. Use the Aside password manager to
-generate and store the credential at creation time — **persist it the instant it is
-visible**, before clicking through. Do not defer the vault write.
+Open `https://gojiberry.ai/` and sign up. Store the credential in Opulent
+Secrets the instant it is visible. Do not defer that write.
 
-Registration identity: use an operator-controlled mailbox, not `paul@opulent.ai`-style
-aliases that are Opulent identities rather than real mailboxes. If no real mailbox
-is available for this signup, that is an escalation, not a workaround.
+Use a real mailbox Jeremy names. If none is available, stop and ask.
 
-**Stop and escalate if a card is required.** Do not pay or upgrade without asking.
+**Stop if a card is required.** Do not pay or upgrade without asking.
 
 ### 2. Teach it the ICP
 
-Add Merraine's website so it learns the ICP, then override the inferred profile with
-ours. Copy `[[merraine-icp]]` into its ICP context. Keep `[NEED: x]` markers intact —
-an honest gap beats a confident guess.
+Add Merraine's website, then override the inferred profile with
+[[merraine-icp]]. Keep `[NEED: x]` markers intact.
 
 ### 3. Get the MCP URL
 
-Settings -> Connect MCP. If the workspace issues a **unique** MCP URL, use that one.
+Settings → Connect MCP. If the workspace issues a unique URL, use that.
 Otherwise the default is `https://mcp.gojiberry.ai/mcp`.
 
-### 4. Wire it into Jeremy's Opulent account
+### 4. Wire it into this Opulent account
 
-The connector UI is at `platform.opulentia.ai/dashboard/settings/credentials`,
-under the **MCP servers** tab. (`/dashboard/settings/connections` 404s — do not
-send him there.)
-
-Use **Add custom MCP**:
+Settings → Connectors → MCP servers. Use **Add custom MCP**:
 
 | Field | Value |
 |---|---|
 | Name | `gojiberry` |
 | Server URL | the workspace MCP URL from step 3 |
-| Transport | HTTP (fall back to SSE only if HTTP discovery fails) |
+| Transport | HTTP (SSE only if HTTP discovery fails) |
 | Custom Headers JSON | auth header if the workspace issued a key, else empty |
 
-Discovery runs **synchronously on submit**, so the new row's status label *is* the
-probe result. A row that says connected with a tool count is your proof. A row that
-errors is a real failure — read the label, do not retry blindly.
+Discovery runs on submit. A row that says connected with a tool count is
+proof. A row that errors is a real failure — read the label.
 
-### 5. Verify before declaring success
+### 5. Verify before calling it done
 
-- Fresh read-only connector discovery shows `gojiberry` connected with tool count > 0.
-- Ask it one read-only question: *"Show me my Gojiberry workspace — campaigns, lists,
-  and intent breakdown. Don't change anything."* A real answer proves the wiring.
-- Update `[[gojiberry]]` in this hub: `connected: yes`, real `toolCount`, and an
-  evidence row citing the discovery read.
-
-### 6. Hand it the desks
-
-Copy `skills/sales-os/` from `OpulentiaAI/gojiberryai-sales-os` into the account's
-skill surface, or point Opulent at the repo. Then register the five commands as hub
-workflows: `/sales-os:outbound`, `:find-leads`, `:research`, `:replies`, `:pipeline`.
+- A fresh read shows `gojiberry` connected with tool count > 0.
+- One read-only question: *"Show me my Gojiberry workspace — campaigns, lists,
+  and intent breakdown. Don't change anything."*
+- Update [[gojiberry]]: `connected: yes`, real `toolCount`, evidence row.
 
 ## Verification
 
-Done means: connector row green with a tool count, one read-only query answered from
-real workspace data, `[[gojiberry]]` updated with evidence, and **no campaign created
-and no message sent**.
+Done means: connector row green with a tool count, one read-only query
+answered from real workspace data, [[gojiberry]] updated, and **no campaign
+created and no message sent**.
 
 ## Failure branches
 
 | Symptom | Do this |
 |---|---|
-| Signup wants a card | Escalate to Jeremy. Do not pay. |
-| MCP row errors on submit | Read the probe label verbatim. Try SSE once. If it still fails, capture the exact error into `[[gojiberry]]` `blockerNote` and move on — do not block the rest of setup. |
-| LinkedIn connect needs Sanchez's own login | Escalate. This is a credential, one of the three things that reach a human. |
-| Tool count is 0 but row says connected | Treat as failed. A connector with no tools is not wired. |
+| Signup wants a card | Ask Jeremy. Do not pay. |
+| MCP row errors on submit | Read the probe label. Try SSE once. Then write the error on [[gojiberry]] and move on. |
+| LinkedIn connect needs Jeremy's login | Stop. That click is his. |
+| Tool count is 0 but the row says connected | Treat as failed. |

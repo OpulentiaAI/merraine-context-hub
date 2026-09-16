@@ -2,13 +2,14 @@
 type: gtm.extraction
 tldr: Email, communications and relationship extraction
 status: blocked
-owner: Opulent
-updated: 2026-09-14
-provenance: "Designed for this engagement. Blocked on [[gmail]] until the user completes OAuth."
+owner: Jeremy Sanchez
+updated: 2026-09-16
+surface: jeremy
+provenance: "Designed for this engagement. Blocked on [[gmail]] until OAuth completes."
 sourceSystem: "Jeremy Sanchez's connected mailbox"
 accessPath: mcp
 requiresAuth: "yes"
-authOwner: user
+authOwner: Jeremy Sanchez
 method: "read-only mailbox sweep, then graph construction"
 coordinatorRoute: "ai-gateway/openai/gpt-6-astra"
 workerRoute: "gemini-3.8-flash"

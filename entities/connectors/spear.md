@@ -3,18 +3,37 @@ type: gtm.connector
 tldr: Spear
 status: active
 owner: Jeremy Sanchez
-updated: 2026-09-14
-provenance: "Connection discovery read 2026-09-10"
+updated: 2026-09-16
+surface: jeremy
+provenance: "mcpConnectors:listInstalledCapabilitiesInternal 2026-09-16; Spear Site Notes knowledge note; spear-mcp-context-export memory"
 slug: spear
 kind: mcp
 connected: yes
 toolCount: 131
 scopes: []
-authOwner: user
+authOwner: already connected
 blockerNote: ""
-evidence: []
+evidence:
+  - claim: "Spear MCP connected with 131 tools"
+    tldr: "Spear MCP connected with 131 tools"
+    origin: "convex:mcpConnectors:listInstalledCapabilitiesInternal"
+    observedAt: 2026-09-16
+    method: cli
+    verifiedBy: parent
+    confidence: verified
 ---
 
 # Spear
 
-Trigger-based, human-led outbound (getspear.ai). **Already connected, 131 tools.** Its own rule is 'no signal, no outreach, ever; every message requires human approval' — identical to this hub's send policy. Data already extracted; see [[spear-tool-extraction]].
+Your outbound prospecting engine at [app.getspear.ai](https://app.getspear.ai).
+Connected here, 131 tools.
+
+Profile: **Jeremy's agent**, id `b2f107ad-fd1a-4139-a603-54a43e8fca21`. Every
+Spear URL needs `?profile_id=` on it or the app loses scope.
+
+The export is already in Drive: `personal-context-hub.zip`, FILE-INDEX, prospect
+and trigger JSON. Counts from that export: **1,314 prospects on your profile,
+1,639 on Reid's**. Do not extract Spear again. See [[spear-tool-extraction]].
+
+How you configured it — 33 of 38 triggers on, one keyword set everywhere, Merraine
+as the only company watch — is in [[spear-signal-vocabulary]].

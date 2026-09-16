@@ -2,13 +2,14 @@
 type: gtm.extraction
 tldr: Spear tool extraction
 status: active
-owner: Opulent
-updated: 2026-09-14
-provenance: "Already executed on this account 2026-09-10, thread m576g30rken6. This file documents the proven pattern."
+owner: Jeremy Sanchez
+updated: 2026-09-16
+surface: jeremy
+provenance: "Already executed. Confirmed again 2026-09-16: personal-context-hub.zip and 57 Drive files still present. Do not repeat."
 sourceSystem: Spear
 accessPath: mcp
 requiresAuth: "no"
-authOwner: user
+authOwner: already connected
 method: "codemode + mcp access"
 coordinatorRoute: "luna-fast"
 workerRoute: "deepseek worker"

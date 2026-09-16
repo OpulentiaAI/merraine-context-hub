@@ -24,6 +24,7 @@ import argparse
 import json
 import os
 import pathlib
+import re
 import subprocess
 import sys
 
@@ -47,9 +48,19 @@ CONTENT_DIRS = {
     "catalogs": "knowledge",
     "research": "knowledge",
     "skills": "knowledge",
-    "injects": "knowledge",
-    "agents": "knowledge",
+    "inject": "knowledge",
 }
+
+
+def is_jeremy_surface(path: pathlib.Path) -> bool:
+    """ops/ never installs. Product files with surface: operator never install."""
+    rel = path.relative_to(HUB).as_posix()
+    if rel.startswith("ops/") or "/ops/" in rel:
+        return False
+    text = path.read_text(encoding="utf-8")
+    if re.search(r"^surface:\s*[\"']?operator", text, re.M):
+        return False
+    return True
 
 
 def pilot(mode: str, fn: str, args: dict) -> dict | list | None:
@@ -99,7 +110,12 @@ def collect() -> list[tuple[pathlib.Path, str, str]]:
         if not d.is_dir():
             continue
         for p in sorted(d.glob("*.md")):
+            if not is_jeremy_surface(p):
+                continue
             out.append((p, kind, rel.replace("/", "-")))
+    start = HUB / "start here.md"
+    if start.exists() and is_jeremy_surface(start):
+        out.append((start, "knowledge", "root"))
     return out
 
 

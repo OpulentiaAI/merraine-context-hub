@@ -1,0 +1,36 @@
+{
+  "runbooks": [
+    {
+      "contentLength": 5691,
+      "contentPreview": "# Durable Memory Write Rules\n\n> Migrated from Aside account memory on 2026-09-08. Source of truth: Aside memory/ — if this conflicts with newer Aside memory, Aside wins.\n\n# Memory Taxonomy\n\nLast updat…",
+      "createdAt": 1788905861176,
+      "id": "jd7m46csykkxrj8k5c1tckvn2d8e1h14",
+      "mode": "default",
+      "source": "agent",
+      "title": "Durable Memory Write Rules",
+      "updatedAt": 1788905861176
+    },
+    {
+      "contentLength": 608,
+      "contentPreview": "# Aside Operating Defaults\n\n> Migrated from Aside account memory on 2026-09-08. Source of truth: Aside memory/ — if this conflicts with newer Aside memory, Aside wins.\n\n# Memory Briefing\n\n<!-- L1 oper…",
+      "createdAt": 1788905860863,
+      "id": "jd7m7bhk5m4yet28aq77my3mx58e0xc4",
+      "mode": "default",
+      "source": "agent",
+      "title": "Aside Operating Defaults",
+      "updatedAt": 1788905860863
+    },
+    {
+      "contentLength": 3853,
+      "contentPreview": "# Working with Jeremy Sanchez\n\n> Migrated from Aside account memory on 2026-09-08. Source of truth: Aside memory/ — if this conflicts with newer Aside memory, Aside wins.\n\n# User Briefing\n\n<!-- L1 use…",
+      "createdAt": 1788905852378,
+      "id": "jd7zh1q4085hc1a329tn58jaad8e1xzy",
+      "mode": "default",
+      "source": "agent",
+      "title": "Working with Jeremy Sanchez",
+      "updatedAt": 1788905852378
+    }
+  ],
+  "total": 3,
+  "truncated": false
+}

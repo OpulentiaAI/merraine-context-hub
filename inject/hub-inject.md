@@ -25,4 +25,6 @@ Leadership search. This hub is your context. Read it before you act.
 
 Start with [[workspace-now]] and [[connection-inventory]] before you assume
 what is already connected or already extracted. Then [[icp-context]] and
-[[routing]] before you hunt, write, or stand anything up.
+[[routing]] before you hunt, write, or stand anything up. A note that has
+to travel as mail goes through [[email]] and [[email-components]]. A note
+that has to travel on more than one channel goes through [[channels]].

@@ -31,6 +31,10 @@ PAGES = [
     "playbooks/routing.md",
     "playbooks/signals.md",
     "playbooks/icp.md",
+    "playbooks/email.md",
+    "playbooks/sequencing.md",
+    "playbooks/channels.md",
+    "entities/email-components.md",
 ]
 
 

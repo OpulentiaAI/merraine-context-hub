@@ -14,7 +14,9 @@ description: "Write an opener, sequence, or any message to a prospect for Merrai
 4. One question. One CTA.
 5. Close with permission to pass — "no pressure if it's not for you."
 6. Run [[slop-patterns]]. Two trips means rewrite.
-7. `sendReady: no`. Always. It flips only when Jeremy types the confirm word.
+7. If it is mail, run [[adapting-for-email]] and fill [[email-components]].
+   If it must travel on more than one channel, run [[shaping-for-the-channel]].
+8. `sendReady: no`. Always. It flips only when Jeremy types the confirm word.
 
 Never invent a name, title, or email to make the draft land. Leave the field
 blank and say so.

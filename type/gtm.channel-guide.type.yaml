@@ -1,0 +1,11 @@
+#: How a settled message changes when it moves to a channel.
+extends: [idea::au-base-types, gtm.managed]
+fields:
+  channel: [email, linkedin, call, event]
+  firstFoldChars: Number{integer}
+  wordCap: Number{integer}
+  linkPlacement: String
+body:
+  - section: Shape
+  - section: Limits
+  - section: Failures

@@ -29,8 +29,10 @@ Chains:
 
 | Ask | Chain |
 |---|---|
-| New outbound | [[icp]] → [[signals]] → filter → [[research]] → [[enrichment]] → [[scoring]] → [[copy]] → STOP → [[outreach]] |
-| Work an existing list | filter → research keepers → score → copy → STOP |
+| New outbound | [[icp]] → [[signals]] → filter → [[research]] → [[enrichment]] → [[scoring]] → [[copy]] → [[style]] → [[channels]] → STOP → [[outreach]] |
+| Work an existing list | filter → research keepers → score → copy → style → channel → STOP |
+| Make it mail | [[email]] after the claim is settled. Fill [[email-components]]. |
+| Multi-touch | [[sequencing]] after style. Write the last note first. |
 | Inbox | [[replies]] → interested to [[qualification]], warm to [[follow-up]] |
 | Stalled | [[follow-up]] + [[pipeline]] |
 | What's working | [[pipeline]] → [[icp]] if targeting should change |

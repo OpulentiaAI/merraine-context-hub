@@ -21,7 +21,8 @@ This is **Jeremy Sanchez's** workspace. Merraine Group. Leadership search.
 
 - **Who** — [[merraine-group]], [[jeremy-sanchez]], [[sanchez-opulent-account]]
 - **What is in motion** — [[active-accounts]], [[boston-week-2026]], [[daily-hiring-scan]]
-- **How it should sound** — [[jeremy-voice]]
+- **How it should sound** — [[jeremy-voice]], then [[style]]
+- **How a note travels** — [[channels]], [[email-components]], [[sequencing]]
 - **How the motion runs** — [[routing]], then [[playbook-catalog]]
 - **What we watch** — [[signal-catalog]]
 - **How we score** — [[intent-score]]

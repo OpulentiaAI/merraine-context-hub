@@ -121,7 +121,7 @@ become a guess.
 type/         the ontology
 entities/     Merraine, you, the workspace, living ICP, score model, connectors
 signals/      ranked buying triggers
-playbooks/    specialist modules — hunt, filter, score, reply, qualify
+playbooks/    specialist modules — hunt, filter, score, reply, email, sequence
 extractions/  how to pull a tool or a mailbox into the hub
 automations/  paste-ready prompts with schedules — all Disabled
 runbooks/     how the work actually runs

@@ -27,7 +27,9 @@ Write a personalised note for every lead that cleared the cut. Then run
 4. 80 words for a signal opener, 60 for congratulations. Connection notes
    stay short.
 5. Run [[slop-patterns]]. Two trips means rewrite.
-6. `sendReady: no`.
+6. If the note will travel as mail, hand it to [[email]]. If it has to
+   live on more than one channel, hand it to [[channels]] then [[style]].
+7. `sendReady: no`.
 
 # Output
 ```

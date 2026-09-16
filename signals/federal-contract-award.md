@@ -18,10 +18,8 @@ evidence: []
 
 # Federal contract award
 
-## How to detect
-
+# How to detect
 Filter USASpending by ICP-relevant NAICS and award date. Capture company, award value, service type, award date.
 
-## How to disqualify
-
+# How to disqualify
 Drop option-year exercises presented as new awards. Confirm the awardee entity matches the company you intend to contact.

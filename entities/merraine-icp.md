@@ -20,11 +20,15 @@ disqualifiers:
   - "Currently inside an open Merraine search"
   - "On the suppression or unsubscribe list"
 rankedTriggers:
-  - [[senior-role-posting-open]]
-  - [[funding-round-closed]]
-  - [[executive-move]]
-  - [[award-recognition]]
-  - [[headcount-growth]]
+  - "[[senior-role-posting-open]]"
+  - "[[funding-round-closed]]"
+  - "[[executive-move]]"
+  - "[[posted-hiring-pain]]"
+  - "[[category-conversation]]"
+  - "[[award-recognition]]"
+  - "[[headcount-growth]]"
+  - "[[lookalike-won]]"
+  - "[[social-warmth]]"
 falseTriggers:
   - "Title match alone"
   - "Works at a company in a hot sector"
@@ -39,8 +43,7 @@ cta: "Reply, or a 15-minute call. One CTA per message, closed with permission to
 
 # Merraine ICP
 
-## Positioning
-
+# Positioning
 Merraine places senior operators and executives at companies that are scaling or
 rebuilding a leadership bench. The buyer is whoever owns the open seat: a CEO
 who just raised, a COO absorbing a departure, a CHRO with three senior reqs
@@ -55,8 +58,10 @@ The keyword thesis already running in Spear — funding stage plus seniority —
 is in [[spear-signal-vocabulary]]. Treat it as how you already search, not as
 a confirmed industry list.
 
-## Open Questions
+The living file every specialist opens first is [[icp-context]]. Positioning
+questions go through [[settling-positioning]] before anyone writes a line.
 
+# Open Questions
 These stay `[NEED: x]` until you answer. A guess here poisons every draft.
 
 - **Industries.** The `industries` field is empty on purpose. We can derive a

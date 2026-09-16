@@ -28,14 +28,12 @@ evidence: []
 The single richest source Merraine has, and it is entirely unexploited. **Blocked
 until [[gmail]] is connected** — that is one user click and it unlocks this whole file.
 
-## Preconditions
-
+# Preconditions
 - `gmail` connector reads `isConnected: true` with scopes listed.
 - **Read-only.** This extraction never sends, replies, archives, or labels.
 - Jeremy Sanchez has confirmed the mailbox is his business mailbox.
 
-## Procedure
-
+# Procedure
 ### 1. Relationship graph
 
 Sweep sent and received mail. For every human correspondent build a `gtm.person`
@@ -81,15 +79,13 @@ the automations write against.
 Anyone in an open search, anyone who asked not to be contacted, anyone mid-negotiation.
 This file is a **hard filter** on every automation in this hub.
 
-## Proof of delivery
-
+# Proof of delivery
 - `relationship-graph.json` row count equals the distinct-correspondent count you
   can reproduce from a second independent sweep.
 - Every `relationshipStrength` above `aware` traces to at least one message id.
 - `voice-profile.md` quotes at least 15 real sent messages by id.
 - No message was sent, modified, or labelled. Prove it from the tool log.
 
-## Do not repeat if
-
+# Do not repeat if
 An `extraction-receipt.json` exists with a message-id high-water mark. Re-runs are
 incremental from that mark, never a full re-sweep.

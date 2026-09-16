@@ -18,10 +18,8 @@ evidence: []
 
 # Headcount growth 20%+ year over year
 
-## How to detect
-
+# How to detect
 Compare trailing-twelve-month headcount from a provider that returns a dated series. Flag 20%+ increases.
 
-## How to disqualify
-
+# How to disqualify
 Drop growth explained by an acquisition. Drop single-snapshot claims - one number is not a trend. Treat provider disagreement as a conflict to record, not resolve by guessing.

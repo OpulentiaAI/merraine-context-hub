@@ -9,6 +9,7 @@ provenance: "Pattern from x.ai dr-eggbot-v2 standing healthchecks, rebuilt on Op
 slug: merraine-transcript-healthcheck
 uses: []
 schedule:
+  tldr: weekday cron
   kind: cron
   expression: "44 8 * * 1-5"
   timezone: America/Chicago
@@ -25,8 +26,7 @@ loopGuard: "If today's friction scan exists, stop. If there is nothing to propos
 
 # Transcript healthcheck
 
-## Overview
-
+# Overview
 Mines this account's own turn history for friction and proposes fixes to the hub.
 **It proposes; it never applies.** This is how the hub improves itself without
 anyone deciding to sit down and improve it.
@@ -41,8 +41,7 @@ neither allowed to create anything until a human picks from the report.
 - `decision` is always `proposed` on write
 - Silence is a valid and successful run
 
-## Prompt
-
+# Prompt
 ```text
 Create an Opulent automation named "Merraine transcript healthcheck".
 
@@ -71,8 +70,7 @@ IMPORTANT: If today's friction scan already exists, stop. If you find nothing wo
 CAUTION: Propose only. Never apply a change, never restart a run, never contact anyone. An empty scan is a good outcome, not a failure to report.
 ```
 
-## Forbidden Actions
-
+# Forbidden Actions
 - Do not apply a proposal
 - Do not create anything from the report until a human picks
 - Do not report "no issues" as a message; stay silent instead

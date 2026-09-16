@@ -1,5 +1,5 @@
-#: When an automation fires.
-extends: [idea::au-base-types, gtm.managed]
+#: When an automation fires. Inline value on an automation, not its own page.
+extends: [idea::au-base-types]
 fields:
   kind: [cron, event, webhook, manual]
   #: Cron string, or the event/webhook name.

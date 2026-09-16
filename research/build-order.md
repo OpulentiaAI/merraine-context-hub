@@ -16,8 +16,7 @@ adoptionState: adopted
 
 # Build order - data layer before agents
 
-## The play
-
+# The play
 > "The order you build in matters more than what you build."
 
 1. **Data layer** — one place where truth lives. Everything reads from and writes to it.
@@ -32,8 +31,7 @@ adoptionState: adopted
 > "People start at step 6 because agents are sexy and they don't want to tell the
 > client no. Then they wonder why nothing holds up at scale."
 
-## How we apply it for Merraine
-
+# How we apply it for Merraine
 This hub **is** step 1, and that is the whole reason it exists rather than a folder
 of prompts. The typed graph is the data layer; `merraine/types` is the schema.
 

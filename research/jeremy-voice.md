@@ -15,8 +15,7 @@ claimedResult: "Email averages about 16 words per sentence; LinkedIn about 6. 'B
 
 # Jeremy Sanchez voice
 
-## The play
-
+# The play
 Write the way Jeremy already writes.
 
 - Open on the other person's name.
@@ -38,8 +37,7 @@ Recurring marks to keep:
 
 Spell **Lazerow** and **Farmers Fridge** correctly even if a draft slipped.
 
-## How we apply it for Merraine
-
+# How we apply it for Merraine
 Every opener, congratulations note, and follow-up goes through
 [[drafting-outreach]]. Until the mailbox extraction exists, this file plus
 the voice fields on [[merraine-icp]] are the voice. After Gmail is connected,

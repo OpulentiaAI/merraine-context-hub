@@ -16,8 +16,7 @@ adoptionState: adopted
 
 # Slop patterns
 
-## The play
-
+# The play
 Run this on **every** message any automation in this hub drafts, for any recipient.
 If a note trips two or more, rewrite it.
 
@@ -44,8 +43,7 @@ If a note trips two or more, rewrite it.
 **Pass test.** Read it out loud. If you would be embarrassed to send it from your
 own account to a peer, it fails.
 
-## How we apply it for Merraine
-
+# How we apply it for Merraine
 Jeremy Sanchez is a talent scout writing to CEOs and CHROs. The failure mode is
 worse for him than for a SaaS rep: a search firm that sounds automated signals it
 will send automated candidates. Every draft passes this check before it reaches

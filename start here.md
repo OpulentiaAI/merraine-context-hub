@@ -12,7 +12,9 @@ This is **Jeremy Sanchez's** workspace. Merraine Group. Leadership search.
 - [[hub-inject]] — standing rules for every session
 - [[workspace-now]] — what is already here
 - [[connection-inventory]] — what is actually connected
+- [[icp-context]] — living ICP. Empty fields stay empty.
 - [[merraine-icp]] — who we sell to, and what is still unknown
+- [[playbook-catalog]] — specialist modules in the motion
 - [[automation-dictionary]] — what we can stand up
 
 ## The graph
@@ -20,7 +22,9 @@ This is **Jeremy Sanchez's** workspace. Merraine Group. Leadership search.
 - **Who** — [[merraine-group]], [[jeremy-sanchez]], [[sanchez-opulent-account]]
 - **What is in motion** — [[active-accounts]], [[boston-week-2026]], [[daily-hiring-scan]]
 - **How it should sound** — [[jeremy-voice]]
+- **How the motion runs** — [[routing]], then [[playbook-catalog]]
 - **What we watch** — [[signal-catalog]]
+- **How we score** — [[intent-score]]
 - **What we pull in** — [[runbook-catalog]]
 - **What can run** — [[automation-dictionary]]
 

@@ -15,8 +15,7 @@ claimedResult: "33 of 38 triggers on. The five off all said Requires Setup. One 
 
 # Spear signal vocabulary
 
-## The play
-
+# The play
 Jeremy configured Spear for maximum surface area, then filter later.
 
 - 33 of 38 triggers on. The five off were the ones that said **Requires Setup**,
@@ -39,8 +38,7 @@ Jeremy configured Spear for maximum surface area, then filter later.
 X and Reddit keyword triggers were over the keyword limit when this was read.
 Do not silently cut the list. Ask before trimming.
 
-## How we apply it for Merraine
-
+# How we apply it for Merraine
 Reuse this vocabulary in any other sourcing tool. Do not invent a second
 industry list from it — confirm industries on [[merraine-icp]] first. Profile
 id for every Spear URL: `b2f107ad-fd1a-4139-a603-54a43e8fca21`.

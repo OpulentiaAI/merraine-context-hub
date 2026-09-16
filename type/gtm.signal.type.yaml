@@ -15,6 +15,7 @@ fields:
   falsePositives: String[+]
   #: How it becomes a first line.
   openerAngle: String
+  evidence?: gtm.evidence&[]
 body:
   - section: How to detect
   - section: How to disqualify

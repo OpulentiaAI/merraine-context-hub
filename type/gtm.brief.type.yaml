@@ -3,4 +3,4 @@ extends: [idea::au-base-types, gtm.managed]
 fields:
   kind: [workspace, travel, inventory, accounts]
 body:
-  - section: Now
+  - section?: Now

@@ -19,13 +19,11 @@ relatedAutomations: []
 
 Jeremy says **wire up Gojiberry**. Everything before LinkedIn is the agent's job.
 
-## Overview
-
+# Overview
 Gojiberry is a 13-desk outbound department sitting over a hosted connector. It
 proposes. It does not send. That matches this hub.
 
-## Procedure
-
+# Procedure
 ### 1. Create the account
 
 Open `https://gojiberry.ai/` and sign up. Store the credential in Opulent
@@ -66,14 +64,12 @@ proof. A row that errors is a real failure — read the label.
   and intent breakdown. Don't change anything."*
 - Update [[gojiberry]]: `connected: yes`, real `toolCount`, evidence row.
 
-## Verification
-
+# Verification
 Done means: connector row green with a tool count, one read-only query
 answered from real workspace data, [[gojiberry]] updated, and **no campaign
 created and no message sent**.
 
-## Failure branches
-
+# Failure branches
 | Symptom | Do this |
 |---|---|
 | Signup wants a card | Ask Jeremy. Do not pay. |

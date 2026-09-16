@@ -7,7 +7,7 @@ updated: 2026-09-16
 surface: jeremy
 provenance: "Opulent knowledge note 'Jeremy Sanchez Profile (canonical)' plus user_context memory block, both read live 2026-09-16"
 role: Head of Growth
-org: [[merraine-group]]
+org: "[[merraine-group]]"
 email: jeremy@merraine.com
 phone: "+1-312-835-2373"
 linkedin: "https://www.linkedin.com/in/sanchezjeremy"

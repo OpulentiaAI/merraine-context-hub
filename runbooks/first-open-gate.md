@@ -19,8 +19,7 @@ relatedAutomations: []
 No automation gets a running clock until it has produced one output Jeremy
 opened.
 
-## Procedure
-
+# Procedure
 1. Open the automation file. Write down **Uses**, **schedule**, and **mode**
    before touching anything.
 2. Connect only the connectors on the `uses` line, least privilege. Read-only
@@ -40,14 +39,12 @@ opened.
 9. Validate the next live fire the same way. Pause if auth fails twice, or if
    any write happened without the confirm word.
 
-## Verification
-
+# Verification
 An automation is Enabled only if its file shows `firstOpenChecked: yes` and
 an evidence row naming the artifact that was opened. Anything else is an
 ungated clock. Pause it.
 
-## Failure branches
-
+# Failure branches
 | Symptom | Do this |
 |---|---|
 | Two artifacts from one tick | Loop guard failed. Fix it before re-running. |

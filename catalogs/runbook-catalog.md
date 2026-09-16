@@ -1,6 +1,6 @@
 ---
 type: gtm.catalog
-tldr: Operating procedures and data-extraction runbooks.
+tldr: "Operating procedures and data-extraction runbooks."
 status: active
 owner: Jeremy Sanchez
 updated: 2026-09-16
@@ -12,7 +12,7 @@ entryCount: 7
 
 # Runbook and extraction catalog
 
-## Index
+# Index
 
 ### Runbooks
 

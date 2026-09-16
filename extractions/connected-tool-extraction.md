@@ -23,14 +23,12 @@ evidence: []
 Run this for every tool you authorise, in connector order. Same pattern as
 Spear, with the tool name as the only change.
 
-## Preconditions
-
+# Preconditions
 - Connector reads `connected: yes` with a tool count > 0 in a fresh discovery.
 - `FILE-INDEX` has no completed entry for this tool.
 - Budget ceiling set. Stop at $15 per tool with no artifact.
 
-## Procedure
-
+# Procedure
 1. **Discover.** List the connector's tools and their input schemas. Save as
    `<tool>-tool-surface.json`. Never invent a tool name.
 2. **Inventory.** Call the tool's list/search endpoints with the widest safe filter
@@ -48,14 +46,12 @@ Spear, with the tool name as the only change.
 7. **Receipt.** `extraction-receipt.json`: record counts, tool calls used, spend,
    bundle hash, and the reconciliation result.
 
-## Proof of delivery
-
+# Proof of delivery
 A reconciliation showing **0 missing, 0 extra, 0 field differences** against the
 raw source responses, plus a hash you recomputed after download. The Spear
 export already in Drive met this bar. Every later tool has to meet it too.
 
-## Do not repeat if
-
+# Do not repeat if
 `FILE-INDEX` already has a `<tool>` entry with a hash and a nonzero record count.
 A failed retry that started seconds after a successful run is a **programmatic
 retry, not a new request** — do not treat it as unfinished work.

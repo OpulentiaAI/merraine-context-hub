@@ -9,6 +9,7 @@ provenance: "Requested: autonomous additions to the hub as new knowledge arrives
 slug: merraine-hub-self-extension
 uses: []
 schedule:
+  tldr: weekday cron
   kind: event
   expression: "accepted gtm.improvement, or a completed extraction"
   timezone: America/Chicago
@@ -25,8 +26,7 @@ loopGuard: "Never triggered by its own patch artifact."
 
 # Hub self-extension
 
-## Overview
-
+# Overview
 Closes the loop. When a healthcheck proposal is **accepted**, or an extraction lands
 new entities, this turns that into an actual hub change — as a reviewable patch,
 never a silent edit.
@@ -36,8 +36,7 @@ argument for it, from Ramp's GTM Coworker: *"the real unlock is encoding
 institutional knowledge that used to live in reps' heads and making it computable.
 Every run compounds it. Every human correction teaches the system."*
 
-## Prompt
-
+# Prompt
 ```text
 Create an Opulent automation named "Merraine hub self-extension".
 
@@ -60,8 +59,7 @@ IMPORTANT: Never trigger on your own patch artifact. If the only new input is a 
 CAUTION: Propose the patch, do not apply it. Never invent a field value. Never widen a type to make bad data fit.
 ```
 
-## Forbidden Actions
-
+# Forbidden Actions
 - Do not edit hub files in place
 - Do not mark an improvement applied before the patch is confirmed
 - Do not create a type to accommodate data you have not verified

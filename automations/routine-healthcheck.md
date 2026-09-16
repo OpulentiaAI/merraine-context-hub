@@ -9,6 +9,7 @@ provenance: "Pattern from x.ai dr-eggbot-v2; cost lens from Clay's 350m-agents-a
 slug: merraine-routine-healthcheck
 uses: []
 schedule:
+  tldr: weekday cron
   kind: cron
   expression: "49 8 * * 1"
   timezone: America/Chicago
@@ -25,14 +26,12 @@ loopGuard: "If this week's audit exists, stop. Silent when nothing to propose."
 
 # Routine healthcheck
 
-## Overview
-
+# Overview
 Weekly waste audit over every automation on the account. Catches the automation that
 fires daily and finds nothing, the one whose tool calls doubled, and the one nobody
 has read the output of in three weeks.
 
-## Prompt
-
+# Prompt
 ```text
 Create an Opulent automation named "Merraine routine healthcheck".
 
@@ -59,8 +58,7 @@ IMPORTANT: If this week's routine audit already exists, stop. If nothing is wort
 CAUTION: Propose only. Never pause, enable, or delete an automation. Never claim a saving you did not compute from real spend numbers.
 ```
 
-## Forbidden Actions
-
+# Forbidden Actions
 - Do not pause or delete any automation
 - Do not change a schedule
 - Do not estimate savings without real spend figures

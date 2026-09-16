@@ -8,11 +8,12 @@ surface: jeremy
 provenance: "Adapted from OpulentiaAI/gtm-agent-automations agents/gtm/outbound/signal-triggered-outbound.md"
 slug: merraine-signal-outbound
 uses:
-  - [[spear]]
-  - [[parallel]]
-  - [[gmail]]
-  - [[notion]]
+  - "[[spear]]"
+  - "[[parallel]]"
+  - "[[gmail]]"
+  - "[[notion]]"
 schedule:
+  tldr: weekday cron
   kind: cron
   expression: "30 6 * * 1-5"
   timezone: America/Chicago
@@ -29,8 +30,7 @@ loopGuard: "If a digest for today already exists in the workspace, stop."
 
 # Merraine signal-triggered outbound
 
-## Overview
-
+# Overview
 The core of Jeremy Sanchez's ask. Every weekday morning, find who became a buyer
 overnight and have a cited opener waiting.
 
@@ -41,8 +41,7 @@ overnight and have a cited opener waiting.
 - [[merraine-icp]] reviewed and its `[NEED: x]` gaps filled
 - Destination for the digest: workspace artifact, or a Notion page he names
 
-## Procedure
-
+# Procedure
 1. Stand up per [[first-open-gate]]. Create **Disabled**.
 2. Run one manual tick.
 3. Open every cited URL yourself before Enabling.
@@ -53,8 +52,7 @@ overnight and have a cited opener waiting.
 - Mode holds: draft-then-wait, human approval before send, fail closed
 - Empty search is `UNVERIFIED`, never an invented zero
 
-## Prompt
-
+# Prompt
 ```text
 Create an Opulent automation named "Merraine signal-triggered outbound".
 
@@ -87,8 +85,7 @@ IMPORTANT: If a signal digest for today already exists in this workspace, stop. 
 CAUTION: Never auto-send outbound. Never invent a signal, an email, a headcount, or a quote. If a tool returns nothing, say nothing was found.
 ```
 
-## Forbidden Actions
-
+# Forbidden Actions
 - Do not send, enroll, or enable a campaign
 - Do not re-extract Spear
 - Do not infer an industry focus from a company's website styling

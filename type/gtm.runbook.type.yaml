@@ -6,6 +6,7 @@ fields:
   audience: [operator, opulent, jeremy-sanchez]
   #: The only conditions that reach a human.
   escalateWhen: String[+]
+  relatedAutomations?: gtm.automation*[]
 body:
   - section: Procedure
   - section: Verification

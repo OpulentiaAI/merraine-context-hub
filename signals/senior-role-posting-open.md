@@ -18,10 +18,8 @@ evidence: []
 
 # Senior role posting open >30 days
 
-## How to detect
-
+# How to detect
 Pull postings for ICP titles. Age each one. Flag orgs where a senior seat has stayed open past 30 days, or where three or more senior seats are open simultaneously. Record the posting URL and post date verbatim.
 
-## How to disqualify
-
+# How to disqualify
 Drop evergreen reqs (same title reposted continuously for a year), agency reposts of a role already counted, and anything below director level. If the org is a staffing firm, drop it as a competitor.

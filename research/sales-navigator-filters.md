@@ -10,16 +10,15 @@ source: "@draprints"
 sourceUrl: "https://x.com/draprints/status/2019410722137198655"
 category: sourcing
 appliesTo:
-  - [[executive-move]]
-  - [[headcount-growth]]
+  - "[[executive-move]]"
+  - "[[headcount-growth]]"
 claimedResult: "Author claims the 'posted in past 30 days' filter alone 3x response rates"
 adoptionState: adopted
 ---
 
 # The five Sales Navigator filters that matter
 
-## The play
-
+# The play
 Sales Navigator is roughly $99/month and most people use a fraction of it.
 
 1. **Posted on LinkedIn in past 30 days.** Active users are active buyers. Someone
@@ -34,8 +33,7 @@ Sales Navigator is roughly $99/month and most people use a fraction of it.
 5. **Boolean search**, e.g. `(VP OR "Vice President" OR Director) AND (Sales OR
    Revenue OR Growth) NOT (HR OR Recruiting)`.
 
-## How we apply it for Merraine
-
+# How we apply it for Merraine
 **Ask #2 is a purchase, not a build.** Do not spend an engineering hour replicating
 Sales Navigator. Buy the seat, save the top 200 as an account list, and let its
 alerts feed [[executive-move]].

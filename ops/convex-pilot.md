@@ -86,7 +86,7 @@ workspace  : Default Workspace, mesa=ready, mounted_context=0
 automations: 0
 ```
 
-## Procedure
+# Procedure
 
 1. `./scripts/audit.sh`. If `mounted_context` is 0, the hub is not installed.
 2. Compare the audit against what you believed. Any difference is the real state.
@@ -94,13 +94,13 @@ automations: 0
 4. Writes need `CONFIRM=send`. That word is a human decision.
 5. Re-run `audit.sh` afterwards and diff.
 
-## Verification
+# Verification
 
 - `evidence/pilot-log-<date>.jsonl` has one line per call.
 - `evidence/audit-<date>/SUMMARY.md` is the redacted bundle. Raw note bodies
   that contain secrets stay off git.
 
-## Failure branches
+# Failure branches
 
 | Symptom | Do this |
 |---|---|

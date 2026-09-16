@@ -21,8 +21,7 @@ The recurring scan you already run. There is **no saved automation** for it
 yet. When you say "run the scan" or "adjust the prompt," deliver the report
 or the revised prompt in the thread. Do not invent a clock.
 
-## Procedure
-
+# Procedure
 1. Search Indeed, LinkedIn, Crain's Chicago Business, local publications, and
    general news for CFO / VP+ hiring at growth-stage VC or PE-backed companies.
    Titles: VP Finance, VP Ops, Controller, VP Accounting, CAO, VP Sales, CRO,
@@ -52,15 +51,13 @@ or the revised prompt in the thread. Do not invent a clock.
    If the email cannot send, still post the report and say so. That email is
    delivery to you, not outbound to a prospect.
 
-## Verification
-
+# Verification
 - Every open posting still loads on an employer-owned page.
 - Every new hire has a date.
 - No contact on the list was invented.
 - The 10 September baseline rows were not re-reported as new.
 
-## Failure branches
-
+# Failure branches
 | Symptom | Do this |
 |---|---|
 | A source URL does not resolve | Drop the row. |

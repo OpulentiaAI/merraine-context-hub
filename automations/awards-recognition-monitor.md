@@ -8,9 +8,10 @@ surface: jeremy
 provenance: "Jeremy Sanchez ask item 6, 2026-09-11"
 slug: merraine-awards-monitor
 uses:
-  - [[parallel]]
-  - [[gmail]]
+  - "[[parallel]]"
+  - "[[gmail]]"
 schedule:
+  tldr: weekday cron
   kind: cron
   expression: "0 7 * * 1"
   timezone: America/Chicago
@@ -27,8 +28,7 @@ loopGuard: "If this week's recognition digest already exists, stop."
 
 # Merraine awards and recognition monitor
 
-## Overview
-
+# Overview
 Your words: *"Award winners are warm intros waiting to happen."* A named
 congratulations is the only cold opener that is genuinely welcome.
 
@@ -37,8 +37,7 @@ congratulations is the only cold opener that is genuinely welcome.
 - [[parallel]] (already installed, scope `monitor.event.detected`)
 - Confirmation of which regional journals matter beyond Chicago and New York
 
-## Procedure
-
+# Procedure
 Stand up per [[first-open-gate]]. Prefer Parallel monitors over polling — see
 [[parallel-monitor-scheduling]].
 
@@ -48,8 +47,7 @@ Stand up per [[first-open-gate]]. Prefer Parallel monitors over polling — see
 - Social posts are never a source
 - Zero sends
 
-## Prompt
-
+# Prompt
 ```text
 Create an Opulent automation named "Merraine awards and recognition monitor".
 
@@ -75,8 +73,7 @@ IMPORTANT: If this week's recognition digest already exists in this workspace, s
 CAUTION: Never send. Never invent an award, an honoree, or a quote. A quiet week is UNVERIFIED, not "no awards".
 ```
 
-## Forbidden Actions
-
+# Forbidden Actions
 - Do not treat a pay-to-play award as a signal
 - Do not congratulate someone on a prior-year list re-run
 - Do not send

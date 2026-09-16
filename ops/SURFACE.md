@@ -4,9 +4,9 @@ Jeremy's Opulent workspace may only receive files this hub marks as Jeremy-facin
 
 ## Rule
 
-- Files under `entities/`, `signals/`, `pipelines/`, `automations/`, `extractions/`,
-  `runbooks/`, `catalogs/`, `research/`, `skills/`, and `inject/` are the product
-  surface. `scripts/materialize.py` installs only those directories.
+- Files under `entities/`, `signals/`, `pipelines/`, `playbooks/`, `automations/`,
+  `extractions/`, `runbooks/`, `catalogs/`, `research/`, `skills/`, and `inject/`
+  are the product surface. `scripts/materialize.py` installs only those directories.
 - `ops/` is operator-only. It is never materialized. It holds identity traps,
   Convex function catalogs, and leftover-knowledge hygiene.
 - `evidence/` is an audit ledger, not context. Do not attach it to the workspace.

@@ -16,3 +16,4 @@ fields:
   relationship: [client, prospect, partner, vendor, self, excluded]
   #: Citations for every claim above.
   evidence?: gtm.evidence&[]
+  notes?: String

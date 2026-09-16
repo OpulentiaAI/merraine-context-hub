@@ -46,7 +46,7 @@ instead, then mount the hub files.
 | Aside Operating Defaults (runbook) | Migrated leftover. |
 | Working with Jeremy Sanchez (runbook) | Written as if Jeremy were the subject, not the user. |
 
-## Procedure
+# Procedure
 
 1. Run `scripts/audit.sh`. Confirm `mounted_context` is still 0, or that only
    `merraine/*` names are attached.
@@ -57,9 +57,18 @@ instead, then mount the hub files.
 4. If a leftover note must be archived later, that is a separate confirmed write.
    This file does not authorize it.
 
-## Verification
+# Verification
 
 - `scripts/validate.py` fails if product-surface files contain leftover-product
   names or internal commentary.
 - A fresh audit after materialize shows only `merraine/` knowledge and runbook
   titles attached.
+
+# Failure branches
+
+| Symptom | Do this |
+|---|---|
+| Audit shows leftover ids attached | Stop. Do not add more. Detach is a separate confirmed write. |
+| Dry-run lists an `ops/` file | Fix `scripts/materialize.py`. Operator notes never install. |
+| A leftover note body contains a secret | Leave it unmounted. Do not copy it into this repo. |
+| `mounted_context` is not 0 and names are not `merraine/` | Escalate. Do not overwrite Jeremy's notes. |

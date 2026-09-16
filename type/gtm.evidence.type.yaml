@@ -1,6 +1,6 @@
 #: A citation. Nothing in this hub asserts a fact without one.
 #: Extends source: captured material with an origin.
-extends: [source::au-base-types, gtm.managed]
+extends: [source::au-base-types]
 fields:
   #: The specific claim this supports.
   claim: String

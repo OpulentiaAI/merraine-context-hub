@@ -18,10 +18,8 @@ evidence: []
 
 # Funding round closed in last 60 days
 
-## How to detect
-
+# How to detect
 Watch funding feeds for ICP-sized companies. Record amount, stage, close date, and the source URL. Cross-reference against open senior reqs to raise the score.
 
-## How to disqualify
-
+# How to disqualify
 Drop anything you cannot cite to a filing or an official announcement. Never infer a round from a congratulatory social post.

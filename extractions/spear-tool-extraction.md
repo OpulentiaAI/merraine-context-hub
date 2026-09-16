@@ -33,14 +33,12 @@ evidence:
 **This is the reference pattern for pulling any connected tool's full dataset into
 the hub.** It is already done for Spear. Read it before extracting anything else.
 
-## Preconditions
-
+# Preconditions
 - The tool is connected as an MCP connector on the account, with a non-zero tool count.
 - You have confirmed the tool count with a read-only connector discovery first.
 - No prior extraction artifact exists (see **Do not repeat if**).
 
-## Procedure
-
+# Procedure
 1. Read the connector's tool surface. Do not guess tool names.
 2. Run the extraction through **codemode + MCP access**, not UI scraping. The
    operative instruction that worked verbatim was:
@@ -52,8 +50,7 @@ the hub.** It is already done for Spear. Read it before extracting anything else
 5. Zip the corpus into a single retrievable bundle.
 6. Record file count, artifact row count, and the bundle hash.
 
-## Proof of delivery
-
+# Proof of delivery
 `completed` status is **not** proof. Proof is:
 
 - A file count you can list.
@@ -63,8 +60,7 @@ the hub.** It is already done for Spear. Read it before extracting anything else
 For Spear that is: 57 drive files, `personal-context-hub.zip` in `ready` state,
 and FILE-INDEX artifacts.
 
-## Do not repeat if
-
+# Do not repeat if
 Three threads on this account carry duplicate Spear-extraction instructions created
 **after** delivery, all with zero tool executions:
 

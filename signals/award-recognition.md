@@ -18,10 +18,8 @@ evidence: []
 
 # Award or list recognition in last 30 days
 
-## How to detect
-
+# How to detect
 Monitor the named publishers weekly. Keep only honorees matching ICP geo and size. Record honoree, company, list name, publisher URL, publication date.
 
-## How to disqualify
-
+# How to disqualify
 Drop pay-to-play awards and anything without a resolvable publisher URL. Verify the honoree is at the company you think - list pages often lag job changes.

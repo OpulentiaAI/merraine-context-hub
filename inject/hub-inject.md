@@ -1,6 +1,7 @@
 ---
 type: mcp.inject::au-mcp-sdk
 name: merraine-hub
+description: "Standing rules and the first files to read for Jeremy Sanchez's Merraine workspace."
 ---
 
 # Merraine context hub
@@ -23,4 +24,5 @@ Leadership search. This hub is your context. Read it before you act.
   else and keep going.
 
 Start with [[workspace-now]] and [[connection-inventory]] before you assume
-what is already connected or already extracted.
+what is already connected or already extracted. Then [[icp-context]] and
+[[routing]] before you hunt, write, or stand anything up.

@@ -18,10 +18,8 @@ evidence: []
 
 # Reviewed a competing service
 
-## How to detect
-
+# How to detect
 Pull reviewers of competing search and HR platforms. Match reviewer identity to ICP titles.
 
-## How to disqualify
-
+# How to disqualify
 Drop anonymous reviews. Drop anyone whose employer is a competitor. Confirm the reviewer still works where the review says.

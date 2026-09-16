@@ -19,6 +19,8 @@ Start by reading, in this order:
   entities/workspace-now.md         - what is already in this workspace
   entities/connection-inventory.md  - what is actually connected
   catalogs/automation-dictionary.md - what we can stand up
+  catalogs/playbook-catalog.md      - specialist modules in the motion
+  entities/icp-context.md           - living ICP. Empty fields stay empty.
   entities/merraine-icp.md          - who we sell to, and what is still unknown
 
 Then tell me the workspace's real state before doing anything else.
@@ -72,8 +74,9 @@ Read-only. Nothing is sent, filed, or labelled.
 **4. Do not re-extract Spear.** 57 Drive files and `personal-context-hub.zip`
 are already there. 1,314 prospects on your profile, 1,639 on Reid's.
 
-**5. Stand up two automations.** Both created Disabled, both checked on one
-manual run before any clock starts:
+**5. Stand up two automations first.** Both created Disabled, both checked on
+one manual run before any clock starts. The rest of the motion
+(`catalogs/automation-dictionary.md`) stays off until those two open clean.
 
 - **Signal-triggered outbound** — weekday 6:30am. Who became a buyer overnight,
   with a cited opener waiting.
@@ -116,12 +119,13 @@ become a guess.
 
 ```
 type/         the ontology
-entities/     Merraine, you, the workspace, every connector, accounts in motion
-signals/      7 ranked buying triggers
+entities/     Merraine, you, the workspace, living ICP, score model, connectors
+signals/      ranked buying triggers
+playbooks/    specialist modules — hunt, filter, score, reply, qualify
 extractions/  how to pull a tool or a mailbox into the hub
 automations/  paste-ready prompts with schedules — all Disabled
 runbooks/     how the work actually runs
-research/     voice, Spear vocabulary, and outside plays we adopted
+research/     voice, case-study plays, Spear vocabulary
 catalogs/     generated indexes
 skills/       triggered guidance
 scripts/      audit, materialize, validate

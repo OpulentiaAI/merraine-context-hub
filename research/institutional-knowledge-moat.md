@@ -16,8 +16,7 @@ adoptionState: adopted
 
 # Encoded institutional knowledge is the moat
 
-## The play
-
+# The play
 > "Automating repeatable tasks isn't the point. The real unlock is that we're
 > encoding institutional GTM knowledge that used to live in reps' heads — playbooks,
 > account memory, what worked for which segment, why a deal moved — and making it
@@ -33,8 +32,7 @@ Three things the author says made it work:
 - **Playbooks as the orchestration layer.** Who qualifies, why now, the message, the
   channel — agents turn that into the work.
 
-## How we apply it for Merraine
-
+# How we apply it for Merraine
 This is the argument for the whole hub, and the thing to say to Jeremy Sanchez when
 he asks why we did not just buy six tools.
 

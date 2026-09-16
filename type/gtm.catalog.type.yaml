@@ -2,7 +2,7 @@
 #: Extends map: a slice of the graph presented as a page.
 extends: [map::au-base-types, gtm.managed]
 fields:
-  indexes: [tools, workflows, skills, tactics, automations, extractions, signals]
+  indexes: [tools, workflows, skills, tactics, automations, extractions, signals, playbooks]
   entryCount: Number{integer}
 body:
   - section: Index

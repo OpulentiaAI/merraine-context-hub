@@ -49,6 +49,7 @@ CONTENT_DIRS = {
     "research": "knowledge",
     "skills": "knowledge",
     "inject": "knowledge",
+    "playbooks": "knowledge",
 }
 
 

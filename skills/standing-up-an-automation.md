@@ -7,7 +7,8 @@ description: "Create, enable, schedule, or troubleshoot an automation on this ac
 # Standing up an automation
 
 Read [[first-open-gate]] and follow it exactly. Nothing gets a clock before one
-checked output.
+checked output. On first session, [[hub-init]] creates the day-one set
+Disabled and first-opens signal outbound and awards.
 
 Choose the trigger honestly, per [[parallel-monitor-scheduling]]: detection is
 an event, aggregation is a cron. An automation that fires daily and finds

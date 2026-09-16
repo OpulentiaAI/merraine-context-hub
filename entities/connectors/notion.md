@@ -26,6 +26,7 @@ evidence:
 # Notion
 
 Connected, 42 tools. The workspace is **Shepherd Search Group / Merraine**.
+[[hub-init]] extracts it on first session. Do not wait for a second ask.
 
 Candidate system of record for the shortlist if you do not name another CRM
 we can write to. Nothing writes back until you say so. See [[merraine-pipeline]].

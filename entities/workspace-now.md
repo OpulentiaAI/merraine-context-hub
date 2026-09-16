@@ -27,6 +27,14 @@ kind: workspace
 
 - This hub is **not mounted** on Default Workspace yet. Sessions will not
   see these files until `scripts/materialize.py` is applied.
+- **Init has not run.** There is no `init-receipt.json`. First session
+  runs [[hub-init]].
+- **Notion, Parallel, and Mesa are connected and not extracted.** Pull
+  them the same way Spear was pulled. Do not re-extract Spear.
+- **Contacts are not indexed.** The Spear export is in Drive. Mail has
+  not been swept.
+- **Voice is the standing file only.** [[jeremy-voice]] is in force until
+  Gmail lands 15–30 replied-to sent mails.
 - **No saved automations.** Signal outbound and the awards monitor are
   written here and still Disabled.
 - **Gmail is not connected.** Mailbox extraction is waiting on that click.

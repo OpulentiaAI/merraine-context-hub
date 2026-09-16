@@ -23,6 +23,10 @@ Leadership search. This hub is your context. Read it before you act.
 - Three things reach Jeremy: a secret, a payment, and a send. Decide everything
   else and keep going.
 
+If `init-receipt.json` is missing, run [[hub-init]] in this session before
+anything else. Extract every connected service that has no receipt. Skip
+Spear. Index contacts. Train voice. Create the day-one clocks Disabled.
+
 Start with [[workspace-now]] and [[connection-inventory]] before you assume
 what is already connected or already extracted. Then [[icp-context]] and
 [[routing]] before you hunt, write, or stand anything up. A note that has

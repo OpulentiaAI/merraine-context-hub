@@ -32,5 +32,5 @@ Connect it in Settings → Connectors. Two earlier login attempts on the
 "Search the web" thread timed out after ten minutes. Nothing here can finish
 that click for you.
 
-Once it is connected, [[email-communications-extraction]] runs read-only.
-Nothing is sent, filed, or labelled.
+Once it is connected, [[hub-init]] runs [[email-communications-extraction]]
+in the same session. Read-only. Nothing is sent, filed, or labelled.

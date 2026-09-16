@@ -10,6 +10,7 @@ This is **Jeremy Sanchez's** workspace. Merraine Group. Leadership search.
 ## Read first
 
 - [[hub-inject]] — standing rules for every session
+- [[hub-init]] — first session: extract, contacts, voice, clocks
 - [[workspace-now]] — what is already here
 - [[connection-inventory]] — what is actually connected
 - [[icp-context]] — living ICP. Empty fields stay empty.
@@ -29,7 +30,7 @@ This is **Jeremy Sanchez's** workspace. Merraine Group. Leadership search.
 - **How the motion runs** — [[routing]], then [[playbook-catalog]]
 - **What we watch** — [[signal-catalog]]
 - **How we score** — [[intent-score]]
-- **What we pull in** — [[runbook-catalog]]
+- **What we pull in** — [[runbook-catalog]], starting with [[hub-init]]
 - **What can run** — [[automation-dictionary]]
 
 ## Before you act

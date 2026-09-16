@@ -34,13 +34,16 @@ As of 16 September 2026, read live from the workspace:
 
 - Spear, Notion, Parallel, and Mesa are connected.
 - Spear is already extracted. Do not run that job again.
-- Gmail is not connected. That is the unlock for mailbox extraction.
+- Notion, Parallel, and Mesa are connected and not extracted. Init pulls them.
+- Gmail is not connected. That is the unlock for mailbox contacts and voice.
 - No automation is Enabled. The validator fails the build if one is.
 
 ## How to use this
 
-**New here?** Open [ONBOARDING.md](ONBOARDING.md). One paste block, then the
-auth clicks that are actually yours. Then open [start here.md](start%20here.md).
+**New here?** Open [ONBOARDING.md](ONBOARDING.md). One paste block starts
+[[hub-init]]: extract every live service, populate contacts, train voice,
+stand up day-one clocks. The auth clicks that are actually yours happen
+inside that session. Then open [start here.md](start%20here.md).
 
 If you are mounting this in Ars Umbris, see [docs/open-in-au-host.md](docs/open-in-au-host.md).
 On Linux, [docs/running-on-linux.md](docs/running-on-linux.md).

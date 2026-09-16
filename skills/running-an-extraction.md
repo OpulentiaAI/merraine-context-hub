@@ -19,5 +19,8 @@ Three rules:
 3. **A failed retry seconds after a success is a programmatic retry**, not
    unfinished work. Do not treat it as a resume candidate.
 
+On first session, [[hub-init]] runs this for every live connector except
+Spear, then the mailbox once Gmail is on.
+
 For the mailbox, read [[email-communications-extraction]]. It is blocked on
 [[gmail]] and unlocks the most valuable asset Merraine has.

@@ -21,7 +21,8 @@ evidence: []
 # Connected tool extraction
 
 Run this for every tool you authorise, in connector order. Same pattern as
-Spear, with the tool name as the only change.
+Spear, with the tool name as the only change. [[hub-init]] runs this for
+every connected service that has no receipt. Spear is the exception: skip it.
 
 # Preconditions
 - Connector reads `connected: yes` with a tool count > 0 in a fresh discovery.

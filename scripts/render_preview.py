@@ -42,6 +42,7 @@ PAGES = [
     "playbooks/review.md",
     "playbooks/facts.md",
     "entities/jeremy-writing-prefs.md",
+    "runbooks/hub-init.md",
     "catalogs/channel-catalog.md",
 ]
 

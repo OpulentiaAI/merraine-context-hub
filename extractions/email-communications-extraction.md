@@ -27,6 +27,8 @@ evidence: []
 
 The single richest source Merraine has, and it is entirely unexploited. **Blocked
 until [[gmail]] is connected** — that is one user click and it unlocks this whole file.
+[[hub-init]] starts every other live extract while that click is pending, then
+runs this file in the same session the moment Gmail reads connected.
 
 # Preconditions
 - `gmail` connector reads `isConnected: true` with scopes listed.

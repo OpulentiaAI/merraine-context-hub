@@ -11,7 +11,10 @@ workspace. Read `ops/SURFACE.md` before adding a file.
 
 1. Read `entities/workspace-now.md` and `entities/connection-inventory.md`.
    Do not reason from memory about what is connected or already extracted.
-2. `python3 scripts/validate.py` — the graph must be clean before you add to it.
+2. If `init-receipt.json` is missing, run `runbooks/hub-init.md` in this
+   session. Extract live services, populate contacts, train voice, stand
+   up day-one clocks. Do not stop after a status report.
+3. `python3 scripts/validate.py` — the graph must be clean before you add to it.
 
 ## Hard rules
 

@@ -26,4 +26,5 @@ evidence:
 # Mesa
 
 Connected. Default Workspace versioning is ready. Use Mesa when a job should
-wake on a webhook instead of polling.
+wake on a webhook instead of polling. [[hub-init]] pulls revisions and
+webhook jobs on first session. MCP tool count may read 0. Still pull it.

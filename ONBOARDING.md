@@ -1,8 +1,9 @@
 # Start here
 
-**Jeremy — paste the block below into a new Opulent session. That is the whole setup.**
+**Jeremy — paste the block below into a new Opulent session. That is init.**
 
-Everything after that is auth clicks. The agent drives the rest.
+The agent fills the hub the way Spear was pulled: every live service,
+then contacts, then voice, then clocks. You only do the auth clicks.
 
 ---
 
@@ -11,85 +12,115 @@ Everything after that is auth clicks. The agent drives the rest.
 ```text
 Read this repository as your operating context: merraine-context-hub.
 
-You are running Jeremy Sanchez's Opulent account (jeremysanchez@opulentia.ai, Merraine Group,
-leadership search). Mount this hub, then work the day-one order in ONBOARDING.md.
+You are running Jeremy Sanchez's Opulent account (jeremysanchez@opulentia.ai,
+Merraine Group, leadership search). Mount this hub, then immediately run
+runbooks/hub-init.md. Do not stop after reporting state.
 
 Start by reading, in this order:
-  inject/hub-inject.md              - standing rules
-  entities/workspace-now.md         - what is already in this workspace
-  entities/connection-inventory.md  - what is actually connected
-  catalogs/automation-dictionary.md - what we can stand up
-  catalogs/playbook-catalog.md      - specialist modules in the motion
-  entities/icp-context.md           - living ICP. Empty fields stay empty.
-  entities/merraine-icp.md          - who we sell to, and what is still unknown
+  inject/hub-inject.md
+  runbooks/hub-init.md
+  entities/workspace-now.md
+  entities/connection-inventory.md
+  catalogs/automation-dictionary.md
+  catalogs/playbook-catalog.md
+  entities/icp-context.md
+  entities/jeremy-writing-prefs.md
 
-Then tell me the workspace's real state before doing anything else.
+Then init, this session, in this order:
+  1. Fresh-read what is actually connected. Do not guess.
+  2. Validate, then mount when I type send
+     (CONFIRM=send python3 scripts/materialize.py --apply).
+  3. Extract every connected service that has no receipt.
+     Spear is already done — do not pull it again.
+     Notion, Parallel, and Mesa are connected and not extracted. Pull them
+     the same way Spear was pulled (codemode + MCP, coordinator + worker,
+     FILE-INDEX, hash).
+  4. Populate contacts from the Spear export now. When Gmail is on, run
+     extractions/email-communications-extraction.md in the same session
+     and merge the relationship graph.
+  5. Train writing style from 15–30 of my sent mails that got a reply.
+     Until Gmail is on, use research/jeremy-voice.md and
+     entities/jeremy-writing-prefs.md.
+  6. Create the day-one automations Disabled. Stand Parallel monitors
+     for the ranked signals. First-open signal outbound and awards.
+     Enable those two clocks only after I have opened the artifact.
+  7. Write init-receipt.json. Resume only what is still blockedOn.
 
 Standing rules, non-negotiable:
-- Nothing sends, pays, publishes, or contacts a person unless I type "send" in that moment.
-- Emailing the daily hiring scan to jeremy@merraine.com is delivery to me, not outbound.
-- Every claim carries a resolvable source. Empty results are UNVERIFIED, never zero.
+- Nothing sends, pays, publishes, or contacts a person unless I type "send"
+  in that moment.
+- Emailing the daily hiring scan to jeremy@merraine.com is delivery to me,
+  not outbound.
+- Every claim carries a resolvable source. Empty results are UNVERIFIED,
+  never zero.
 - "completed" is not proof. Open the artifact.
-- Three things come to me: a secret, a payment, a send. Decide everything else yourself.
+- Three things come to me: a secret, a payment, a send. Decide everything
+  else yourself.
 ```
+
+---
+
+## What init does in the first session
+
+| Step | What lands | You do |
+|---|---|---|
+| Mount | This hub attached to Default Workspace | Type `send` once |
+| Extract live services | Notion, Parallel, Mesa (and any other connected tool) as artifacts + receipts | Nothing if already connected |
+| Skip Spear | 57 Drive files and `personal-context-hub.zip` stay the source of record | Nothing. Do not re-run it. |
+| Contacts | `contacts-from-spear.json`, then `relationship-graph.json` from mail, merged to `contacts-index.json` | Gmail click, if it is still off |
+| Voice | `voice-profile.md` from replied-to sent mail, standing rules on `jeremy-writing-prefs` | Nothing. One-offs are not saved. |
+| Triggers | Parallel monitors on ranked signals. One synthetic fire each. | Nothing |
+| Automations | Day-one jobs created **Disabled**. Signal outbound + awards first-opened, then Enabled only after you open the artifact | Open those two artifacts |
+
+The procedure is [[hub-init]]. The extraction pattern is
+[[connected-tool-extraction]]. Mail is
+[[email-communications-extraction]]. Clocks go through
+[[first-open-gate]].
 
 ---
 
 ## What you will be asked to authorise
 
-Four clicks, in this order. The agent handles everything between them.
+Clicks only. The agent keeps extracting everything else while a click
+is pending, then uses the new connector in the same session.
 
-| # | What | Where | Why it matters |
+| # | What | Where | What it unblocks |
 |---|---|---|---|
-| 1 | **Gmail** | Settings → Connectors | Unlocks mailbox extraction — relationships, voice, and the real pipeline. This is the big one. Two earlier logins timed out. |
-| 2 | **Sales Navigator seat** | LinkedIn, about $99/mo | Not a build. Five filters do the work. See `research/sales-navigator-filters.md` |
-| 3 | **Apollo** (optional) | Connectors | Trial expired. If it needs a paid plan, say so and we drop it. |
+| 1 | **Gmail** | Settings → Connectors | Contacts from mail, voice from sent mail, suppression list, unibox. Two earlier logins timed out. |
+| 2 | **Sales Navigator seat** | LinkedIn, about $99/mo | Not a build. Five filters. See `research/sales-navigator-filters.md` |
+| 3 | **Apollo** (optional) | Connectors | Trial expired. If it needs a paid plan, drop it. |
 | 4 | **Gojiberry** (on request) | Say "wire up Gojiberry" | The agent creates the account. Only the LinkedIn connect needs you. |
 
-Already connected: **Spear** (131 tools, export already in Drive), **Notion**
-(42 tools, Shepherd Search Group / Merraine), **Parallel Monitor**, **Mesa**.
+Already connected, and init must extract them now (except Spear):
+
+- **Spear** — 131 tools. Export already in Drive. Skip the pull. Index the prospects.
+- **Notion** — 42 tools. Shepherd Search Group / Merraine. Pull it.
+- **Parallel Monitor** — watches. Pull the monitors, then register the day-one ones.
+- **Mesa** — workspace versions and webhook jobs. Pull it.
 
 ---
 
-## Day one, in order
+## Day-one clocks
 
-**1. Ground truth.** Read `entities/workspace-now.md` and
-`entities/connection-inventory.md`. As of 16 September 2026 the hub is not
-mounted yet, Spear is already extracted, and no automation is on a clock.
+Created this session, all Disabled, then gated.
 
-**2. Mount the hub.** `CONFIRM=send python3 scripts/materialize.py --apply`.
-Installs the Jeremy-facing files as knowledge and runbooks, then attaches them
-to Default Workspace so every later session starts with this context.
+**Enable after you open one clean artifact**
 
-**3. Gmail, then extract.** Once Gmail is connected,
-`extractions/email-communications-extraction.md` runs. It produces:
+- **Signal-triggered outbound** — weekday morning. Who became a buyer overnight, with a cited opener waiting.
+- **Awards and recognition monitor** — Monday. Forbes, Crain's Chicago, Crain's New York, the business journals. A named congratulations per honoree.
 
-- `relationship-graph.json` — everyone you know, how warm, by reply latency
-- `voice-profile.md` — how you actually write, from 15–30 of your own replied-to mails
-- `reconstructed-pipeline.json` — the real pipeline, rebuilt from threads
-- `suppression-list.json` — who must never be contacted
+**Create Disabled, leave off until you ask**
 
-Read-only. Nothing is sent, filed, or labelled.
+- Connector health, sales motion board, routine + transcript healthchecks, hub self-extension.
+- Unibox triage — only after Gmail is on.
+- Email / style / sequence / social / newsletter jobs — written, off, until you want them on a clock.
 
-**4. Do not re-extract Spear.** 57 Drive files and `personal-context-hub.zip`
-are already there. 1,314 prospects on your profile, 1,639 on Reid's.
+The daily CFO / VP+ hiring scan already has a procedure
+(`runbooks/daily-hiring-scan.md`). It is not on a clock. Say when you
+want it scheduled.
 
-**5. Stand up two automations first.** Both created Disabled, both checked on
-one manual run before any clock starts. The rest of the motion
-(`catalogs/automation-dictionary.md`) stays off until those two open clean.
-
-- **Signal-triggered outbound** — weekday 6:30am. Who became a buyer overnight,
-  with a cited opener waiting.
-- **Awards and recognition monitor** — Monday 7am. Forbes, Crain's Chicago,
-  Crain's New York, the business journals. A named congratulations per honoree.
-
-The daily CFO / VP+ hiring scan already has a written procedure
-(`runbooks/daily-hiring-scan.md`). It is not on a clock. Say when you want it
-scheduled.
-
-**6. Turn on the self-improvement loop.** Two quiet healthchecks that mine
-session history for friction and waste and propose fixes. They propose. They
-never apply.
+Detection uses Parallel events, not a daily poll that finds nothing.
+See `runbooks/parallel-monitor-scheduling.md`.
 
 ---
 
@@ -99,10 +130,10 @@ never apply.
 |---|---|---|
 | Universal search across LinkedIn, Google, company sites | `automations/signal-triggered-outbound.md` + `runbooks/daily-hiring-scan.md` | Needs Gmail for the mailbox side. The daily scan already runs on request. |
 | LinkedIn Sales Navigator | `research/sales-navigator-filters.md` | Buy the seat — do not build it |
-| Spear for sequencing, replies, auto-prospecting | Already connected, data already extracted | Ready now |
+| Spear for sequencing, replies, auto-prospecting | Already connected, data already extracted | Ready now. Init indexes those contacts. |
 | Enrichment: name → email, phone, title history | Monid → Crustdata. Farmers Fridge already resolved. | Ready |
-| Market signals: raises, exec moves, job postings | `signals/` + `automations/signal-triggered-outbound.md` | Build this first |
-| Awards tracker: Forbes, Crain's, regional journals | `automations/awards-recognition-monitor.md` | Ready to stand up |
+| Market signals: raises, exec moves, job postings | `signals/` + `automations/signal-triggered-outbound.md` | Build this first. Init stands the monitors. |
+| Awards tracker: Forbes, Crain's, regional journals | `automations/awards-recognition-monitor.md` | Ready to stand up on init |
 
 You asked for six tools. You wrote "one stack" and asked for the fastest path
 to pilot **one** of them this month. The answer is the fifth row: market
@@ -124,7 +155,7 @@ signals/      ranked buying triggers
 playbooks/    specialist modules — hunt, filter, score, reply, email, sequence
 extractions/  how to pull a tool or a mailbox into the hub
 automations/  paste-ready prompts with schedules — all Disabled
-runbooks/     how the work actually runs
+runbooks/     how the work actually runs, including hub-init
 research/     voice, case-study plays, Spear vocabulary
 catalogs/     generated indexes
 skills/       triggered guidance

@@ -31,10 +31,12 @@ Silence and no evidence are valid results.
    facts supported by the profile or another public source.
 3. For each potential introducer, find the public page that shows the route to
    the target: a shared network, former employer, investor, advisor, customer,
-   partner, or community connection. Record its URL exactly as `evidenceUrl`.
-4. Create `gtm.warm-path` only when `evidenceUrl` is present. Set `pathKind`
-   and `strength` no stronger than the evidence supports, and set `verified` to
-   `yes` only after reopening the cited page. A missing URL means drop the path.
+   partner, or community connection. Record its URL exactly as `evidenceUrl`
+   and the date it was observed as `observedAt`.
+4. Create `gtm.warm-path` only when both `evidenceUrl` and `observedAt` are
+   present. Set `pathKind` and `strength` no stronger than the evidence
+   supports, and set `verified` to `yes` only after reopening the cited page.
+   A missing URL or date means drop the path.
 5. Keep the map separate from outreach. Do not infer email addresses, personal
    contacts, reporting lines, or permission to introduce. Respect
    `doNotContact: yes` on every person.
@@ -44,7 +46,8 @@ Silence and no evidence are valid results.
 
 # Verification
 - Sales Navigator is used as a purchased product, not reproduced with a scraper.
-- Every retained `gtm.warm-path` has a non-empty public `evidenceUrl`.
+- Every retained `gtm.warm-path` has a non-empty public `evidenceUrl` and
+  `observedAt` date.
 - The cited page was reopened before `verified: yes` was assigned.
 - `strength` reflects the cited connection and does not turn a shared employer
   or community into a direct relationship.

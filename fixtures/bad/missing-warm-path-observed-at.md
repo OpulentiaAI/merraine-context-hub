@@ -1,19 +1,18 @@
 ---
 type: gtm.warm-path
-expectError: "doNotContact"
-tldr: Synthetic warm path that attempts to use a do-not-contact person
+expectError: "observedAt"
+tldr: Synthetic warm path without an observation date
 status: active
 owner: Opulent
 updated: 2026-09-18
 surface: jeremy
 provenance: "Synthetic fixture"
 target: "[[synthetic-target-person]]"
-introducer: "[[synthetic-do-not-contact-person]]"
+introducer: "[[synthetic-introducer-person]]"
 pathKind: former-colleagues
 evidenceUrl: "https://example.invalid/public/synthetic-former-colleagues"
-observedAt: 2026-09-18
 strength: working
 verified: yes
 ---
 
-# Prohibited synthetic warm path
+# Synthetic warm path missing observation date

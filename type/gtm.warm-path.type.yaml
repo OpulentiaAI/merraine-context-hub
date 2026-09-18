@@ -10,8 +10,9 @@ fields:
   pathKind: [shared-network, former-colleagues, investor, advisor, customer, partner, community]
   #: Required. Without a public URL, this route cannot be used.
   evidenceUrl: String
+  #: Required. A URL without its observation date cannot establish a current route.
+  observedAt: Date
   #: Relationship proximity as supported by the cited public record.
   strength: [cold, distant, affiliated, working, direct]
   #: no keeps the route visible for research but blocks its use.
   verified: [yes, no]
-

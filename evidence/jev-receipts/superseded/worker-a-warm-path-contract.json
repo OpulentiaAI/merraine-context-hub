@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Choose the minimum public evidence contract for gtm.warm-path.",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "offline": false,
+  "model": "jev-1.13.0",
+  "inputHash": "sha256:6009c274b610503a8a31712d2f87d3dba852186b15012ea4c7a3ecf7c89862f2",
+  "inputSummary": {
+    "stateKeys": [
+      "candidateA",
+      "candidateB",
+      "constraint",
+      "domain"
+    ],
+    "questionIds": [
+      "minimum_evidence_contract"
+    ],
+    "questionTypes": {
+      "minimum_evidence_contract": "choice"
+    },
+    "questionSetVersion": "worker-a-warm-path-contract-v1"
+  },
+  "answers": [
+    {
+      "question_id": "minimum_evidence_contract",
+      "type": "choice",
+      "value": "url_plus_observed_at",
+      "probabilities": {
+        "url_only": 0.46,
+        "url_plus_observed_at": 0.54
+      },
+      "confidence": 0.08
+    }
+  ],
+  "deterministicDecision": {
+    "rule": "threshold gates, safe side; abstention and unavailability are outcomes",
+    "outcome": "pass",
+    "components": [
+      {
+        "question_id": "minimum_evidence_contract",
+        "threshold": 0.5,
+        "direction": "at_least",
+        "value": "url_plus_observed_at",
+        "gate_result": "recorded",
+        "reason": "composite input; combined by the published weights in code"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 440,
+    "output_tokens": 46
+  },
+  "historyStatus": "superseded_non_reproducible",
+  "evidenceUse": "prohibited",
+  "supersededReason": "Original public record lacks reproducible request, rules, and response inputs; retained as history only, never as current evaluation evidence."
+}

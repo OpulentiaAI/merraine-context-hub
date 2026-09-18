@@ -1,0 +1,62 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Merraine integration review: warm-path-evidence",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "offline": false,
+  "model": "jev-1.13.0",
+  "inputHash": "sha256:149c7b0686391cf06af96e892516e7dd9d4938324ef469d293e3326e1a143167",
+  "inputSummary": {
+    "stateKeys": [
+      "candidate_a",
+      "candidate_b",
+      "context",
+      "risk"
+    ],
+    "questionIds": [
+      "a_is_sufficient",
+      "b_is_sufficient",
+      "best_choice"
+    ],
+    "questionTypes": {
+      "a_is_sufficient": "noul",
+      "b_is_sufficient": "noul",
+      "best_choice": "choice"
+    },
+    "questionSetVersion": "merraine.integration.warmpath.v1"
+  },
+  "answers": [
+    {
+      "question_id": "a_is_sufficient",
+      "type": "noul",
+      "value": 0.12
+    },
+    {
+      "question_id": "b_is_sufficient",
+      "type": "noul",
+      "value": 0.22
+    },
+    {
+      "question_id": "best_choice",
+      "type": "choice",
+      "value": "candidate_b",
+      "probabilities": {
+        "candidate_a": 0.03,
+        "neither": 0.0,
+        "candidate_b": 0.97
+      },
+      "confidence": 0.95
+    }
+  ],
+  "deterministicDecision": {
+    "rule": "threshold gates, safe side; abstention and unavailability are outcomes",
+    "outcome": "pass",
+    "components": []
+  },
+  "usage": {
+    "input_tokens": 618,
+    "output_tokens": 85
+  },
+  "historyStatus": "superseded_non_reproducible",
+  "evidenceUse": "prohibited",
+  "supersededReason": "Original public record lacks reproducible request, rules, and response inputs; retained as history only, never as current evaluation evidence."
+}

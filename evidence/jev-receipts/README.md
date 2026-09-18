@@ -28,3 +28,12 @@ Unavailable receipts retain the request and rules, set `response` to `null`, and
 record `outcome: unavailable`. They are honest failed evaluations, never a pass.
 
 See `docs/jev-evaluation-contract.md` for the full safety and privacy contract.
+
+## Superseded historical records
+
+`superseded/` is intentionally not an active evidence directory. Its records
+are retained as non-reproducible historical claims with
+`historyStatus: superseded_non_reproducible` and `evidenceUse: prohibited`.
+They lack sufficient request/rules/response inputs to verify them and must not
+support present design, coverage, authorization, or safety claims. They were
+not rewritten to fill in unavailable inputs.

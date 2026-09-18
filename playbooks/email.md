@@ -37,5 +37,5 @@ cut on purpose.
 
 # Guardrails
 - Gmail is not connected. Stop before any send step.
-- Daily hiring scan to jeremy@merraine.com is delivery, not this job.
+- Daily hiring scan to Jeremy's work inbox is delivery, not this job.
 - If the honest "do nothing" answer is nothing, say this should not be mail.

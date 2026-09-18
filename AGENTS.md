@@ -21,7 +21,7 @@ workspace. Read `ops/SURFACE.md` before adding a file.
 - **Nothing sends.** No email to a prospect, InMail, calendar invite, payment,
   publish, or merge unless Jeremy typed the confirm word in that moment.
   Drafts carry `sendReady: no`. Emailing the daily scan to
-  `jeremy@merraine.com` is delivery to him.
+  Jeremy's work inbox is delivery to him. The address is not stored here.
 - **Cite or say UNVERIFIED.** Every factual claim needs a resolvable source.
   An empty search result is `UNVERIFIED`, never an invented zero.
 - **`completed` is not proof.** Proof is a file count, an artifact row, a hash

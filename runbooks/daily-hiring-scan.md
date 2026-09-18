@@ -11,7 +11,7 @@ audience: jeremy-sanchez
 escalateWhen:
   - "A prospect would be contacted"
   - "A name, title, or email would have to be invented"
-  - "Email to jeremy@merraine.com fails"
+  - "Email to Jeremy's work inbox fails"
 relatedAutomations: []
 ---
 
@@ -46,7 +46,7 @@ or the revised prompt in the thread. Do not invent a clock.
 7. Confirm openings on the employer ATS or careers page, not on a search snippet.
    LinkedIn job pages alone are not enough. Built In "removed" and Lever 404
    mean the seat is gone.
-8. Deliver the full report in the thread **and** email `jeremy@merraine.com`
+8. Deliver the full report in the thread **and** email Jeremy's work inbox
    with subject `Daily CFO/Leadership Hiring Scan — [today's date]`. Not Slack.
    If the email cannot send, still post the report and say so. That email is
    delivery to you, not outbound to a prospect.
@@ -61,6 +61,6 @@ or the revised prompt in the thread. Do not invent a clock.
 | Symptom | Do this |
 |---|---|
 | A source URL does not resolve | Drop the row. |
-| Email to jeremy@merraine.com fails | Keep the thread report. Name the blocker. |
+| Email to Jeremy's work inbox fails | Keep the thread report. Name the blocker. |
 | Someone asks to "just send a few notes" | No. The list is for your outreach. |
 | You want this on a weekday clock | Stand it up Disabled through [[first-open-gate]]. |

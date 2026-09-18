@@ -12,8 +12,11 @@
   record unavailable outcomes honestly. They never authorize contact or sends.
 - Public automations are disabled non-runnable drafts. A future dispatcher must
   enforce an authorized per-run budget before it can activate one.
-- Public account bindings and audit payloads are removed from the current
-  branch. Historical repository exposure is a separate owner decision.
+- Public account bindings, audit payloads, private contact details, and
+  third-party individual data are removed from the **current branch**.
+  Earlier commits still contain some of that data. This branch is not a
+  claim that git history is sanitized. Removal or rotation of historical
+  exposure is an owner decision.
 
 ## Data coverage
 

@@ -20,7 +20,7 @@ Write to one person. One spine per issue. Subject and preview as a pair. Open in
 # Limits
 - Subject under about 50 characters, hook in the first 35 to 40.
 - Readers give an issue about 51 seconds. That is NN/g's number, not ours.
-- Daily hiring scan to jeremy@merraine.com is delivery, not this job.
+- Daily hiring scan to Jeremy's work inbox is delivery, not this job.
 
 # Failures
 "Welcome back to another edition". Five CTAs. Preview left unset. Filler on a schedule.

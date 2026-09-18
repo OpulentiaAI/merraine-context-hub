@@ -41,16 +41,16 @@ Then init, this session, in this order:
   5. Train writing style from 15–30 of my sent mails that got a reply.
      Until Gmail is on, use research/jeremy-voice.md and
      entities/jeremy-writing-prefs.md.
-  6. Create the day-one automations Disabled. Stand Parallel monitors
-     for the ranked signals. First-open signal outbound and awards.
-     Enable those two clocks only after I have opened the artifact.
+  6. Create the day-one automations as Disabled drafts. This repository
+     has no executor or cost-authorizing dispatcher, so do not Enable
+     a clock from here. First-open is a future external-executor gate.
   7. Write init-receipt.json. Resume only what is still blockedOn.
 
 Standing rules, non-negotiable:
 - Nothing sends, pays, publishes, or contacts a person unless I type "send"
   in that moment.
-- Emailing the daily hiring scan to jeremy@merraine.com is delivery to me,
-  not outbound.
+- Emailing the daily hiring scan to my work inbox is delivery to me,
+  not outbound. Do not store that address in this public hub.
 - Every claim carries a resolvable source. Empty results are UNVERIFIED,
   never zero.
 - "completed" is not proof. Open the artifact.
@@ -69,8 +69,8 @@ Standing rules, non-negotiable:
 | Skip Spear | 57 Drive files and `personal-context-hub.zip` stay the source of record | Nothing. Do not re-run it. |
 | Contacts | `contacts-from-spear.json`, then `relationship-graph.json` from mail, merged to `contacts-index.json` | Gmail click, if it is still off |
 | Voice | `voice-profile.md` from replied-to sent mail, standing rules on `jeremy-writing-prefs` | Nothing. One-offs are not saved. |
-| Triggers | Parallel monitors on ranked signals. One synthetic fire each. | Nothing |
-| Automations | Day-one jobs created **Disabled**. Signal outbound + awards first-opened, then Enabled only after you open the artifact | Open those two artifacts |
+| Triggers | Parallel monitor procedures exist. Live monitors need an extracted Parallel surface and an external executor. | Nothing |
+| Automations | Day-one jobs written here as **Disabled, non-runnable drafts**. This repo cannot Enable a clock. | Nothing until an external dispatcher exists |
 
 The procedure is [[hub-init]]. The extraction pattern is
 [[connected-tool-extraction]]. Mail is
@@ -102,42 +102,48 @@ Already connected, and init must extract them now (except Spear):
 
 ## Day-one clocks
 
-Created this session, all Disabled, then gated.
+Written in this repository as Disabled drafts. They are not runnable
+here. `runbooks/first-open-gate.md` is the future external-executor
+gate; this repo has no dispatcher.
 
-**Enable after you open one clean artifact**
+**Drafts that would be first-open candidates later**
 
 - **Signal-triggered outbound** — weekday morning. Who became a buyer overnight, with a cited opener waiting.
 - **Awards and recognition monitor** — Monday. Forbes, Crain's Chicago, Crain's New York, the business journals. A named congratulations per honoree.
 
-**Create Disabled, leave off until you ask**
+**Drafts that stay off until you ask, and stay off here regardless**
 
 - Connector health, sales motion board, routine + transcript healthchecks, hub self-extension.
 - Unibox triage — only after Gmail is on.
-- Email / style / sequence / social / newsletter jobs — written, off, until you want them on a clock.
+- Email / style / sequence / social / newsletter jobs — written, off.
 
 The daily CFO / VP+ hiring scan already has a procedure
-(`runbooks/daily-hiring-scan.md`). It is not on a clock. Say when you
-want it scheduled.
+(`runbooks/daily-hiring-scan.md`). It is not on a clock. It is not an
+executor. Say when you want it scheduled outside this repo.
 
-Detection uses Parallel events, not a daily poll that finds nothing.
-See `runbooks/parallel-monitor-scheduling.md`.
+Detection is specified as Parallel events, not a daily poll that finds
+nothing. See `runbooks/parallel-monitor-scheduling.md`. Parallel is
+connected and not extracted.
 
 ---
 
 ## Your six asks, and where each one landed
 
+This public hub holds **typed knowledge, procedures, and disabled
+automation drafts**. It does not run them. There is no executor or
+cost-authorizing dispatcher in this repository. Several sources remain
+authorization-blocked. See `docs/integration-status.md` and
+`runbooks/first-open-gate.md`. Recording the six asks is not acceptance
+that they are live.
+
 | Your ask | Where it lives | State |
 |---|---|---|
-| Universal search across LinkedIn, Google, company sites | `automations/signal-triggered-outbound.md` + `runbooks/daily-hiring-scan.md` | Needs Gmail for the mailbox side. The daily scan already runs on request. |
-| LinkedIn Sales Navigator | `research/sales-navigator-filters.md` | Buy the seat — do not build it |
-| Spear for sequencing, replies, auto-prospecting | Already connected, data already extracted | Ready now. Init indexes those contacts. |
-| Enrichment: name → email, phone, title history | Monid → Crustdata. Farmers Fridge already resolved. | Ready |
-| Market signals: raises, exec moves, job postings | `signals/` + `automations/signal-triggered-outbound.md` | Build this first. Init stands the monitors. |
-| Awards tracker: Forbes, Crain's, regional journals | `automations/awards-recognition-monitor.md` | Ready to stand up on init |
-
-You asked for six tools. You wrote "one stack" and asked for the fastest path
-to pilot **one** of them this month. The answer is the fifth row: market
-signals is the engine. The other five are its inputs and outputs.
+| Universal search across LinkedIn, Google, company sites | `runbooks/universal-search.md`, `runbooks/daily-hiring-scan.md`, typed `gtm.search-run` fixtures | Procedure and synthetic fixtures. No live search executor. Gmail is not connected. |
+| LinkedIn Sales Navigator | `research/sales-navigator-filters.md` | Procedure only. Buy the seat — do not build it. |
+| Spear for sequencing, replies, auto-prospecting | `entities/connectors/spear.md`, `playbooks/sequencing.md`, `playbooks/replies.md` | Typed connector note and procedures. Extracted payloads are not in this public repo. Automations are disabled drafts. |
+| Enrichment: name → email, phone, title history | `playbooks/enrichment.md`, `automations/contact-enrichment-pass.md` | Procedure and a disabled draft. Not executable here. |
+| Market signals: raises, exec moves, job postings | `signals/`, `automations/signal-triggered-outbound.md` | Typed signal catalog and a disabled draft. Parallel is connected and not extracted. No dispatcher. |
+| Awards tracker: Forbes, Crain's, regional journals | `automations/awards-recognition-monitor.md`, `signals/award-recognition.md` | Typed signal and a disabled draft. Not standing, not runnable here. |
 
 ---
 

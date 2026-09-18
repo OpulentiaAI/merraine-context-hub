@@ -3,22 +3,19 @@ type: gtm.person
 tldr: Jeremy Sanchez
 status: active
 owner: Jeremy Sanchez
-updated: 2026-09-16
+updated: 2026-09-18
 surface: jeremy
-provenance: "Opulent knowledge note 'Jeremy Sanchez Profile (canonical)' plus user_context memory block, both read live 2026-09-16"
+provenance: "Opulent knowledge note 'Jeremy Sanchez Profile (canonical)' plus user_context memory block, both read live 2026-09-16. Private contact fields omitted from this public branch."
 role: Head of Growth
 org: "[[merraine-group]]"
-email: jeremy@merraine.com
-phone: "+1-312-835-2373"
-linkedin: "https://www.linkedin.com/in/sanchezjeremy"
 titleHistory:
   - "Head of Growth, Merraine Group"
   - "Founder, CultureHub Insights (joined Merraine March 2026)"
 relationshipStrength: client
 doNotContact: "no"
 evidence:
-  - claim: "Head of Growth at Merraine Group; work email jeremy@merraine.com; LinkedIn sanchezjeremy; WhatsApp 312-835-2373"
-    tldr: "Role, email, LinkedIn, and phone from the canonical profile note"
+  - claim: "Head of Growth at Merraine Group"
+    tldr: "Role from the canonical profile note. Private contact details are not stored on this public branch."
     origin: "convex:knowledgeNotes/Jeremy Sanchez Profile (canonical)"
     observedAt: 2026-09-16
     method: cli
@@ -29,13 +26,14 @@ evidence:
 # Jeremy Sanchez
 
 Head of Growth and Talent & Growth Partner at [[merraine-group]]. Based in
-Chicago. Work email `jeremy@merraine.com`. LinkedIn Premium with Sales Navigator
-and Recruiter: [sanchezjeremy](https://www.linkedin.com/in/sanchezjeremy).
-Direct / WhatsApp: 312-835-2373. Calendar:
-[calendly.com/jeremy-merraine/letsbuild](https://calendly.com/jeremy-merraine/letsbuild).
+Chicago. LinkedIn Premium with Sales Navigator and Recruiter.
 
 You founded CultureHub Insights on 30 August 2024. It joined Merraine in March
 2026. You lead the expansion into Chicago and other innovation cities.
+
+Private contact details (work email, phone, personal profile and booking
+links) are omitted from this public branch. Reach Jeremy through the
+workspace, not through addresses stored here.
 
 ## How you work
 
@@ -55,21 +53,17 @@ When anything is written in your name, use [[jeremy-voice]].
 | Person | Role |
 |---|---|
 | Codi McCommon | Fulfillment — "our Unicorn Hunter" |
-| Reid Lortz | Search. 1,639 prospects already in Spear beside your 1,314 |
 | Dina Ufberg | COO and Co-Owner |
-| David Gantshar | `dg@merraine.com` |
+| David Gantshar | Colleague |
 | Jane Nueva | Operations and calendar |
 
 ## Signature links
 
 - [merraine.com/merraine-growth](https://merraine.com/merraine-growth)
-- [linkedin.com/in/sanchezjeremy](https://www.linkedin.com/in/sanchezjeremy)
-- Direct / WhatsApp 312-835-2373
-- [calendly.com/jeremy-merraine/letsbuild](https://calendly.com/jeremy-merraine/letsbuild)
 
 ## What you asked for
 
 On 11 September 2026 you wrote: **"My ask: 6 tools, one stack."** You asked for
 the fastest path to a pilot this month. The six asks and where each one lives
-are in `ONBOARDING.md`. Market signals is the engine. The other five are its
-inputs and outputs.
+are in `ONBOARDING.md`. This public hub records them as typed knowledge and
+procedures. It does not accept them as live, runnable capability.

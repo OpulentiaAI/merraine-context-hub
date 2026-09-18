@@ -80,8 +80,7 @@ file count, artifact rows, and a hash you recomputed.
 
 ## 3. Populate contacts
 1. Index the existing Spear export into hub people and orgs. Do not
-   call Spear again. Your profile: 1,314 prospects. Reid's: 1,639.
-   Write `contacts-from-spear.json` plus a FILE-INDEX row.
+   call Spear again. Write `contacts-from-spear.json` plus a FILE-INDEX row.
 2. If [[gmail]] is off, ask for that one click now. Keep extracting
    everything else while it is pending. The moment it reads connected,
    run [[email-communications-extraction]] in the same session.

@@ -13,7 +13,12 @@ from adapters.typesafe.client import (  # noqa: E402
     TypeSafeClient,
     TypeSafeError,
 )
-from adapters.typesafe.constraints import Budget, decide_noul  # noqa: E402
+from adapters.typesafe.constraints import (  # noqa: E402
+    Budget,
+    DEFAULT_MAX_CALLS,
+    DEFAULT_MAX_LATENCY_MS,
+    decide_noul,
+)
 from adapters.typesafe.questions import noul  # noqa: E402
 
 
@@ -25,6 +30,11 @@ def response_transport(status=200, payload=None):
 
 
 class TypeSafeAdapterTests(unittest.TestCase):
+    def test_default_budget_is_one_batched_call_with_two_second_ceiling(self):
+        budget = Budget()
+        self.assertEqual(budget.max_calls, DEFAULT_MAX_CALLS)
+        self.assertEqual(budget.max_latency_ms, DEFAULT_MAX_LATENCY_MS)
+
     def test_unavailable_path_without_key(self):
         old_key = os.environ.pop("TYPESAFE_API_KEY", None)
         try:
@@ -102,3 +112,4 @@ class TypeSafeAdapterTests(unittest.TestCase):
         self.assertEqual(decision.outcome, "review")
         self.assertEqual(decision.probability, 0.52)
         self.assertIs(decision.send, False)
+        self.assertIs(decide_noul(0.99, 0.8).send, False)

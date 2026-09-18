@@ -2,19 +2,21 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Literal
 
 
 Outcome = Literal["pass", "fail", "review", "abstain", "unavailable", "refused"]
+DEFAULT_MAX_CALLS = 1
+DEFAULT_MAX_LATENCY_MS = 2_000
 
 
 @dataclass
 class Budget:
     """Bound a single run; callers must share one instance across requests."""
 
-    max_calls: int
-    max_latency_ms: int
+    max_calls: int = DEFAULT_MAX_CALLS
+    max_latency_ms: int = DEFAULT_MAX_LATENCY_MS
     calls: int = 0
     latency_ms: int = 0
 
@@ -35,7 +37,7 @@ class Decision:
     probability: float | None
     threshold: float
     reason: str
-    send: Literal[False] = False
+    send: Literal[False] = field(default=False, init=False)
 
 
 def decide_noul(

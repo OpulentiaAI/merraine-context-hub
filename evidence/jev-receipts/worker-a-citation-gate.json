@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Test whether the universal-search procedure blocks unresolvable sources from factual use.",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "offline": false,
+  "model": "jev-1.13.0",
+  "inputHash": "sha256:b7def316fe96a8ff5bd426365abe4d5a90f2a8fd5187da497764d6e97096d8a3",
+  "inputSummary": {
+    "stateKeys": [
+      "procedure",
+      "scope"
+    ],
+    "questionIds": [
+      "unresolvable_row_usable"
+    ],
+    "questionTypes": {
+      "unresolvable_row_usable": "noul"
+    },
+    "questionSetVersion": "worker-a-citation-gate-v1"
+  },
+  "answers": [
+    {
+      "question_id": "unresolvable_row_usable",
+      "type": "noul",
+      "value": 0.03
+    }
+  ],
+  "deterministicDecision": {
+    "rule": "threshold gates, safe side; abstention and unavailability are outcomes",
+    "outcome": "pass",
+    "components": [
+      {
+        "question_id": "unresolvable_row_usable",
+        "threshold": 0.1,
+        "direction": "at_most",
+        "value": 0.03,
+        "gate_result": "passed"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 373,
+    "output_tokens": 26
+  }
+}

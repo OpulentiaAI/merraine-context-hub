@@ -10,9 +10,9 @@ provenance: "Synthetic fixture"
 target: "[[synthetic-target-person]]"
 introducer: "[[synthetic-introducer-person]]"
 pathKind: former-colleagues
+observedAt: 2026-09-18
 strength: direct
 verified: yes
 ---
 
 # Unsupported synthetic warm path
-

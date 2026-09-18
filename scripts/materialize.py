@@ -30,7 +30,9 @@ import sys
 
 HUB = pathlib.Path(__file__).resolve().parent.parent
 PILOT = HUB / "scripts" / "pilot.sh"
-USER_ID = "k57apryqpfeg6h33ybxfynarx58e1dwa"
+USER_ID = os.environ.get("OPERATOR_ACCOUNT_ID", "")
+if not USER_ID:
+    raise SystemExit("Set OPERATOR_ACCOUNT_ID in private environment")
 WORKSPACE_ID = "ws_6b932257a9014a51a2ec5d42bb"
 
 # Directory -> how it should land in Opulent.

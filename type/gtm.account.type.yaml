@@ -4,7 +4,7 @@ fields:
   email: String
   opulentUserId: String
   plan: [Free, Pro, Heavy]
-  #: e.g. prod:confident-sheep-333
+  #: e.g. [OPERATOR_DEPLOYMENT: private configuration]
   deployment: String
   balanceCents?: Number{>=0}
   workspaceId?: String

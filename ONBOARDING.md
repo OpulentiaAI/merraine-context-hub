@@ -12,7 +12,7 @@ then contacts, then voice, then clocks. You only do the auth clicks.
 ```text
 Read this repository as your operating context: merraine-context-hub.
 
-You are running Jeremy Sanchez's Opulent account (jeremysanchez@opulentia.ai,
+You are running Jeremy Sanchez's Opulent account ([OPERATOR_EMAIL: private configuration],
 Merraine Group, leadership search). Mount this hub, then immediately run
 runbooks/hub-init.md. Do not stop after reporting state.
 

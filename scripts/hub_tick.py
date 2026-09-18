@@ -169,6 +169,9 @@ def tick(automation: dict, hub: pathlib.Path) -> dict:
 def violations(automation: dict) -> str | None:
     if automation["enabled"] == "yes" and automation["firstOpenChecked"] != "yes":
         return (f"{automation['path'].name}: enabled without a checked first open")
+    if automation["enabled"] == "yes":
+        return (f"{automation['path'].name}: enabled without a local cost authorizer; "
+                "this runner supports disabled drafts only")
     return None
 
 

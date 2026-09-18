@@ -91,9 +91,9 @@ class AutomationRules(HubCase):
         self.write("automations/a.md", self.prompt("enabled: yes\nfirstOpenChecked: no\ncostCeilingUsd: 1\n"))
         self.assert_error_contains("enabled without a checked first open")
 
-    def test_enabled_with_first_open_checked_is_allowed(self):
+    def test_enabled_with_first_open_checked_still_fails_without_a_cost_authorizer(self):
         self.write("automations/a.md", self.prompt("enabled: yes\nfirstOpenChecked: yes\ncostCeilingUsd: 1\n"))
-        self.assert_no_error_containing("enabled without a checked first open")
+        self.assert_error_contains("no local cost authorizer")
 
     def test_prompt_without_caution_is_an_error(self):
         self.write("automations/a.md", self.prompt(caution=False))
@@ -111,9 +111,9 @@ class AutomationRules(HubCase):
         self.write("automations/a.md", self.prompt("enabled: no\nfirstOpenChecked: no\ncostCeilingUsd: -1\n"))
         self.assert_error_contains("costCeilingUsd must be a non-negative number")
 
-    def test_missing_cost_ceiling_warns(self):
+    def test_missing_cost_ceiling_is_an_error(self):
         self.write("automations/a.md", self.prompt("enabled: no\nfirstOpenChecked: no\n"))
-        self.assertTrue(any("no costCeilingUsd" in w for w in self.warnings()))
+        self.assert_error_contains("no costCeilingUsd")
 
 
 class SurfaceRules(HubCase):

@@ -134,9 +134,9 @@ class DryRunContract(TickCase):
         self.assertIsNotNone(TICK.violations(TICK.load_automations(self.root)[0]))
         self.assertEqual(self.ticks()[0]["status"], "violation")
 
-    def test_enabled_with_first_open_checked_is_allowed(self):
+    def test_enabled_with_first_open_checked_is_blocked_without_cost_authorizer(self):
         self.add("fine", enabled="yes", checked="yes")
-        self.assertIsNone(TICK.violations(TICK.load_automations(self.root)[0]))
+        self.assertIn("without a local cost authorizer", TICK.violations(TICK.load_automations(self.root)[0]))
 
     def test_existing_artifact_makes_the_tick_a_noop(self):
         self.add("solo", artifact="done-2026-01-01.md")

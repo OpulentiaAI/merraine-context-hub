@@ -508,8 +508,12 @@ def run_checks(hub: pathlib.Path | None = None) -> CheckResult:
             checked = scalar(fm.get("firstOpenChecked", "no"))
             if enabled == "yes" and checked != "yes":
                 errors.append(f"{rel}: enabled without a checked first open")
+            if enabled == "yes":
+                errors.append(
+                    f"{rel}: enabled has no local cost authorizer — this repository only supports disabled drafts"
+                )
             if "costCeilingUsd" not in fm:
-                warnings.append(f"{rel}: no costCeilingUsd")
+                errors.append(f"{rel}: no costCeilingUsd — a future executor must reject dispatch without one")
             elif not re.match(r"^\d+(\.\d+)?$", fm.get("costCeilingUsd", "")):
                 errors.append(f"{rel}: costCeilingUsd must be a non-negative number")
 

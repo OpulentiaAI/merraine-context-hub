@@ -61,3 +61,12 @@ class ReceiptContractTests(unittest.TestCase):
             receipt = json.loads(output.read_text(encoding="utf-8"))
             self.assertEqual(receipt["deterministicDecision"]["outcome"], "unavailable")
             self.assertEqual(receipt["rules"], {})
+
+    def test_private_request_is_refused_before_a_receipt_is_written(self):
+        unsafe = {**REQUEST, "state": {"email": "person@example.com"}}
+        with self.assertRaisesRegex(ValueError, "email address"):
+            jev_evaluate.assert_public_safe(unsafe, "request")
+
+    def test_private_provider_response_becomes_unavailable_not_persisted(self):
+        with self.assertRaisesRegex(ValueError, "email address"):
+            jev_evaluate.assert_public_safe({"answers": {}, "echo": "person@example.com"}, "response")

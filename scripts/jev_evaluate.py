@@ -35,6 +35,7 @@ import hashlib
 import json
 import os
 import pathlib
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -43,6 +44,12 @@ ENDPOINT = "https://api.typesafe.ai/v1/systemone"
 SCHEMA_VERSION = "1.0"
 TIMEOUT_S = 60
 MAX_BODY = 16 << 20
+PUBLIC_UNSAFE = (
+    ("email address", re.compile(r"(?i)\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b")),
+    ("API key", re.compile(r"\bsk-[A-Za-z0-9]{20,}")),
+    ("bearer token", re.compile(r"\bBearer\s+[A-Za-z0-9\-._~+/]{30,}")),
+    ("private key", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
+)
 
 
 def canonical(request: dict) -> bytes:
@@ -52,6 +59,17 @@ def canonical(request: dict) -> bytes:
 
 def input_hash(request: dict) -> str:
     return "sha256:" + hashlib.sha256(canonical(request)).hexdigest()
+
+
+def assert_public_safe(value: object, label: str) -> None:
+    """Reject public receipt content that looks like a private payload or secret."""
+    try:
+        text = json.dumps(value, sort_keys=True)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"{label} is not JSON-serializable") from exc
+    for kind, pattern in PUBLIC_UNSAFE:
+        if pattern.search(text):
+            raise ValueError(f"{label} contains an {kind}; public receipts require synthetic/redacted inputs")
 
 
 def call(request: dict, key: str) -> dict:
@@ -212,6 +230,12 @@ def main() -> int:
 
     request = json.loads(pathlib.Path(args.request).read_text(encoding="utf-8"))
     rules = json.loads(pathlib.Path(args.rules).read_text(encoding="utf-8")) if args.rules else {}
+    try:
+        assert_public_safe(request, "request")
+        assert_public_safe(rules, "rules")
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 2
 
     if args.offline:
         if not args.response:
@@ -245,7 +269,12 @@ def main() -> int:
             print(f"unavailable (provider failure) -> {out}")
             return 0
 
-    receipt = build_receipt(request, response, args.purpose, rules, args.offline)
+    try:
+        assert_public_safe(response, "response")
+    except ValueError as exc:
+        receipt = unavailable_receipt(request, rules, args.purpose, str(exc))
+    else:
+        receipt = build_receipt(request, response, args.purpose, rules, args.offline)
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")

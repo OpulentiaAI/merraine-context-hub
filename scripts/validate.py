@@ -28,6 +28,7 @@ The checks are callable as a library for tests:
 from __future__ import annotations
 
 import argparse
+import json
 import pathlib
 import re
 import sys
@@ -427,6 +428,30 @@ def redaction_checks(hub: pathlib.Path, errors: list[str]) -> None:
                         f"{f.relative_to(hub)}: looks like it contains {label} "
                         "— secrets are runtime-only and never committed"
                     )
+
+    # Receipts are public evidence, not a private spill directory. Scan active
+    # and historical records recursively because a raw request/response can
+    # otherwise bypass both the markdown-only graph scan and the CI contract.
+    receipt_root = hub / "evidence" / "jev-receipts"
+    if receipt_root.is_dir():
+        for f in sorted(receipt_root.rglob("*.json")):
+            text = f.read_text(encoding="utf-8")
+            for rx, label in patterns:
+                if rx.search(text):
+                    errors.append(f"{f.relative_to(hub)}: looks like it contains {label}")
+            try:
+                receipt = json.loads(text)
+            except json.JSONDecodeError:
+                errors.append(f"{f.relative_to(hub)}: receipt is not valid JSON")
+                continue
+            rel = f.relative_to(receipt_root)
+            if rel.parts[0] == "superseded":
+                if receipt.get("historyStatus") != "superseded_non_reproducible" or receipt.get("evidenceUse") != "prohibited":
+                    errors.append(f"{f.relative_to(hub)}: superseded receipt must be marked prohibited non-evidence")
+            else:
+                for key in ("request", "rules", "response", "inputHash", "deterministicDecision"):
+                    if key not in receipt:
+                        errors.append(f"{f.relative_to(hub)}: active receipt is missing `{key}`")
 
 
 def run_checks(hub: pathlib.Path | None = None) -> CheckResult:

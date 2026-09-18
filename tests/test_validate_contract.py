@@ -59,7 +59,7 @@ class SendSafetyRules(HubCase):
     def test_send_ready_yes_is_an_error(self):
         self.declare_type("gtm.message")
         self.instance("signals/draft.md", "gtm.message", extra="sendReady: yes\n")
-        self.assert_error_contains("sendReady is yes")
+        self.assert_error_contains("sendReady is")
 
     def test_send_ready_no_is_clean(self):
         self.declare_type("gtm.message")
@@ -146,11 +146,10 @@ class CoverageRules(HubCase):
         ))
         self.assert_error_contains("has no source-manifest row")
 
-    def test_connected_sources_without_any_manifest_warn_once(self):
+    def test_connected_sources_without_any_manifest_is_an_error(self):
         self.connector("spear")
         self.connector("notion")
-        warns = [w for w in self.warnings() if "no source-manifest" in w]
-        self.assertEqual(len(warns), 1, f"expected exactly one coverage warning, got {warns}")
+        self.assert_error_contains("no source-manifest")
 
     def test_manifest_row_missing_does_not_cover_is_an_error(self):
         self.connector("spear")
@@ -243,6 +242,131 @@ class ExperimentRules(HubCase):
         # Promotion is a human decision. An automation must never set it.
         self.experiment("state: running\n")
         self.assert_no_error_containing("promotedBy")
+
+
+class EnumFailClosed(HubCase):
+    """An unrecognized enum value must fail closed, never read as a benign one.
+
+    Adversarial review reproduced a suppression bypass: a warm path through a
+    person whose `doNotContact` was `"yes # hostile-value"` passed validation,
+    because the DNC scan compared the normalized scalar to `yes` and found no
+    match. Enum validation closes the whole class, not just this instance.
+    """
+
+    def setUp(self):
+        super().setUp()
+        self.instance("signals/protected.md", "gtm.person", extra="doNotContact: yes\n")
+        self.instance("signals/intro.md", "gtm.person", extra="doNotContact: no\n")
+        self.write("signals/route.md", (
+            "---\ntype: gtm.warm-path\ntldr: t\nstatus: active\nowner: x\n"
+            "updated: 2026-09-18\nsurface: jeremy\nprovenance: p\n"
+            'target: "[[intro]]"\nintroducer: "[[protected]]"\n'
+            'pathKind: former-colleagues\nevidenceUrl: "https://example.invalid/x"\n'
+            "strength: working\nverified: yes\n---\n\n# Route\n"
+        ))
+
+    def test_baseline_bypass_route_is_rejected(self):
+        self.assert_error_contains("doNotContact")
+
+    def test_noncanonical_dnc_value_fails_closed(self):
+        # The exact bypass: quoted value with a trailing comment.
+        self.write("signals/protected.md", (
+            "---\ntype: gtm.person\ntldr: t\nstatus: active\nowner: x\n"
+            "updated: 2026-09-18\nsurface: jeremy\nprovenance: p\n"
+            'doNotContact: "yes # hostile-value"\n---\n\n# P\n'
+        ))
+        errors = self.errors()
+        self.assertTrue(
+            any("not one of" in e and "doNotContact" in e for e in errors),
+            f"an unrecognized doNotContact value must fail closed; got {errors}",
+        )
+        self.assertTrue(
+            any("doNotContact" in e for e in errors),
+            "the suppression bypass must not pass validation",
+        )
+
+    def test_garbage_dnc_value_also_fails_closed(self):
+        self.write("signals/protected.md", (
+            "---\ntype: gtm.person\ntldr: t\nstatus: active\nowner: x\n"
+            "updated: 2026-09-18\nsurface: jeremy\nprovenance: p\n"
+            "doNotContact: maybe\n---\n\n# P\n"
+        ))
+        self.assertTrue(any("doNotContact" in e for e in self.errors()))
+
+    def test_canonical_no_still_allows_a_route(self):
+        self.write("signals/route.md", (
+            "---\ntype: gtm.warm-path\ntldr: t\nstatus: active\nowner: x\n"
+            "updated: 2026-09-18\nsurface: jeremy\nprovenance: p\n"
+            'target: "[[protected]]"\nintroducer: "[[intro]]"\n'
+            'pathKind: former-colleagues\nevidenceUrl: "https://example.invalid/x"\n'
+            "strength: working\nverified: yes\n---\n\n# Route\n"
+        ))
+        self.assert_no_error_containing("doNotContact")
+
+
+class SendReadyScope(HubCase):
+    def setUp(self):
+        super().setUp()
+        self.declare_type("gtm.message")
+
+    def test_send_ready_yes_in_frontmatter_is_an_error(self):
+        self.instance("signals/m.md", "gtm.message", extra="sendReady: yes\n")
+        self.assert_error_contains("sendReady")
+
+    def test_noncanonical_send_ready_value_fails_closed(self):
+        self.instance("signals/m.md", "gtm.message", extra="sendReady: approved\n")
+        self.assert_error_contains("sendReady")
+
+    def test_send_ready_yes_in_prose_is_not_an_error(self):
+        # A document that QUOTES the field in a body code block is not a draft.
+        self.instance("signals/m.md", "gtm.message", extra="sendReady: no\n",
+                      body='\n# Body\n\nExample frontmatter:\n\n```yaml\nsendReady: yes\n```\n')
+        self.assert_no_error_containing("sendReady")
+
+    def test_send_ready_no_is_clean(self):
+        self.instance("signals/m.md", "gtm.message", extra="sendReady: no\n")
+        self.assert_no_error_containing("sendReady")
+
+
+class DuplicateManifestRows(HubCase):
+    """Two rows for one source with the same owner would merge two datasets."""
+
+    def setUp(self):
+        super().setUp()
+        self.connector("apollo")
+
+    def write_manifest(self, rows: str) -> None:
+        self.write("entities/source-manifest.md", (
+            "---\ntype: gtm.source-manifest\ntldr: t\nstatus: active\nowner: x\n"
+            "updated: 2026-09-18\nsurface: jeremy\nprovenance: p\n---\n\n"
+            f"sources:\n{rows}"
+        ))
+
+    def test_duplicate_source_with_same_owner_is_an_error(self):
+        self.write_manifest(
+            "  - sourceId: apollo\n    kind: mcp\n    reach: readable\n    authorization: live\n"
+            "    state: pending\n    lastObservedAt: 2026-09-18\n    suppressionSurface: no\n"
+            "    covers: c\n    doesNotCover: d\n    privacy: private\n    datasetOwner: same-owner\n"
+            "  - sourceId: apollo\n    kind: mcp\n    reach: readable\n    authorization: live\n"
+            "    state: pending\n    lastObservedAt: 2026-09-18\n    suppressionSurface: no\n"
+            "    covers: c\n    doesNotCover: d\n    privacy: private\n    datasetOwner: same-owner\n"
+        )
+        errors = self.errors()
+        self.assertTrue(
+            any("duplicate sourceId" in e for e in errors),
+            f"duplicate source ids must be an error; got {errors}",
+        )
+
+    def test_duplicate_source_with_distinct_owners_is_an_error(self):
+        self.write_manifest(
+            "  - sourceId: apollo\n    kind: mcp\n    reach: readable\n    authorization: live\n"
+            "    state: pending\n    lastObservedAt: 2026-09-18\n    suppressionSurface: no\n"
+            "    covers: c\n    doesNotCover: d\n    privacy: private\n    datasetOwner: owner-one\n"
+            "  - sourceId: apollo\n    kind: mcp\n    reach: readable\n    authorization: live\n"
+            "    state: pending\n    lastObservedAt: 2026-09-18\n    suppressionSurface: no\n"
+            "    covers: c\n    doesNotCover: d\n    privacy: private\n    datasetOwner: owner-two\n"
+        )
+        self.assert_error_contains("duplicate sourceId")
 
 
 if __name__ == "__main__":

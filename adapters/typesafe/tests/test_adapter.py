@@ -15,8 +15,8 @@ from adapters.typesafe.client import (  # noqa: E402
 )
 from adapters.typesafe.constraints import (  # noqa: E402
     Budget,
-    DEFAULT_MAX_CALLS,
-    DEFAULT_MAX_LATENCY_MS,
+    HARD_MAX_CALLS,
+    HARD_MAX_LATENCY_MS,
     decide_noul,
 )
 from adapters.typesafe.questions import noul  # noqa: E402
@@ -32,8 +32,14 @@ def response_transport(status=200, payload=None):
 class TypeSafeAdapterTests(unittest.TestCase):
     def test_default_budget_is_one_batched_call_with_two_second_ceiling(self):
         budget = Budget()
-        self.assertEqual(budget.max_calls, DEFAULT_MAX_CALLS)
-        self.assertEqual(budget.max_latency_ms, DEFAULT_MAX_LATENCY_MS)
+        self.assertEqual(budget.max_calls, HARD_MAX_CALLS)
+        self.assertEqual(budget.max_latency_ms, HARD_MAX_LATENCY_MS)
+
+    def test_caller_cannot_raise_the_policy_budget_ceiling(self):
+        with self.assertRaisesRegex(ValueError, "cannot be raised"):
+            Budget(max_calls=HARD_MAX_CALLS + 1)
+        with self.assertRaisesRegex(ValueError, "cannot be raised"):
+            Budget(max_latency_ms=HARD_MAX_LATENCY_MS + 1)
 
     def test_unavailable_path_without_key(self):
         old_key = os.environ.pop("TYPESAFE_API_KEY", None)

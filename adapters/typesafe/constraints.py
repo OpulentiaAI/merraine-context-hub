@@ -7,28 +7,67 @@ from typing import Literal
 
 
 Outcome = Literal["pass", "fail", "review", "abstain", "unavailable", "refused"]
-DEFAULT_MAX_CALLS = 1
-DEFAULT_MAX_LATENCY_MS = 2_000
+
+# The ceiling that bounds spend is policy, so it lives here and not at the call
+# site. A caller may ask for a TIGHTER budget; it may not raise the cap.
+HARD_MAX_CALLS = 1
+HARD_MAX_LATENCY_MS = 2_000
 
 
-@dataclass
 class Budget:
-    """Bound a single run; callers must share one instance across requests."""
+    """Bound a single run. The ceiling is a hard cap, not a default.
 
-    max_calls: int = DEFAULT_MAX_CALLS
-    max_latency_ms: int = DEFAULT_MAX_LATENCY_MS
-    calls: int = 0
-    latency_ms: int = 0
+    A budget a caller can silently widen is not a budget. The limits are
+    read-only after construction, and construction rejects any value above the
+    module-level cap, so the evaluated fail-closed ceiling cannot be raised
+    from a call site. Lowering it is allowed, including to zero for a caller
+    that wants to prove refusal.
+    """
+
+    __slots__ = ("_max_calls", "_max_latency_ms", "_calls", "_latency_ms")
+
+    def __init__(self, max_calls: int = HARD_MAX_CALLS,
+                 max_latency_ms: int = HARD_MAX_LATENCY_MS) -> None:
+        if not isinstance(max_calls, int) or not 0 <= max_calls <= HARD_MAX_CALLS:
+            raise ValueError(
+                f"max_calls must be an int between 0 and {HARD_MAX_CALLS}; "
+                f"got {max_calls!r}. The ceiling is policy and cannot be raised."
+            )
+        if not isinstance(max_latency_ms, int) or not 0 <= max_latency_ms <= HARD_MAX_LATENCY_MS:
+            raise ValueError(
+                f"max_latency_ms must be an int between 0 and {HARD_MAX_LATENCY_MS}; "
+                f"got {max_latency_ms!r}. The ceiling is policy and cannot be raised."
+            )
+        self._max_calls = max_calls
+        self._max_latency_ms = max_latency_ms
+        self._calls = 0
+        self._latency_ms = 0
+
+    @property
+    def max_calls(self) -> int:
+        return self._max_calls
+
+    @property
+    def max_latency_ms(self) -> int:
+        return self._max_latency_ms
+
+    @property
+    def calls(self) -> int:
+        return self._calls
+
+    @property
+    def latency_ms(self) -> int:
+        return self._latency_ms
 
     def reserve_call(self) -> bool:
-        if self.calls >= self.max_calls or self.latency_ms >= self.max_latency_ms:
+        if self._calls >= self._max_calls or self._latency_ms >= self._max_latency_ms:
             return False
-        self.calls += 1
+        self._calls += 1
         return True
 
     def record_latency(self, elapsed_ms: int) -> bool:
-        self.latency_ms += max(0, elapsed_ms)
-        return self.latency_ms <= self.max_latency_ms
+        self._latency_ms += max(0, elapsed_ms)
+        return self._latency_ms <= self._max_latency_ms
 
 
 @dataclass(frozen=True)

@@ -106,10 +106,10 @@ non-2xx statuses carry the provider's error body; read it, do not retry blindly.
   evaluator.
 - Never copy question sets, thresholds, or decision records out of a private
   repository. Author your own.
-- Receipts live under `evidence/jev-receipts/` and carry the input hash, the
-  question ids and types, the answers, and the deterministic outcome. They carry
-  **no keys and no payload prose** — a receipt is a pointer and a result, not a
-  copy of the data.
+- Receipts live under `evidence/jev-receipts/` and carry a **synthetic or redacted**
+  request, deterministic rules, provider response, input hash, question ids and
+  types, answers, and deterministic outcome. They carry **no keys and no private
+  payload prose** — a public receipt is reproducible because its input is safe to publish.
 
 ## Receipt shape
 
@@ -121,15 +121,20 @@ non-2xx statuses carry the provider's error body; read it, do not retry blindly.
   "inputHash": "sha256:…",
   "inputSummary": { "questionIds": ["…"], "questionTypes": { "…": "noul" },
                     "stateKeys": ["…"], "questionSetVersion": "…" },
+  "request": { "synthetic": "public-safe input" },
+  "rules": { "is_supported": { "threshold": 0.8, "direction": "at_least" } },
+  "response": { "synthetic": "provider response" },
   "answers": [ { "question_id": "…", "type": "noul", "value": 0.9 } ],
   "deterministicDecision": { "outcome": "pass", "components": [ … ] },
   "usage": { "input_tokens": 0, "output_tokens": 0 }
 }
 ```
 
-`inputHash` makes the input reproducible. `answers` records what was stated.
-`deterministicDecision` records what code did about it. A receipt missing either
-half is not a receipt.
+`request` plus `inputHash` makes the input reproducible. `rules` and `response`
+make the deterministic result reviewable. `answers` records what was stated.
+`deterministicDecision` records what code did about it. An unavailable receipt
+uses `response: null`, preserves the request and rules, and records `unavailable`;
+a receipt missing any of those contract fields is not a receipt.
 
 ## Negative controls
 

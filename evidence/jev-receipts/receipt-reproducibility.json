@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Choose a reproducible public-safe Jev receipt design for hub integration review.",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "offline": false,
+  "model": "jev-1.13.0",
+  "inputHash": "sha256:ec5489808ef84a439c173ddab21ee9ff2d3331368909fc567425147d5392286e",
+  "inputSummary": {
+    "stateKeys": [
+      "constraint",
+      "domain",
+      "option_a",
+      "option_b"
+    ],
+    "questionIds": [
+      "authority_preserved",
+      "reproducible_receipt_design"
+    ],
+    "questionTypes": {
+      "reproducible_receipt_design": "choice",
+      "authority_preserved": "noul"
+    },
+    "questionSetVersion": "merraine.integration.receipt-reproducibility.v1"
+  },
+  "request": {
+    "questionSetVersion": "merraine.integration.receipt-reproducibility.v1",
+    "state": {
+      "domain": "synthetic public context-hub validation",
+      "option_a": "Store only inputHash and a summary, then claim the evaluation was checkable.",
+      "option_b": "Store a synthetic request, deterministic rules, provider response, and the hash; preserve an unavailable receipt if parsing fails.",
+      "constraint": "The design must preserve no-send, human authorization, suppression, and a deterministic fallback."
+    },
+    "questions": {
+      "reproducible_receipt_design": {
+        "type": "choice",
+        "instructions": "Which synthetic receipt design makes an evidence-quality judgment auditable without granting authority: option_a or option_b?",
+        "criteria": {
+          "option_a": "Hash-only record that cannot reproduce the request or rule inputs.",
+          "option_b": "Synthetic request, deterministic rules, provider response, input hash, and explicit unavailable outcome on protocol failure."
+        }
+      },
+      "authority_preserved": {
+        "type": "noul",
+        "instructions": "Does option_b preserve the rule that a typed model judgment cannot authorize a send, override suppression, or replace named-human approval?",
+        "criteria": {
+          "true": "The receipt records evidence quality only and code plus a named human retain all authority.",
+          "false": "The receipt or model can authorize contact, override suppression, or decide an irreversible action."
+        }
+      }
+    },
+    "model": "jev-latest"
+  },
+  "rules": {
+    "authority_preserved": {
+      "threshold": 0.8,
+      "direction": "at_least",
+      "review_band": [
+        0.4,
+        0.6
+      ]
+    },
+    "reproducible_receipt_design": {
+      "threshold": 0.5,
+      "direction": "at_least"
+    }
+  },
+  "response": {
+    "model": "jev-1.13.0",
+    "answers": {
+      "authority_preserved": {
+        "type": "noul",
+        "noul": 0.82
+      },
+      "reproducible_receipt_design": {
+        "type": "choice",
+        "choice": "option_b",
+        "confidence": 0.99,
+        "probabilities": {
+          "option_a": 0.0,
+          "option_b": 1.0
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 530,
+      "output_tokens": 59
+    }
+  },
+  "answers": [
+    {
+      "question_id": "authority_preserved",
+      "type": "noul",
+      "value": 0.82
+    },
+    {
+      "question_id": "reproducible_receipt_design",
+      "type": "choice",
+      "value": "option_b",
+      "probabilities": {
+        "option_a": 0.0,
+        "option_b": 1.0
+      },
+      "confidence": 0.99
+    }
+  ],
+  "deterministicDecision": {
+    "rule": "threshold gates, safe side; abstention and unavailability are outcomes",
+    "outcome": "pass",
+    "components": [
+      {
+        "question_id": "authority_preserved",
+        "threshold": 0.8,
+        "direction": "at_least",
+        "value": 0.82,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "reproducible_receipt_design",
+        "threshold": 0.5,
+        "direction": "at_least",
+        "value": "option_b",
+        "gate_result": "recorded",
+        "reason": "composite input; combined by the published weights in code"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 530,
+    "output_tokens": 59
+  }
+}

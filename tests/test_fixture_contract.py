@@ -93,14 +93,9 @@ class FixtureContract(unittest.TestCase):
 
 
 class CoverageGuardrail(unittest.TestCase):
-    """The completeness rule must stay loud even without a manifest.
+    """Connected sources without a manifest are an error, not a reminder."""
 
-    A Jev evaluation of this design put its adoptability at 0.77 and its
-    ability to prevent a silently deleted manifest at 0.70, so the warning is
-    test-enforced rather than left to a reviewer to notice.
-    """
-
-    def test_repo_warns_when_connected_sources_lack_a_manifest(self):
+    def test_repo_has_a_manifest_for_every_connected_source(self):
         result = VALIDATE.run_checks(hub=REPO)
         connectors = list((REPO / "entities" / "connectors").glob("*.md"))
         connected = [
@@ -108,11 +103,11 @@ class CoverageGuardrail(unittest.TestCase):
             if VALIDATE.scalar(VALIDATE.parse_frontmatter(p.read_text(encoding="utf-8")).get("connected", "")) == "yes"
         ]
         manifests = list((REPO / "entities").glob("*source-manifest*.md"))
-        if connected and not manifests:
-            self.assertTrue(
-                any("no source-manifest" in w for w in result.warnings),
-                "connected sources exist with no manifest — the coverage warning must fire",
-            )
+        self.assertTrue(manifests, "connected sources require a source manifest")
+        self.assertFalse(
+            any("no source-manifest" in e for e in result.errors),
+            f"every connected source must have a manifest row; got {result.errors}",
+        )
 
     def test_repo_build_is_clean(self):
         result = VALIDATE.run_checks(hub=REPO)

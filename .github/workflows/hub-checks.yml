@@ -63,7 +63,7 @@ jobs:
           bad = []
           for p in files:
               r = json.loads(p.read_text())
-              for key in ("schemaVersion", "purpose", "inputHash", "answers", "deterministicDecision"):
+              for key in ("schemaVersion", "purpose", "inputHash", "request", "rules", "response", "answers", "deterministicDecision"):
                   if key not in r:
                       bad.append(f"{p.name}: missing `{key}`")
               dd = r.get("deterministicDecision") or {}
@@ -71,6 +71,12 @@ jobs:
                   bad.append(f"{p.name}: deterministicDecision has no outcome")
               if r.get("answers") and not r.get("inputHash"):
                   bad.append(f"{p.name}: answers without an input hash")
+              if r.get("request") is None or r.get("rules") is None:
+                  bad.append(f"{p.name}: request and rules must be reproducible")
+              elif "sha256:" + __import__("hashlib").sha256(
+                  json.dumps(r["request"], sort_keys=True, separators=(",", ":")).encode()
+              ).hexdigest() != r["inputHash"]:
+                  bad.append(f"{p.name}: inputHash does not match request")
               blob = p.read_text()
               for secret in ("TYPESAFE_API_KEY=", "OPENROUTER_API_KEY=", "Bearer "):
                   if secret in blob:

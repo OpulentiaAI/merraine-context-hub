@@ -63,7 +63,10 @@ def call(request: dict, key: str) -> dict:
         headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
     )
     with urllib.request.urlopen(req, timeout=TIMEOUT_S) as resp:
-        return json.loads(resp.read(MAX_BODY).decode("utf-8"))
+        decoded = json.loads(resp.read(MAX_BODY).decode("utf-8"))
+    if not isinstance(decoded, dict) or not isinstance(decoded.get("answers"), dict):
+        raise ValueError("provider response lacks an answers map")
+    return decoded
 
 
 def extract_answers(response: dict) -> list[dict]:
@@ -139,6 +142,40 @@ def deterministic_decision(answers: list[dict], rules: dict) -> dict:
             "outcome": outcome, "components": applied}
 
 
+def input_summary(request: dict) -> dict:
+    return {
+        "stateKeys": sorted(request.get("state", {}).keys())
+        if isinstance(request.get("state"), dict) else ["<scalar>"],
+        "questionIds": sorted((request.get("questions") or {}).keys()),
+        "questionTypes": {k: v.get("type") for k, v in (request.get("questions") or {}).items()},
+        "questionSetVersion": request.get("questionSetVersion", "unversioned"),
+    }
+
+
+def unavailable_receipt(request: dict, rules: dict, purpose: str, reason: str) -> dict:
+    """Record an unavailable call without losing its reproducible inputs."""
+    return {
+        "schemaVersion": SCHEMA_VERSION,
+        "purpose": purpose,
+        "endpoint": ENDPOINT,
+        "offline": False,
+        "model": None,
+        "inputHash": input_hash(request),
+        "inputSummary": input_summary(request),
+        "request": request,
+        "rules": rules,
+        "response": None,
+        "answers": [],
+        "deterministicDecision": {
+            "rule": "provider unavailable; deterministic rubric answers instead",
+            "outcome": "unavailable",
+            "components": [],
+            "reason": reason,
+        },
+        "usage": None,
+    }
+
+
 def build_receipt(request: dict, response: dict, purpose: str,
                   rules: dict, offline: bool) -> dict:
     answers = extract_answers(response)
@@ -149,13 +186,12 @@ def build_receipt(request: dict, response: dict, purpose: str,
         "offline": offline,
         "model": response.get("model"),
         "inputHash": input_hash(request),
-        "inputSummary": {
-            "stateKeys": sorted(request.get("state", {}).keys())
-            if isinstance(request.get("state"), dict) else ["<scalar>"],
-            "questionIds": sorted((request.get("questions") or {}).keys()),
-            "questionTypes": {k: v.get("type") for k, v in (request.get("questions") or {}).items()},
-            "questionSetVersion": request.get("questionSetVersion", "unversioned"),
-        },
+        "inputSummary": input_summary(request),
+        # The public hub only accepts synthetic/redacted requests. Keeping all
+        # three inputs makes the hash and deterministic outcome reproducible.
+        "request": request,
+        "rules": rules,
+        "response": response,
         "answers": answers,
         "deterministicDecision": deterministic_decision(answers, rules),
         "usage": response.get("usage"),
@@ -186,18 +222,10 @@ def main() -> int:
         key = os.environ.get("TYPESAFE_API_KEY", "")
         if not key:
             # Unavailable is a recorded outcome, not a crash and not a silent skip.
-            receipt = {
-                "schemaVersion": SCHEMA_VERSION, "purpose": args.purpose,
-                "endpoint": ENDPOINT, "offline": False, "model": None,
-                "inputHash": input_hash(request),
-                "inputSummary": {"questionIds": sorted((request.get("questions") or {}).keys()),
-                                 "questionTypes": {k: v.get("type") for k, v in (request.get("questions") or {}).items()}},
-                "answers": [],
-                "deterministicDecision": {"rule": "no provider", "outcome": "unavailable",
-                                          "components": [],
-                                          "reason": "TYPESAFE_API_KEY not bound; deterministic rubric answers instead"},
-                "usage": None,
-            }
+            receipt = unavailable_receipt(
+                request, rules, args.purpose,
+                "TYPESAFE_API_KEY not bound; deterministic rubric answers instead",
+            )
             out = pathlib.Path(args.out)
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
@@ -205,17 +233,12 @@ def main() -> int:
             return 0
         try:
             response = call(request, key)
-        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as exc:
-            receipt = {
-                "schemaVersion": SCHEMA_VERSION, "purpose": args.purpose, "endpoint": ENDPOINT,
-                "offline": False, "model": None, "inputHash": input_hash(request),
-                "inputSummary": {"questionIds": sorted((request.get("questions") or {}).keys())},
-                "answers": [],
-                "deterministicDecision": {"rule": "provider failure", "outcome": "unavailable",
-                                          "components": [],
-                                          "reason": f"provider call failed: {type(exc).__name__}; deterministic rubric answers instead"},
-                "usage": None,
-            }
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError,
+                UnicodeDecodeError, json.JSONDecodeError, TypeError, ValueError, KeyError) as exc:
+            receipt = unavailable_receipt(
+                request, rules, args.purpose,
+                f"provider call failed: {type(exc).__name__}; deterministic rubric answers instead",
+            )
             out = pathlib.Path(args.out)
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")

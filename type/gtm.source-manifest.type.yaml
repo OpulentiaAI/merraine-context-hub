@@ -17,11 +17,14 @@ fields:
   #: How the source is reached. Not a judgement about whether it is connected.
   kind?: [mcp, native, composio, oauth, api, browser, cli, export, human, local-import]
   #: What we can actually read, independent of what a registry displays.
-  #: readable    - tokens or bytes are in hand now.
-  #: refreshable - stored refresh token; one authorized run restores access.
-  #: discovered  - tools enumerated, no tokens. Not readable yet.
-  #: none        - registered only. No reach at all.
-  reach?: [readable, refreshable, discovered, none]
+  #: readable         - tokens or bytes are in hand now.
+  #: refreshable      - stored refresh token; one authorized run restores access.
+  #: discovered       - tools enumerated, no tokens. Not readable yet.
+  #: captured-artifact - we hold a captured export rather than live access. The
+  #:                     artifact is readable; the source behind it is not. This
+  #:                     is the honest state for an import or a delivered export.
+  #: none             - registered only. No reach at all.
+  reach?: [readable, refreshable, discovered, captured-artifact, none]
   #: live     - authorized to read right now.
   #: past-use - we used it before; that is history, not current permission.
   #: none     - never authorized, or authorization lapsed.

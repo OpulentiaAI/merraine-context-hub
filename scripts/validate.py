@@ -123,6 +123,16 @@ def load_types(hub: pathlib.Path | None = None) -> dict[str, dict]:
         # separately so the difference is explicit rather than implied.
         optional = set(re.findall(r"^  ([a-zA-Z][a-zA-Z0-9]*)\?:", body, re.M))
         required = {f for f in fields if f not in optional}
+        # Bare enum declarations: `field: [a, b, c]`. A value outside the set is
+        # an error, never a silently-ignored unknown — an unrecognized
+        # `doNotContact` value must not read as "not do-not-contact".
+        enums: dict[str, set[str]] = {}
+        for fname, values in re.findall(r"^  ([a-zA-Z][a-zA-Z0-9]*)\??:\s*\[([^\]]+)\]", body, re.M):
+            if "::" in values:
+                continue
+            enum = {v.strip().strip('"').strip("'").lower() for v in values.split(",") if v.strip()}
+            if enum:
+                enums[fname] = enum
         extends = re.findall(r"^extends:\s*\[([^\]]*)\]", body, re.M)
         parents = []
         if extends:
@@ -131,7 +141,8 @@ def load_types(hub: pathlib.Path | None = None) -> dict[str, dict]:
             blk = re.search(r"^extends:\n((?:\s+- .*\n)+)", body, re.M)
             if blk:
                 parents = [l.strip("- ").strip() for l in blk.group(1).splitlines()]
-        types[name] = {"fields": set(fields), "required": required, "parents": parents}
+        types[name] = {"fields": set(fields), "required": required,
+                       "enums": enums, "parents": parents}
     return types
 
 
@@ -191,23 +202,34 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
             if scalar(fm.get("connected", "")) == "yes":
                 connectors.append((fm.get("slug") or p.stem, p))
 
-    manifest_rows: dict[str, dict[str, str]] = {}
+    manifest_rows_list: list[dict[str, str]] = []
     manifest_files = sorted((root / "entities").glob("*source-manifest*.md"))
-    manifest_files += sorted(root.glob("**/source-manifest.md")) if root != HUB else []
     for p in sorted(set(manifest_files)):
-        for line in p.read_text(encoding="utf-8").splitlines():
-            if line.startswith("  - sourceId:"):
-                pass
-        # Rows are declared as a list of maps; parse with the shallow reader per
-        # row so a missing field is visible rather than defaulted.
-        for m in re.finditer(r"^  - sourceId:\s*(.+)$", p.read_text(encoding="utf-8"), re.M):
-            rowsrc = p.read_text(encoding="utf-8")[m.end():]
-            nb = re.match(r"^  - sourceId:", rowsrc, re.M)
-            body = rowsrc[: nb.start()] if nb else rowsrc
-            row: dict[str, str] = {"sourceId": scalar(m.group(1))}
-            for k, v in re.findall(r"^\s{4}([a-zA-Z]+):\s*(.+)$", body, re.M):
+        text = p.read_text(encoding="utf-8")
+        # Rows are declared as a list of maps. Split on the row marker rather
+        # than scanning offsets: `\s` matches newlines, so an indentation-based
+        # scan can run across row boundaries and silently misparse a row.
+        for block in re.split(r"^  - sourceId:", text, flags=re.M)[1:]:
+            first, _, rest = block.partition("\n")
+            row: dict[str, str] = {"sourceId": scalar(first.strip())}
+            for k, v in re.findall(r"^[ \t]+([A-Za-z][A-Za-z0-9]*):[ \t]*(.+)$", rest, re.M):
                 row[k] = v.strip().strip('"')
-            manifest_rows[row["sourceId"]] = row
+            manifest_rows_list.append(row)
+
+    # Keep a list, not a dict: keying by sourceId silently overwrites a duplicate
+    # row, which would make the separation checks below vacuous.
+    manifest_rows = {r["sourceId"]: r for r in manifest_rows_list} if manifest_rows_list else {}
+    if manifest_rows_list:
+        seen_ids: dict[str, int] = {}
+        for r in manifest_rows_list:
+            seen_ids[r["sourceId"]] = seen_ids.get(r["sourceId"], 0) + 1
+        for sid, n in seen_ids.items():
+            if n > 1:
+                errors.append(
+                    f"source-manifest `{sid}`: duplicate sourceId across {n} rows — "
+                    "encode the dataset owner in a distinct stable sourceId so rows "
+                    "cannot overwrite or merge different people's data"
+                )
 
     if manifest_rows:
         ROW_REQUIRED = ("sourceId", "kind", "reach", "authorization", "state",
@@ -219,20 +241,6 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
                     errors.append(
                         f"source-manifest `{sid}`: row is missing `{field}`"
                     )
-        # Identity separation: two rows for the same source must name different
-        # dataset owners. One count covering two people is how a merged dataset
-        # starts, and a merged dataset cannot be separated again.
-        by_source: dict[str, list[str]] = {}
-        for sid, row in manifest_rows.items():
-            owner = (row.get("datasetOwner") or "").strip()
-            by_source.setdefault(sid, []).append(owner)
-        for sid, owners in by_source.items():
-            dupes = [o for o in owners if owners.count(o) > 1]
-            if dupes:
-                errors.append(
-                    f"source-manifest `{sid}`: two rows share a datasetOwner "
-                    f"(`{dupes[0]}`); different people's data must stay separate"
-                )
         for slug, path in connectors:
             if slug not in manifest_rows:
                 errors.append(
@@ -253,7 +261,7 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
                     f"source-manifest `{sid}`: doesNotCover is required — the gap is the important half"
                 )
     elif connectors:
-        warnings.append(
+        errors.append(
             f"coverage: {len(connectors)} connected source(s) and no source-manifest — "
             "completeness is manifest-based; add rows (see docs/completeness-and-source-coverage.md)"
         )
@@ -458,9 +466,13 @@ def run_checks(hub: pathlib.Path | None = None) -> CheckResult:
             if target and target not in known:
                 errors.append(f"{rel}: dangling link [[{target}]]")
 
-        # send safety
-        if re.search(r"^sendReady:\s*[\"']?yes", text, re.M):
-            errors.append(f"{rel}: sendReady is yes — nothing in the hub may ship pre-approved")
+        # send safety. Scoped to frontmatter: prose that discusses the field, or a
+        # documentation code block quoting it, is not a pre-approved draft. Any
+        # value other than `no` fails closed, including an unrecognized one.
+        if "sendReady" in fm and scalar(fm.get("sendReady", "")) != "no":
+            errors.append(
+                f"{rel}: sendReady is {fm.get('sendReady')} — nothing in the hub may ship pre-approved"
+            )
 
         if t == "gtm.automation":
             if "```text" not in text:
@@ -484,11 +496,13 @@ def run_checks(hub: pathlib.Path | None = None) -> CheckResult:
             # undeclared fields become engine diagnostics at mount time
             declared = set(BASE_FIELDS) | {"type", "status", "owner", "updated", "provenance"}
             required: set[str] = set()
+            enums: dict[str, set[str]] = {}
             cur, seen = t, set()
             while cur in types and cur not in seen:
                 seen.add(cur)
                 declared |= types[cur]["fields"]
                 required |= types[cur]["required"]
+                enums.update({k: v for k, v in types[cur].get("enums", {}).items() if k not in enums})
                 parents = [x for x in types[cur]["parents"] if x in types]
                 cur = parents[0] if parents else ""
             for k in fm:
@@ -500,6 +514,20 @@ def run_checks(hub: pathlib.Path | None = None) -> CheckResult:
             for k in sorted(required - BASE_FIELDS):
                 if k not in fm:
                     errors.append(f"{rel}: required field `{k}` is missing on {t}")
+            # An unrecognized enum value fails closed. This is safety-bearing:
+            # a hostile or malformed `doNotContact` value must never be read as
+            # "not do-not-contact", and the same holds for every other enum.
+            for k, allowed in enums.items():
+                if k not in fm or not str(fm.get(k, "")).strip():
+                    continue
+                raw = fm.get(k, "")
+                if raw.startswith("["):
+                    continue  # inline list shorthand; not a bare scalar
+                if scalar(raw) not in allowed:
+                    errors.append(
+                        f"{rel}: `{k}` is `{raw}` on {t}, which is not one of "
+                        f"{sorted(allowed)} — an unrecognized value fails closed"
+                    )
 
     cross_checks(root, errors, warnings)
     redaction_checks(root, errors)

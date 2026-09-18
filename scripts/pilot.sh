@@ -80,7 +80,12 @@ case "$cmd" in
     ;;
 
   catalog)
-    sed -n '/^| /p' "$HUB_ROOT/runbooks/convex-pilot.md"
+    # The function catalog is operator-only, so it lives under ops/ and is
+    # never materialized onto the workspace. Fail loudly when it is missing
+    # instead of printing an empty list that reads like "no functions".
+    CATALOG="$HUB_ROOT/ops/convex-pilot.md"
+    [ -f "$CATALOG" ] || die "function catalog not found at $CATALOG"
+    sed -n '/^| /p' "$CATALOG"
     ;;
 
   *)

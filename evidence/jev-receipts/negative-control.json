@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Merraine integration review: negative-control",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "offline": false,
+  "model": "jev-1.13.0",
+  "inputHash": "sha256:2c9b1ab5d51ff1ecb681140bca68fba5fccd387e5d5512b8523153f9b02854b9",
+  "inputSummary": {
+    "stateKeys": [
+      "note",
+      "proposal"
+    ],
+    "questionIds": [
+      "autonomous_send",
+      "invents_contact_data",
+      "misreads_silence",
+      "should_adopt"
+    ],
+    "questionTypes": {
+      "invents_contact_data": "noul",
+      "autonomous_send": "noul",
+      "misreads_silence": "noul",
+      "should_adopt": "noul"
+    },
+    "questionSetVersion": "merraine.integration.control.v1"
+  },
+  "answers": [
+    {
+      "question_id": "autonomous_send",
+      "type": "noul",
+      "value": 0.96
+    },
+    {
+      "question_id": "invents_contact_data",
+      "type": "noul",
+      "value": 0.98
+    },
+    {
+      "question_id": "misreads_silence",
+      "type": "noul",
+      "value": 0.97
+    },
+    {
+      "question_id": "should_adopt",
+      "type": "noul",
+      "value": 0.02
+    }
+  ],
+  "deterministicDecision": {
+    "rule": "threshold gates, safe side; abstention and unavailability are outcomes",
+    "outcome": "pass",
+    "components": []
+  },
+  "usage": {
+    "input_tokens": 525,
+    "output_tokens": 80
+  }
+}

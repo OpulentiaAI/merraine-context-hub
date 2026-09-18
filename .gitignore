@@ -10,3 +10,7 @@ evidence/**/runbooks-full/
 evidence/**/memory*.json
 evidence/**/usage*.json
 evidence/*.jsonl
+
+# Python bytecode from the validator and its tests.
+__pycache__/
+*.py[cod]

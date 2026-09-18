@@ -4,17 +4,26 @@ validate.py — check the hub's integrity before anyone points Opulent at it.
 
 Checks
 ------
-1. Every instance file has frontmatter with a `type:` that exists in types/.
+1. Every instance file has frontmatter with a `type:` that exists in type/.
 2. Every required field declared on a type (and its parents) is present.
 3. Every [[wikilink]] resolves to a real file in the hub.
 4. Every gtm.automation has a fenced Prompt block containing a CAUTION line.
 5. No automation is `enabled: yes` without `firstOpenChecked: yes`.
 6. No file claims `sendReady: yes`.
+7. Every terminal gtm.extraction-run names its gap or its blocker.
+8. A resolved gtm.experiment carries the value and sample size it rests on.
+9. When a source manifest exists, every connected connector has a row in it.
 
 Also regenerates catalogs/ from what actually exists.
 
     python3 scripts/validate.py            # check
     python3 scripts/validate.py --catalog  # check + rewrite catalogs
+
+The checks are callable as a library for tests:
+
+    from validate import run_checks
+    result = run_checks(hub=pathlib.Path("/tmp/fixture-hub"))
+    result.errors, result.warnings, result.by_type
 """
 from __future__ import annotations
 
@@ -22,11 +31,12 @@ import argparse
 import pathlib
 import re
 import sys
+from dataclasses import dataclass, field
 
 HUB = pathlib.Path(__file__).resolve().parent.parent
 CONTENT_DIRS = ["entities", "entities/connectors", "signals", "pipelines", "automations",
                 "workflows", "extractions", "runbooks", "catalogs", "research",
-                "skills", "inject", "playbooks"]
+                "skills", "inject", "playbooks", "fixtures/good"]
 # Root pages Jeremy or his agent will read. Not typed as gtm.* but they are surface.
 SURFACE_ROOT_FILES = ["start here.md", "ONBOARDING.md", "README.md", "AGENTS.md"]
 FORBIDDEN_ON_JEREMY_SURFACE = [
@@ -71,6 +81,17 @@ FM = re.compile(r"^---\n(.*?)\n---\n", re.S)
 WIKILINK = re.compile(r"\[\[([^\]|:]+?)(?:::[^\]]+)?\]\]")
 
 
+@dataclass
+class CheckResult:
+    """Everything one run of the checks found, plus what it looked at."""
+
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+    by_type: dict[str, list[pathlib.Path]] = field(default_factory=dict)
+    files_checked: int = 0
+    types_loaded: int = 0
+
+
 def parse_frontmatter(text: str) -> dict[str, str]:
     """Deliberately shallow: we only need top-level scalar keys."""
     m = FM.match(text)
@@ -85,13 +106,23 @@ def parse_frontmatter(text: str) -> dict[str, str]:
     return out
 
 
-def load_types() -> dict[str, dict]:
+def scalar(value: str) -> str:
+    """Normalize a frontmatter scalar: unquoted, trimmed, lowercased."""
+    return value.strip().strip('"').strip("'").strip().lower()
+
+
+def load_types(hub: pathlib.Path | None = None) -> dict[str, dict]:
+    root = hub or HUB
     types: dict[str, dict] = {}
-    tdir = HUB / "type"
+    tdir = root / "type"
     for p in tdir.glob("*.type.yaml"):
         name = p.name[: -len(".type.yaml")]
         body = p.read_text(encoding="utf-8")
         fields = re.findall(r"^  ([a-zA-Z][a-zA-Z0-9]*)\??:", body, re.M)
+        # A field declared without `?` is required. Read the optional ones
+        # separately so the difference is explicit rather than implied.
+        optional = set(re.findall(r"^  ([a-zA-Z][a-zA-Z0-9]*)\?:", body, re.M))
+        required = {f for f in fields if f not in optional}
         extends = re.findall(r"^extends:\s*\[([^\]]*)\]", body, re.M)
         parents = []
         if extends:
@@ -100,33 +131,35 @@ def load_types() -> dict[str, dict]:
             blk = re.search(r"^extends:\n((?:\s+- .*\n)+)", body, re.M)
             if blk:
                 parents = [l.strip("- ").strip() for l in blk.group(1).splitlines()]
-        types[name] = {"fields": set(fields), "parents": parents}
+        types[name] = {"fields": set(fields), "required": required, "parents": parents}
     return types
 
 
-def all_files() -> list[pathlib.Path]:
+def all_files(hub: pathlib.Path | None = None) -> list[pathlib.Path]:
+    root = hub or HUB
     out = []
     for d in CONTENT_DIRS:
-        p = HUB / d
+        p = root / d
         if p.is_dir():
             out.extend(sorted(p.glob("*.md")))
-    start = HUB / "start here.md"
+    start = root / "start here.md"
     if start.exists():
         out.append(start)
     return out
 
 
-def surface_files() -> list[pathlib.Path]:
-    out = list(all_files())
+def surface_files(hub: pathlib.Path | None = None) -> list[pathlib.Path]:
+    root = hub or HUB
+    out = list(all_files(root))
     for name in SURFACE_ROOT_FILES:
-        p = HUB / name
+        p = root / name
         if p.exists():
             out.append(p)
     return out
 
 
-def surface_violations(path: pathlib.Path, text: str) -> list[str]:
-    rel = path.relative_to(HUB)
+def surface_violations(path: pathlib.Path, text: str, hub: pathlib.Path | None = None) -> list[str]:
+    rel = path.relative_to(hub or HUB)
     if str(rel).startswith("ops/") or "/ops/" in str(rel):
         return []
     if re.search(r"^surface:\s*[\"']?operator", text, re.M):
@@ -138,28 +171,249 @@ def surface_violations(path: pathlib.Path, text: str) -> list[str]:
     return found
 
 
-def stems() -> set[str]:
-    return {p.stem for p in all_files()} | {p.name[:-len(".type.yaml")] for p in (HUB / "type").glob("*.type.yaml")}
+def stems(hub: pathlib.Path | None = None) -> set[str]:
+    root = hub or HUB
+    return {p.stem for p in all_files(root)} | {p.name[:-len(".type.yaml")] for p in (root / "type").glob("*.type.yaml")}
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--catalog", action="store_true")
-    args = ap.parse_args()
+def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> None:
+    """Rules that span more than one file. Each one is a coverage or safety claim."""
+    root = hub or HUB
 
-    types = load_types()
-    files = all_files()
-    known = stems() | {pathlib.Path(n).stem for n in SURFACE_ROOT_FILES}
-    errors: list[str] = []
-    warnings: list[str] = []
-    by_type: dict[str, list[pathlib.Path]] = {}
+    # --- coverage: a connected source must have a manifest row -----------------
+    # Completeness is manifest-based. One extraction speaks for one source only,
+    # so a connected connector with no row is a gap, never an implicit zero.
+    connectors = []
+    cdir = root / "entities" / "connectors"
+    if cdir.is_dir():
+        for p in sorted(cdir.glob("*.md")):
+            fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+            if scalar(fm.get("connected", "")) == "yes":
+                connectors.append((fm.get("slug") or p.stem, p))
 
-    for p in surface_files():
+    manifest_rows: dict[str, dict[str, str]] = {}
+    manifest_files = sorted((root / "entities").glob("*source-manifest*.md"))
+    manifest_files += sorted(root.glob("**/source-manifest.md")) if root != HUB else []
+    for p in sorted(set(manifest_files)):
+        for line in p.read_text(encoding="utf-8").splitlines():
+            if line.startswith("  - sourceId:"):
+                pass
+        # Rows are declared as a list of maps; parse with the shallow reader per
+        # row so a missing field is visible rather than defaulted.
+        for m in re.finditer(r"^  - sourceId:\s*(.+)$", p.read_text(encoding="utf-8"), re.M):
+            rowsrc = p.read_text(encoding="utf-8")[m.end():]
+            nb = re.match(r"^  - sourceId:", rowsrc, re.M)
+            body = rowsrc[: nb.start()] if nb else rowsrc
+            row: dict[str, str] = {"sourceId": scalar(m.group(1))}
+            for k, v in re.findall(r"^\s{4}([a-zA-Z]+):\s*(.+)$", body, re.M):
+                row[k] = v.strip().strip('"')
+            manifest_rows[row["sourceId"]] = row
+
+    if manifest_rows:
+        # Identity separation: two rows for the same source must name different
+        # dataset owners. One count covering two people is how a merged dataset
+        # starts, and a merged dataset cannot be separated again.
+        by_source: dict[str, list[str]] = {}
+        for sid, row in manifest_rows.items():
+            owner = (row.get("datasetOwner") or "").strip()
+            by_source.setdefault(sid, []).append(owner)
+        for sid, owners in by_source.items():
+            dupes = [o for o in owners if owners.count(o) > 1]
+            if dupes:
+                errors.append(
+                    f"source-manifest `{sid}`: two rows share a datasetOwner "
+                    f"(`{dupes[0]}`); different people's data must stay separate"
+                )
+        for slug, path in connectors:
+            if slug not in manifest_rows:
+                errors.append(
+                    f"{path.relative_to(root)}: connected source `{slug}` has no source-manifest row"
+                )
+        for sid, row in manifest_rows.items():
+            state = scalar(row.get("state", ""))
+            if state in ("extracted", "unavailable", "blocked") and not row.get("blockerNote") and state != "extracted":
+                errors.append(
+                    f"source-manifest `{sid}`: state `{state}` requires a blockerNote"
+                )
+            if state == "extracted" and not row.get("lastObservedAt"):
+                errors.append(
+                    f"source-manifest `{sid}`: state `extracted` requires lastObservedAt"
+                )
+            if not row.get("doesNotCover"):
+                errors.append(
+                    f"source-manifest `{sid}`: doesNotCover is required — the gap is the important half"
+                )
+    elif connectors:
+        warnings.append(
+            f"coverage: {len(connectors)} connected source(s) and no source-manifest — "
+            "completeness is manifest-based; add rows (see docs/completeness-and-source-coverage.md)"
+        )
+
+    # --- extraction runs: a terminal outcome must name its gap -----------------
+    for p in sorted((root / "extractions").glob("*.md")) + sorted((root / "runbooks").glob("*.md")):
         text = p.read_text(encoding="utf-8")
-        errors.extend(surface_violations(p, text))
+        fm = parse_frontmatter(text)
+        if fm.get("type") != "gtm.extraction-run":
+            continue
+        outcome = scalar(fm.get("outcome", ""))
+        if outcome in ("partial", "failed", "unavailable"):
+            if not fm.get("missing") and not fm.get("blockerNote"):
+                errors.append(
+                    f"{p.relative_to(root)}: outcome `{outcome}` requires `missing` or `blockerNote`"
+                )
+        if fm.get("artifactRef") and not fm.get("artifactSha256"):
+            errors.append(
+                f"{p.relative_to(root)}: artifactRef without artifactSha256 — an unchecked hash is not proof"
+            )
+        if scalar(fm.get("scope", "")) == "delta" and not fm.get("continuingFrom"):
+            errors.append(
+                f"{p.relative_to(root)}: a delta run requires continuingFrom"
+            )
+
+    # --- warm paths: an unevidenced route cannot be used -----------------------
+    # A path is only as good as the public record behind it. Without a URL it is
+    # a guess, and a guess must never become an introduction.
+    if "gtm.warm-path" in load_types(root):
+        dnc: set[str] = set()
+        pdir = root / "entities"
+        for p in list(pdir.glob("*.md")) + list((root / "research").glob("*.md")) + list((root / "signals").glob("*.md")):
+            fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+            if fm.get("type") == "gtm.person" and scalar(fm.get("doNotContact", "no")) == "yes":
+                dnc.add(p.stem)
+        for d in ("research", "signals", "entities", "playbooks"):
+            for p in sorted((root / d).glob("*.md")):
+                text = p.read_text(encoding="utf-8")
+                fm = parse_frontmatter(text)
+                if fm.get("type") != "gtm.warm-path":
+                    continue
+                if not str(fm.get("evidenceUrl", "")).strip() or "invalid" in str(fm.get("evidenceUrl", "")):
+                    errors.append(
+                        f"{p.relative_to(root)}: warm path needs a resolvable evidenceUrl "
+                        "— an unevidenced route cannot be used"
+                    )
+                intro = str(fm.get("introducer", ""))
+                for stem in dnc:
+                    if stem in intro:
+                        errors.append(
+                            f"{p.relative_to(root)}: warm path introduces through `{stem}`, "
+                            "who is do-not-contact"
+                        )
+
+    # --- awards: a conflict state must be a real answer ------------------------
+    if "gtm.award" in load_types(root):
+        for d in ("research", "signals", "entities"):
+            for p in sorted((root / d).glob("*.md")):
+                fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+                if fm.get("type") != "gtm.award":
+                    continue
+                if scalar(fm.get("conflict", "")) not in ("yes", "no"):
+                    errors.append(
+                        f"{p.relative_to(root)}: award `conflict` must be yes or no, "
+                        f"got `{fm.get('conflict', '')}`"
+                    )
+                if not str(fm.get("publisherUrl", "")).strip():
+                    errors.append(
+                        f"{p.relative_to(root)}: award needs a publisherUrl — "
+                        "a social post is never a source"
+                    )
+
+    # --- search runs: a captured artifact needs a real hash --------------------
+    for d in ("signals", "entities", "research"):
+        for p in sorted((root / d).glob("*.md")):
+            fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+            if fm.get("type") != "gtm.search-run":
+                continue
+            sha = str(fm.get("artifactSha256", "")).strip()
+            if sha and not re.fullmatch(r"[0-9a-fA-F]{64}", sha):
+                errors.append(
+                    f"{p.relative_to(root)}: artifactSha256 is not a SHA-256 digest"
+                )
+            if sha and not str(fm.get("artifactPath", "")).strip():
+                errors.append(
+                    f"{p.relative_to(root)}: artifactSha256 without artifactPath"
+                )
+
+    # --- observations: two rows for the same signal and org are one row --------
+    seen_obs: dict[tuple[str, str], pathlib.Path] = {}
+    for d in ("signals", "research", "entities"):
+        for p in sorted((root / d).glob("*.md")):
+            fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+            if fm.get("type") != "gtm.observation":
+                continue
+            key = (str(fm.get("signal", "")).strip(), str(fm.get("quote", "")).strip().lower())
+            if not key[0]:
+                continue
+            if key in seen_obs:
+                errors.append(
+                    f"{p.relative_to(root)}: duplicate observation — same signal and quote as "
+                    f"{seen_obs[key].relative_to(root)}"
+                )
+            else:
+                seen_obs[key] = p
+        for p in sorted((root / d).glob("*.md")):
+            fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+            if fm.get("type") != "gtm.experiment":
+                continue
+            state = scalar(fm.get("state", ""))
+            if state in ("supported", "refuted"):
+                if fm.get("observedValue") in (None, "") or fm.get("sampleSize") in (None, ""):
+                    errors.append(
+                        f"{p.relative_to(root)}: state `{state}` requires observedValue and sampleSize"
+                    )
+            if state == "insufficient" and fm.get("observedValue") not in (None, ""):
+                errors.append(
+                    f"{p.relative_to(root)}: state `insufficient` must not carry an observedValue — "
+                    "a small sample is a result, not a number to fill in"
+                )
+
+
+def redaction_checks(hub: pathlib.Path, errors: list[str]) -> None:
+    """Nothing secret-shaped belongs in a public repository, ever.
+
+    This is a net, not a proof. It catches the shapes that actually leak:
+    provider key prefixes, bearer headers, private-key blocks, deploy keys.
+    """
+    patterns = [
+        (re.compile(r"\bsk-[A-Za-z0-9]{20,}"), "an API key (sk-…)"),
+        (re.compile(r"\bsk_live_[A-Za-z0-9]{10,}"), "a live secret key"),
+        (re.compile(r"\bghp_[A-Za-z0-9]{20,}"), "a GitHub token (ghp_…)"),
+        (re.compile(r"\bgithub_pat_[A-Za-z0-9_]{20,}"), "a GitHub PAT"),
+        (re.compile(r"\bAKIA[0-9A-Z]{16}\b"), "an AWS access key id"),
+        (re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{10,}"), "a Slack token"),
+        (re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----"), "a private key block"),
+        (re.compile(r"\bBearer\s+[A-Za-z0-9\-._~+/]{30,}"), "a bearer token"),
+        (re.compile(r"CONVEX_DEPLOY_KEY\s*=\s*\S"), "a deploy key assignment"),
+    ]
+    for d in CONTENT_DIRS:
+        p = hub / d
+        if not p.is_dir():
+            continue
+        for f in sorted(p.glob("*.md")):
+            text = f.read_text(encoding="utf-8")
+            for rx, label in patterns:
+                if rx.search(text):
+                    errors.append(
+                        f"{f.relative_to(hub)}: looks like it contains {label} "
+                        "— secrets are runtime-only and never committed"
+                    )
+
+
+def run_checks(hub: pathlib.Path | None = None) -> CheckResult:
+    """Run every check against `hub` (defaults to this repository)."""
+    root = hub or HUB
+    types = load_types(root)
+    files = all_files(root)
+    known = stems(root) | {pathlib.Path(n).stem for n in SURFACE_ROOT_FILES}
+    result = CheckResult(types_loaded=len(types), files_checked=len(files))
+    errors, warnings = result.errors, result.warnings
+    by_type = result.by_type
+
+    for p in surface_files(root):
+        text = p.read_text(encoding="utf-8")
+        errors.extend(surface_violations(p, text, root))
 
     for p in files:
-        rel = p.relative_to(HUB)
+        rel = p.relative_to(root)
         text = p.read_text(encoding="utf-8")
         fm = parse_frontmatter(text)
 
@@ -190,12 +444,14 @@ def main() -> int:
                 errors.append(f"{rel}: automation has no fenced Prompt block")
             elif "CAUTION" not in text:
                 errors.append(f"{rel}: automation prompt has no CAUTION line")
-            enabled = fm.get("enabled", "no").strip('"')
-            checked = fm.get("firstOpenChecked", "no").strip('"')
+            enabled = scalar(fm.get("enabled", "no"))
+            checked = scalar(fm.get("firstOpenChecked", "no"))
             if enabled == "yes" and checked != "yes":
                 errors.append(f"{rel}: enabled without a checked first open")
             if "costCeilingUsd" not in fm:
                 warnings.append(f"{rel}: no costCeilingUsd")
+            elif not re.match(r"^\d+(\.\d+)?$", fm.get("costCeilingUsd", "")):
+                errors.append(f"{rel}: costCeilingUsd must be a non-negative number")
 
         if t and t.startswith("gtm."):
             if "tldr" not in fm:
@@ -204,47 +460,71 @@ def main() -> int:
                 warnings.append(f"{rel}: no provenance")
             # undeclared fields become engine diagnostics at mount time
             declared = set(BASE_FIELDS) | {"type", "status", "owner", "updated", "provenance"}
+            required: set[str] = set()
             cur, seen = t, set()
             while cur in types and cur not in seen:
                 seen.add(cur)
                 declared |= types[cur]["fields"]
+                required |= types[cur]["required"]
                 parents = [x for x in types[cur]["parents"] if x in types]
                 cur = parents[0] if parents else ""
             for k in fm:
                 if k not in declared:
                     warnings.append(f"{rel}: field `{k}` not declared on {t}")
+            # A field declared without `?` is required. Presence is the test:
+            # the frontmatter reader is deliberately shallow, so a block list or
+            # a nested map reads as an empty scalar and must not be called absent.
+            for k in sorted(required - BASE_FIELDS):
+                if k not in fm:
+                    errors.append(f"{rel}: required field `{k}` is missing on {t}")
 
-    print(f"files checked : {len(files)}")
-    print(f"types loaded  : {len(types)}")
+    cross_checks(root, errors, warnings)
+    redaction_checks(root, errors)
+    return result
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--catalog", action="store_true")
+    ap.add_argument("--hub", type=pathlib.Path, default=None,
+                    help="repository root to check (defaults to this repo)")
+    args = ap.parse_args()
+
+    result = run_checks(hub=args.hub)
+    by_type = result.by_type
+
+    print(f"files checked : {result.files_checked}")
+    print(f"types loaded  : {result.types_loaded}")
     for t in sorted(by_type):
         print(f"  {t:20} {len(by_type[t])}")
 
-    if warnings:
-        print(f"\nwarnings ({len(warnings)}):")
-        for w in warnings:
+    if result.warnings:
+        print(f"\nwarnings ({len(result.warnings)}):")
+        for w in result.warnings:
             print(f"  ! {w}")
 
-    if errors:
-        print(f"\nERRORS ({len(errors)}):")
-        for e in errors:
+    if result.errors:
+        print(f"\nERRORS ({len(result.errors)}):")
+        for e in result.errors:
             print(f"  x {e}")
 
     if args.catalog:
         write_catalogs(by_type)
         print("\ncatalogs regenerated")
 
-    print("\nOK" if not errors else "\nFAILED")
-    return 1 if errors else 0
+    print("\nOK" if not result.errors else "\nFAILED")
+    return 1 if result.errors else 0
 
 
-def write_catalogs(by_type: dict[str, list[pathlib.Path]]) -> None:
-    cat = HUB / "catalogs"
+def write_catalogs(by_type: dict[str, list[pathlib.Path]], hub: pathlib.Path | None = None) -> None:
+    root = hub or HUB
+    cat = root / "catalogs"
     cat.mkdir(exist_ok=True)
 
     def table(t: str, cols: tuple[str, ...]) -> str:
         rows = []
         for rel in sorted(by_type.get(t, [])):
-            fm = parse_frontmatter((HUB / rel).read_text(encoding="utf-8"))
+            fm = parse_frontmatter((root / rel).read_text(encoding="utf-8"))
             cells = [f"[[{rel.stem}]]"] + [fm.get(c, "").strip('"') or "-" for c in cols[1:]]
             rows.append("| " + " | ".join(cells) + " |")
         head = "| " + " | ".join(cols) + " |\n|" + "---|" * len(cols)

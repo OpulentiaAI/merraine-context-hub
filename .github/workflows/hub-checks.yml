@@ -37,6 +37,8 @@ jobs:
         run: python3 -m unittest discover -s tests -t . -v
       - name: TypeSafe adapter tests
         run: python3 -m unittest discover -s adapters/typesafe/tests -t . -v
+      - name: Automation loop dry-run
+        run: python3 scripts/hub_tick.py --all
 
   jev-receipts:
     name: jev receipt integrity

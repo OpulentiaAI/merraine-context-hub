@@ -130,8 +130,8 @@ class Baseline(unittest.TestCase):
 
     def test_manifest_type_separates_authorization_from_reach(self):
         body = (REPO / "type" / "gtm.source-manifest.type.yaml").read_text(encoding="utf-8")
-        self.assertIn("authorization:", body)
-        self.assertIn("reach:", body)
+        self.assertRegex(body, r"authorization\??:")
+        self.assertRegex(body, r"reach\??:")
         self.assertIn("past-use", body,
                       "registry state is not permission; past use must be representable")
         self.assertRegex(body, r"datasetOwner\??:",

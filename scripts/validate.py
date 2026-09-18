@@ -210,6 +210,15 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
             manifest_rows[row["sourceId"]] = row
 
     if manifest_rows:
+        ROW_REQUIRED = ("sourceId", "kind", "reach", "authorization", "state",
+                        "lastObservedAt", "suppressionSurface", "covers",
+                        "doesNotCover", "privacy")
+        for sid, row in manifest_rows.items():
+            for field in ROW_REQUIRED:
+                if not str(row.get(field, "")).strip():
+                    errors.append(
+                        f"source-manifest `{sid}`: row is missing `{field}`"
+                    )
         # Identity separation: two rows for the same source must name different
         # dataset owners. One count covering two people is how a merged dataset
         # starts, and a merged dataset cannot be separated again.

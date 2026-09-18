@@ -66,6 +66,10 @@ class HubCase(unittest.TestCase):
         for d in ("type", "entities", "entities/connectors", "automations",
                   "runbooks", "extractions", "research", "signals", "fixtures/good"):
             (self.root / d).mkdir(parents=True, exist_ok=True)
+        # Run against the REAL ontology. Re-declaring types in tests lets them
+        # drift from the files the repo actually ships.
+        for t in sorted((REPO / "type").glob("*.type.yaml")):
+            shutil.copy(t, self.root / "type" / t.name)
 
     def write(self, rel: str, text: str) -> pathlib.Path:
         p = self.root / rel
@@ -74,7 +78,7 @@ class HubCase(unittest.TestCase):
         return p
 
     def declare_type(self, name: str, parents: str = "idea::au-base-types",
-                     fields: str = "  kind: String") -> None:
+                     fields: str = "  kind?: String") -> None:
         self.write(f"type/{name}.type.yaml",
                    TYPE_TEMPLATE.format(parents=parents, fields=fields))
 

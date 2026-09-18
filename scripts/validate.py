@@ -291,6 +291,14 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
                         f"{p.relative_to(root)}: warm path needs a resolvable evidenceUrl "
                         "— an unevidenced route cannot be used"
                     )
+                # An unverified route stays visible for research but is blocked from
+                # use. Measured: a URL with no observation date scored 0.12, URL plus
+                # date 0.22 — so the weakest tiers must not be actionable.
+                if scalar(fm.get("verified", "")) == "no" and scalar(fm.get("strength", "")) in ("working", "direct"):
+                    errors.append(
+                        f"{p.relative_to(root)}: warm path is `verified: no` but claims "
+                        f"`strength: {fm.get('strength')}` — an unverified route cannot be actionable"
+                    )
                 intro = str(fm.get("introducer", ""))
                 for stem in dnc:
                     if stem in intro:

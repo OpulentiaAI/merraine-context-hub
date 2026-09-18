@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import unittest
 
-from support import HubCase
+from tests.support import HubCase
 
 
 class FrontmatterRules(HubCase):
@@ -181,47 +181,47 @@ class CoverageRules(HubCase):
 
 
 class ExtractionRunRules(HubCase):
-    def run_doc(self, extra: str) -> None:
-        self.instance("extractions/r.md", "gtm.extraction-run", extra=extra)
+    """Exercised against the real gtm.extraction-run declaration."""
 
-    def setUp(self):
-        super().setUp()
-        self.declare_type("gtm.extraction-run", parents="event::au-base-types",
-                          fields="  sourceId: String\n  scope: String\n  outcome: String\n"
-                                 "  missing: String[+]\n  blockerNote: String\n"
-                                 "  artifactRef: String\n  artifactSha256: String\n"
-                                 "  continuingFrom: String")
+    def run_doc(self, extra: str) -> None:
+        base = ("sourceId: s\nscope: full\nobservedAt: 2026-09-18\nproduced: [rows]\n"
+                "recordCount: 1\nfileCount: 1\ncompleteness: COMPLETE\ntruncated: no\n"
+                "outcome: ok\nprivacy: private\n")
+        self.instance("extractions/r.md", "gtm.extraction-run", extra=base + extra)
 
     def test_partial_without_gap_or_blocker_is_an_error(self):
-        self.run_doc("sourceId: s\nscope: full\noutcome: partial\n")
+        self.run_doc("outcome: partial\n")
         self.assert_error_contains("requires `missing` or `blockerNote`")
 
     def test_partial_with_missing_is_clean(self):
-        self.run_doc("sourceId: s\nscope: full\noutcome: partial\nmissing: [dms]\n")
+        self.run_doc("outcome: partial\nmissing: [dms]\n")
         self.assert_no_error_containing("requires `missing`")
 
     def test_artifact_ref_without_hash_is_an_error(self):
-        self.run_doc("sourceId: s\nscope: full\noutcome: ok\nartifactRef: a.zip\n")
+        self.run_doc("artifactRef: a.zip\n")
         self.assert_error_contains("artifactRef without artifactSha256")
 
     def test_delta_without_continuing_from_is_an_error(self):
-        self.run_doc("sourceId: s\nscope: delta\noutcome: ok\n")
+        self.run_doc("scope: delta\n")
         self.assert_error_contains("delta run requires continuingFrom")
 
     def test_ok_run_is_clean(self):
-        self.run_doc("sourceId: s\nscope: full\noutcome: ok\nartifactRef: a.zip\n"
-                     "artifactSha256: deadbeef\n")
+        self.run_doc("artifactRef: a.zip\nartifactSha256: deadbeef\n")
+        self.assertEqual(self.errors(), [])
+
+    def test_truncated_read_is_representable(self):
+        self.run_doc("truncated: yes\nerrors: [large-output truncation lost rows]\n")
         self.assertEqual(self.errors(), [])
 
 
 class ExperimentRules(HubCase):
-    def experiment(self, extra: str) -> None:
-        self.instance("research/e.md", "gtm.experiment", extra=extra)
+    """Exercised against the real gtm.experiment declaration."""
 
-    def setUp(self):
-        super().setUp()
-        self.declare_type("gtm.experiment", fields="  state: String\n  observedValue: Number\n"
-                                                   "  sampleSize: Number{integer}\n  promotedBy: String")
+    BASE = ("unit: replies\nhypothesis: h\nmeasure: rate\nthreshold: 3\ndirection: at_least\n"
+            "preconditions: [approval]\n")
+
+    def experiment(self, extra: str) -> None:
+        self.instance("research/e.md", "gtm.experiment", extra=self.BASE + extra)
 
     def test_supported_without_value_is_an_error(self):
         self.experiment("state: supported\n")
@@ -238,6 +238,11 @@ class ExperimentRules(HubCase):
     def test_insufficient_alone_is_clean(self):
         self.experiment("state: insufficient\n")
         self.assertEqual(self.errors(), [])
+
+    def test_run_experiment_carries_no_promotion(self):
+        # Promotion is a human decision. An automation must never set it.
+        self.experiment("state: running\n")
+        self.assert_no_error_containing("promotedBy")
 
 
 if __name__ == "__main__":

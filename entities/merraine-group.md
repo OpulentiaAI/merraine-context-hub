@@ -47,7 +47,7 @@ Media). CultureHub Insights joined in March 2026. The Notion workspace already
 connected here is named **Shepherd Search Group / Merraine**.
 
 Daily team: [[jeremy-sanchez]], Dina Ufberg (COO and Co-Owner), Codi McCommon,
-Reid Lortz, David Gantshar, Jane Nueva.
+David Gantshar, Jane Nueva.
 
 Buyers you sell to, and who you do not, live in [[merraine-icp]]. Named
 accounts already in motion live in [[active-accounts]].

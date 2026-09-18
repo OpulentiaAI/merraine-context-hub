@@ -34,5 +34,5 @@ A filled [[email-components]] pack labelled as an issue, plus what was
 cut.
 
 # Guardrails
-- Daily hiring scan to jeremy@merraine.com is delivery. Do not rewrite it here.
+- Daily hiring scan to Jeremy's work inbox is delivery. Do not rewrite it here.
 - Gmail is not connected. Do not pretend a send is possible.

@@ -62,7 +62,7 @@ here poisons every draft.
 - Mode: propose
 - Autonomous min score: 80, and only if Jeremy said so in that session
 - Channels: LinkedIn, email once Gmail is connected
-- Daily hiring scan to jeremy@merraine.com is delivery, not outbound
+- Daily hiring scan to Jeremy's work inbox is delivery, not outbound
 - Approval required for: first-touch and follow-up
 - Never send after hours in the prospect's timezone unless Jeremy says so
 

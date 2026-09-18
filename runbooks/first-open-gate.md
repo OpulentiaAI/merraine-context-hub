@@ -40,7 +40,13 @@ opened.
    any write happened without the confirm word.
 
 # Verification
-An automation is Enabled only if its file shows `firstOpenChecked: yes` and
+This repository has no cost-authorizing dispatcher. Every automation is a
+**disabled, non-runnable draft** here, regardless of `costCeilingUsd`; that
+field is planning metadata, not a dollar or token cap. Activation requires an
+external executor that rejects dispatch before any provider call when a named
+cost authorizer and enforceable per-run budget are absent.
+
+An automation is eligible for a future external executor only if its file shows `firstOpenChecked: yes` and
 an evidence row naming the artifact that was opened. Anything else is an
 ungated clock. Pause it.
 

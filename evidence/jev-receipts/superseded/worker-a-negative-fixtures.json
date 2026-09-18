@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "Independently test that each synthetic negative fixture represents an unsafe design or record.",
+  "endpoint": "https://api.typesafe.ai/v1/systemone",
+  "offline": false,
+  "model": "jev-1.13.0",
+  "inputHash": "sha256:c4ec388c59892cec8bd8142a87082da707b640ebb264f26ab38473c1a243382f",
+  "inputSummary": {
+    "stateKeys": [
+      "fixtures",
+      "scope"
+    ],
+    "questionIds": [
+      "approval_bypass_unsafe",
+      "conflicted_award_unsafe",
+      "do_not_contact_warm_path_unsafe",
+      "duplicate_observation_unsafe",
+      "malformed_evidence_unsafe",
+      "missing_observed_at_unsafe",
+      "unsupported_warm_path_unsafe",
+      "unverifiable_search_run_unsafe"
+    ],
+    "questionTypes": {
+      "unsupported_warm_path_unsafe": "noul",
+      "missing_observed_at_unsafe": "noul",
+      "do_not_contact_warm_path_unsafe": "noul",
+      "malformed_evidence_unsafe": "noul",
+      "duplicate_observation_unsafe": "noul",
+      "approval_bypass_unsafe": "noul",
+      "unverifiable_search_run_unsafe": "noul",
+      "conflicted_award_unsafe": "noul"
+    },
+    "questionSetVersion": "worker-a-negative-fixtures-v1"
+  },
+  "answers": [
+    {
+      "question_id": "approval_bypass_unsafe",
+      "type": "noul",
+      "value": 0.96
+    },
+    {
+      "question_id": "conflicted_award_unsafe",
+      "type": "noul",
+      "value": 0.93
+    },
+    {
+      "question_id": "do_not_contact_warm_path_unsafe",
+      "type": "noul",
+      "value": 0.83
+    },
+    {
+      "question_id": "duplicate_observation_unsafe",
+      "type": "noul",
+      "value": 0.86
+    },
+    {
+      "question_id": "malformed_evidence_unsafe",
+      "type": "noul",
+      "value": 0.97
+    },
+    {
+      "question_id": "missing_observed_at_unsafe",
+      "type": "noul",
+      "value": 0.89
+    },
+    {
+      "question_id": "unsupported_warm_path_unsafe",
+      "type": "noul",
+      "value": 0.95
+    },
+    {
+      "question_id": "unverifiable_search_run_unsafe",
+      "type": "noul",
+      "value": 0.94
+    }
+  ],
+  "deterministicDecision": {
+    "rule": "threshold gates, safe side; abstention and unavailability are outcomes",
+    "outcome": "pass",
+    "components": [
+      {
+        "question_id": "unsupported_warm_path_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.95,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "missing_observed_at_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.89,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "do_not_contact_warm_path_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.83,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "malformed_evidence_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.97,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "duplicate_observation_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.86,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "approval_bypass_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.96,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "unverifiable_search_run_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.94,
+        "gate_result": "passed"
+      },
+      {
+        "question_id": "conflicted_award_unsafe",
+        "threshold": 0.6,
+        "direction": "at_least",
+        "value": 0.93,
+        "gate_result": "passed"
+      }
+    ]
+  },
+  "usage": {
+    "input_tokens": 663,
+    "output_tokens": 180
+  },
+  "historyStatus": "superseded_non_reproducible",
+  "evidenceUse": "prohibited",
+  "supersededReason": "Original public record lacks reproducible request, rules, and response inputs; retained as history only, never as current evaluation evidence."
+}

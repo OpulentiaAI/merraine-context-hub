@@ -6,17 +6,17 @@ owner: Jeremy Sanchez
 updated: 2026-09-16
 surface: jeremy
 provenance: "Live Convex read 2026-09-16: checkAccountDetails, getCreditBalance, listForAgentInternal, listInstalledCapabilitiesInternal, listAutomationsInternal"
-email: jeremysanchez@opulentia.ai
-opulentUserId: k57apryqpfeg6h33ybxfynarx58e1dwa
+email: [OPERATOR_EMAIL: private configuration]
+opulentUserId: [OPERATOR_ACCOUNT_ID: private configuration]
 plan: Heavy
-deployment: "prod:confident-sheep-333"
+deployment: "[OPERATOR_DEPLOYMENT: private configuration]"
 balanceCents: 14012
 workspaceId: ws_6b932257a9014a51a2ec5d42bb
 isolated: "yes"
 evidence:
   - claim: "Heavy plan, $140.12 balance, Default Workspace ready, mounted context 0, zero saved automations"
     tldr: "Live workspace state 2026-09-16"
-    origin: "convex:prod:confident-sheep-333/workspaceEntities:listForAgentInternal"
+    origin: "convex:[OPERATOR_DEPLOYMENT: private configuration]/workspaceEntities:listForAgentInternal"
     observedAt: 2026-09-16
     method: cli
     verifiedBy: parent
@@ -25,7 +25,7 @@ evidence:
 
 # Your Opulent workspace
 
-This is your work account: **Jeremy Sanchez**, `jeremysanchez@opulentia.ai`,
+This is your work account: **Jeremy Sanchez**, `[OPERATOR_EMAIL: private configuration]`,
 Heavy plan. Default Workspace is ready. Mesa is ready.
 
 As of 16 September 2026:

@@ -7,7 +7,7 @@ updated: 2026-09-16
 surface: jeremy
 provenance: "Canonical Jeremy profile note. Built from one week of sent mail and LinkedIn, 64 emails, 7 posts, 17 DMs, captured 2026-09-08 and read live 2026-09-16."
 source: "Jeremy Sanchez sent mail and LinkedIn"
-sourceUrl: "https://www.linkedin.com/in/sanchezjeremy"
+sourceUrl: "UNVERIFIED"
 category: copy
 adoptionState: adopted
 claimedResult: "Email averages about 16 words per sentence; LinkedIn about 6. 'Best,' about 33 times in the sampled week, 'Cheers,' 11. Em dashes almost absent."

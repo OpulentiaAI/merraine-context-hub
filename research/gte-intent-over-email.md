@@ -23,5 +23,5 @@ conversation. Meetings came from intent, not from a bigger list.
 # How we apply it for Merraine
 Gmail is still the unlock for *our* mailbox and voice, not for blasting.
 First touch on a signal goes LinkedIn / Spear until Jeremy says otherwise.
-The daily hiring scan still emails jeremy@merraine.com — that is delivery
-to him.
+The daily hiring scan still emails Jeremy's work inbox — that is delivery
+to him. The address is not stored on this public branch.

@@ -13,4 +13,4 @@ were not shown. Delivered means accepted by a server, nothing more.
 
 Do not fake `Re:`. Do not mail a purchased list. Do not jump volume.
 Gmail is not connected, so outbound email is not available.
-The daily hiring scan to jeremy@merraine.com is delivery, not marketing mail.
+The daily hiring scan to Jeremy's work inbox is delivery, not marketing mail.

@@ -13,8 +13,8 @@ Leadership search. This hub is your context. Read it before you act.
 
 - Nothing sends, publishes, pays, or contacts a person unless Jeremy types
   the confirm word in that moment. Drafts stay `sendReady: no`.
-- Emailing the daily hiring scan to `jeremy@merraine.com` is delivery to him,
-  not outbound.
+- Emailing the daily hiring scan to Jeremy's work inbox is delivery to him,
+  not outbound. The address is not stored on this public branch.
 - Every factual claim has a source you can open. An empty result is
   `UNVERIFIED`, never an invented zero. Missing enrichment stays blank.
 - `completed` is not proof. Open the artifact.

@@ -14,8 +14,8 @@ kind: workspace
 ## Done
 
 - **Spear export.** 57 Drive files including `personal-context-hub.zip`,
-  FILE-INDEX, prospect JSON, trigger JSON, campaign JSON. Your profile has
-  1,314 prospects. Reid's has 1,639. Do not extract Spear again.
+  FILE-INDEX, prospect JSON, trigger JSON, campaign JSON. The authorized
+  owner export is already in Drive. Do not extract Spear again.
 - **Spear, Notion, Parallel, Mesa** are connected. See [[connection-inventory]].
 - **Crustdata enrichment** has already resolved Farmers Fridge.
 - **A daily CFO / VP+ hiring scan** already has a written procedure and a

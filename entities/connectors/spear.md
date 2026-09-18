@@ -28,12 +28,11 @@ evidence:
 Your outbound prospecting engine at [app.getspear.ai](https://app.getspear.ai).
 Connected here, 131 tools.
 
-Profile: **Jeremy's agent**, id `b2f107ad-fd1a-4139-a603-54a43e8fca21`. Every
-Spear URL needs `?profile_id=` on it or the app loses scope.
+Every Spear URL needs the signed-in profile query or the app loses scope.
+Account identifiers are not stored on this public branch.
 
 The export is already in Drive: `personal-context-hub.zip`, FILE-INDEX, prospect
-and trigger JSON. Counts from that export: **1,314 prospects on your profile,
-1,639 on Reid's**. Do not extract Spear again. See [[spear-tool-extraction]].
+and trigger JSON. Do not extract Spear again. See [[spear-tool-extraction]].
 
 How you configured it — 33 of 38 triggers on, one keyword set everywhere, Merraine
 as the only company watch — is in [[spear-signal-vocabulary]].

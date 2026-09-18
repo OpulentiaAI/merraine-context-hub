@@ -1,0 +1,79 @@
+name: hub-checks
+
+# The graph is the product, so the graph is what is checked. Everything here
+# runs on the standard library: this repository has no package manager, no
+# lockfile, and no third-party runtime dependency, and CI should not invent one.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: graph contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate the graph
+        run: python3 scripts/validate.py
+
+  tests:
+    name: test suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Top-level contract tests
+        run: python3 -m unittest discover -s tests -t . -v
+      - name: TypeSafe adapter tests
+        run: python3 -m unittest discover -s adapters/typesafe/tests -t . -v
+
+  jev-receipts:
+    name: jev receipt integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # A receipt is a claim that an evaluation happened. It must carry the
+      # question ids it asked and the deterministic outcome code derived, or it
+      # is not evidence of anything. Checked offline: no key, no network.
+      - name: Every receipt carries both halves
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, sys
+          d = pathlib.Path("evidence/jev-receipts")
+          files = sorted(d.glob("*.json"))
+          if not files:
+              print("no receipts yet")
+              sys.exit(0)
+          bad = []
+          for p in files:
+              r = json.loads(p.read_text())
+              for key in ("schemaVersion", "purpose", "inputHash", "answers", "deterministicDecision"):
+                  if key not in r:
+                      bad.append(f"{p.name}: missing `{key}`")
+              dd = r.get("deterministicDecision") or {}
+              if not dd.get("outcome"):
+                  bad.append(f"{p.name}: deterministicDecision has no outcome")
+              if r.get("answers") and not r.get("inputHash"):
+                  bad.append(f"{p.name}: answers without an input hash")
+              blob = p.read_text()
+              for secret in ("TYPESAFE_API_KEY=", "OPENROUTER_API_KEY=", "Bearer "):
+                  if secret in blob:
+                      bad.append(f"{p.name}: receipt must never contain `{secret}`")
+          if bad:
+              print("\n".join(bad)); sys.exit(1)
+          print(f"{len(files)} receipt(s) carry both halves")
+          PY

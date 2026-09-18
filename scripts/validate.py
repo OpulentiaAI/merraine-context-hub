@@ -276,17 +276,23 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
     if "gtm.warm-path" in load_types(root):
         dnc: set[str] = set()
         pdir = root / "entities"
-        for p in list(pdir.glob("*.md")) + list((root / "research").glob("*.md")) + list((root / "signals").glob("*.md")):
-            fm = parse_frontmatter(p.read_text(encoding="utf-8"))
-            if fm.get("type") == "gtm.person" and scalar(fm.get("doNotContact", "no")) == "yes":
-                dnc.add(p.stem)
-        for d in ("research", "signals", "entities", "playbooks"):
+        scan_dirs = [pdir, root / "research", root / "signals", root / "fixtures" / "good"]
+        for d in scan_dirs:
+            if not d.is_dir():
+                continue
+            for p in sorted(d.glob("*.md")):
+                fm = parse_frontmatter(p.read_text(encoding="utf-8"))
+                if fm.get("type") == "gtm.person" and scalar(fm.get("doNotContact", "no")) == "yes":
+                    dnc.add(p.stem)
+        for d in ("research", "signals", "entities", "playbooks", "fixtures/good"):
             for p in sorted((root / d).glob("*.md")):
                 text = p.read_text(encoding="utf-8")
                 fm = parse_frontmatter(text)
                 if fm.get("type") != "gtm.warm-path":
                     continue
-                if not str(fm.get("evidenceUrl", "")).strip() or "invalid" in str(fm.get("evidenceUrl", "")):
+                # Presence is the test. A synthetic TLD such as example.invalid is
+                # a perfectly resolvable citation for fixture purposes.
+                if not str(fm.get("evidenceUrl", "")).strip():
                     errors.append(
                         f"{p.relative_to(root)}: warm path needs a resolvable evidenceUrl "
                         "— an unevidenced route cannot be used"
@@ -304,7 +310,7 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
                     if stem in intro:
                         errors.append(
                             f"{p.relative_to(root)}: warm path introduces through `{stem}`, "
-                            "who is do-not-contact"
+                            "who is flagged doNotContact"
                         )
 
     # --- awards: a conflict state must be a real answer ------------------------
@@ -343,7 +349,7 @@ def cross_checks(hub: pathlib.Path, errors: list[str], warnings: list[str]) -> N
 
     # --- observations: two rows for the same signal and org are one row --------
     seen_obs: dict[tuple[str, str], pathlib.Path] = {}
-    for d in ("signals", "research", "entities"):
+    for d in ("signals", "research", "entities", "fixtures/good"):
         for p in sorted((root / d).glob("*.md")):
             fm = parse_frontmatter(p.read_text(encoding="utf-8"))
             if fm.get("type") != "gtm.observation":

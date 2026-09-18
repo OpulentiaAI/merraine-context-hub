@@ -62,6 +62,10 @@ fields it owes.
 - Instances are typed. Pick an existing type in `type/` or propose a new one.
 - Fill every required field or write `[NEED: x]`. Do not invent a value.
 - New factual claims carry a `gtm.evidence` row.
+- An evaluation claim carries a receipt under `evidence/jev-receipts/`. Read
+  `docs/jev-evaluation-contract.md` first: Jev judges evidence quality, and code
+  plus a named human own approval, contact authority and suppression. Never
+  claim work was evaluated without a receipt.
 - Jeremy-facing files set `surface: jeremy`. Operator files go in `ops/` with
   `surface: operator`.
 - Run `python3 scripts/validate.py --catalog` before committing.

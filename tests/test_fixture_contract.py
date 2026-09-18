@@ -71,6 +71,12 @@ class FixtureContract(unittest.TestCase):
 
     @unittest.skipIf(not bad_cases(), "no bad fixtures yet")
     def test_bad_fixtures_produce_their_expected_error(self):
+        # All bad fixtures go in together: cross-fixture rules such as duplicate
+        # detection only fire when both halves of the duplicate are present.
+        root = self.build_hub()
+        for path in bad_cases():
+            shutil.copy(path, root / "signals" / path.name)
+        result = VALIDATE.run_checks(hub=root)
         failures = []
         for path in bad_cases():
             text = path.read_text(encoding="utf-8")
@@ -81,12 +87,9 @@ class FixtureContract(unittest.TestCase):
                     break
             if not expected:
                 continue
-            root = self.build_hub()
-            shutil.copy(path, root / "signals" / path.name)
-            result = VALIDATE.run_checks(hub=root)
             if not any(expected in e for e in result.errors):
-                failures.append(f"{path.name}: expected an error containing {expected!r}; got {result.errors}")
-        self.assertEqual(failures, [], "\n".join(failures))
+                failures.append(f"{path.name}: expected an error containing {expected!r}")
+        self.assertEqual(failures, [], "\n".join(failures) + "\n\nAll errors:\n" + "\n".join(result.errors))
 
 
 class CoverageGuardrail(unittest.TestCase):
@@ -131,8 +134,8 @@ class Baseline(unittest.TestCase):
         self.assertIn("reach:", body)
         self.assertIn("past-use", body,
                       "registry state is not permission; past use must be representable")
-        self.assertIn("datasetOwner:", body,
-                      "different people's datasets must stay separable")
+        self.assertRegex(body, r"datasetOwner\??:",
+                         "different people's datasets must stay separable")
 
 
 if __name__ == "__main__":
